@@ -1,5 +1,6 @@
 package groupdelta.trocatroca;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,9 +28,13 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
+
         /*Obtaining the references to the views from the XML.*/
         mNickEditText = findViewById(R.id.edtApelidoadastro);
         mEmailEditText = findViewById(R.id.edtEmailCadastro);
+        Intent intentMA = getIntent();
+        String emailReceived = (String) intentMA.getStringExtra("email");
+        mEmailEditText.setText(emailReceived);
         mPasswordEditText = findViewById(R.id.edtSenhaCadastro);
         mPersonalDataTextView = findViewById(R.id.edtData);
     }

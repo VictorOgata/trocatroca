@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         Class destinationClass = CadastroActivity.class;
         Intent intentToStartRegisterActivity = new Intent(context, destinationClass);
-
+        String tS = mEmailEditText.getText().toString();
+        intentToStartRegisterActivity.putExtra("email", mEmailEditText.getText().toString());
         startActivity(intentToStartRegisterActivity);
     }
 
