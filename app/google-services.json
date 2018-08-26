@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "158143344897",
+    "firebase_url": "https://trocatroca-6623b.firebaseio.com",
+    "project_id": "trocatroca-6623b",
+    "storage_bucket": "trocatroca-6623b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158143344897:android:2548237f04b0a2b8",
+        "android_client_info": {
+          "package_name": "groupdelta.trocatroca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "158143344897-1jefcpjvjh1gll69mp8tjp7n6nq3reej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "groupdelta.trocatroca",
+            "certificate_hash": "86fbc2da6fe0564c1559f44edd7987aa6a011678"
+          }
+        },
+        {
+          "client_id": "158143344897-slq0vg5mess5lh1lpe1sa4fuolk44u82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzIEEv4QbQP6pkRXqx4-UZAyluh1CIq1Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "158143344897-slq0vg5mess5lh1lpe1sa4fuolk44u82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
