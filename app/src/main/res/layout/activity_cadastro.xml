@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".CadastroActivity">
-
+    tools:context=".Activity.CadastroActivity">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="116dp"
@@ -16,10 +15,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/tvTitulo"
         app:layout_constraintEnd_toEndOf="@+id/tvTitulo"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/tvTitulo"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
@@ -37,14 +35,27 @@
         android:text="Cadastre-se"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorPrimatyLight"
-        app:layout_constraintBottom_toTopOf="@+id/edtApelidoadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtApelidoadastro"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/edtApelidoadastro"
+        app:layout_constraintBottom_toTopOf="@+id/edtNomeCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtNomeCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtNomeCadastro"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/edtApelidoadastro"
+        android:id="@+id/edtNomeCadastro"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Nome Completo"
+        app:layout_constraintBottom_toTopOf="@+id/edtApelidoCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtApelidoCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtApelidoCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+
+    <EditText
+        android:id="@+id/edtApelidoCadastro"
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginLeft="50dp"
@@ -54,9 +65,8 @@
         android:hint="Apelido"
         app:layout_constraintBottom_toTopOf="@+id/edtEmailCadastro"
         app:layout_constraintEnd_toEndOf="@+id/edtEmailCadastro"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="@+id/edtEmailCadastro"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNomeCadastro" />
 
     <EditText
         android:id="@+id/edtEmailCadastro"
@@ -71,7 +81,7 @@
         app:layout_constraintBottom_toTopOf="@+id/edtSenhaCadastro"
         app:layout_constraintEnd_toEndOf="@+id/edtSenhaCadastro"
         app:layout_constraintStart_toStartOf="@+id/edtSenhaCadastro"
-        app:layout_constraintTop_toBottomOf="@+id/edtApelidoadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/edtApelidoCadastro" />
 
     <EditText
         android:id="@+id/edtSenhaCadastro"
@@ -83,26 +93,41 @@
         android:layout_marginTop="8dp"
         android:hint="Senha"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/edtData"
-        app:layout_constraintEnd_toEndOf="@+id/edtData"
+        app:layout_constraintBottom_toTopOf="@+id/edtConfSenha"
+        app:layout_constraintEnd_toEndOf="@+id/edtConfSenha"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/edtData"
+        app:layout_constraintStart_toStartOf="@+id/edtConfSenha"
         app:layout_constraintTop_toBottomOf="@+id/edtEmailCadastro" />
 
     <EditText
-        android:id="@+id/edtData"
+        android:id="@+id/edtConfSenha"
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:hint="Dados de contato"
+        android:hint="Confirme a senha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/edtPhoneCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtPhoneCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtPhoneCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/edtSenhaCadastro" />
+
+    <EditText
+        android:id="@+id/edtPhoneCadastro"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Telefone"
+        android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/btnOk"
         app:layout_constraintEnd_toEndOf="@+id/btnOk"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btnOk"
-        app:layout_constraintTop_toBottomOf="@+id/edtSenhaCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/edtConfSenha" />
 
     <Button
         android:id="@+id/btnOk"
@@ -118,9 +143,7 @@
         android:text="Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtData" />
-
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneCadastro" />
 
 </android.support.constraint.ConstraintLayout>

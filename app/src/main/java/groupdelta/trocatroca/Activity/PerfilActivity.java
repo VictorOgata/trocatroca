@@ -1,8 +1,10 @@
-package groupdelta.trocatroca;
+package groupdelta.trocatroca.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import groupdelta.trocatroca.R;
 
 public class PerfilActivity extends AppCompatActivity{
 
