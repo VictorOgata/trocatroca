@@ -35,9 +35,9 @@
         android:text="Cadastre-se"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorPrimatyLight"
-        app:layout_constraintBottom_toTopOf="@+id/edtApelidoCadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtApelidoCadastro"
-        app:layout_constraintStart_toStartOf="@+id/edtApelidoCadastro"
+        app:layout_constraintBottom_toTopOf="@+id/edtNomeCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtNomeCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtNomeCadastro"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
