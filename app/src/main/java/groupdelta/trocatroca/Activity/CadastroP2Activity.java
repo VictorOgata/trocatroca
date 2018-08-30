@@ -30,31 +30,7 @@ public class CadastroP2Activity extends AppCompatActivity {
 
     /* Personal data Text View */
     private Spinner mState;
-    private static final String[] paths = {"AC",
-            "AL","AP",
-            "AM",
-            "BA",
-            "CE",
-            "DF",
-            "ES",
-            "GO",
-            "MA",
-            "MT",
-            "MS",
-            "MG",
-            "PA",
-            "PB",
-            "PR",
-            "PE",
-            "PI",
-            "RJ",
-            "RN",
-            "RS",
-            "RO",
-            "RR",
-            "SC",
-            "SP",
-            "SE"};
+    private static final String[] paths = {"SP", "RJ", "MG"};
     private Usuario user;
     /* Firebase conection */
     private FirebaseAuth autentication;
@@ -75,7 +51,9 @@ public class CadastroP2Activity extends AppCompatActivity {
         emailReceived = (String) intentR2.getStringExtra("email");
         passReceived = (String) intentR2.getStringExtra("pass");
         nickReceived = (String) intentR2.getStringExtra("nick");
+
         phoneReceived = (String) intentR2.getStringExtra("phone");
+
         mState = findViewById(R.id.edtData);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CadastroP2Activity.this,
                 android.R.layout.simple_spinner_item,paths);
