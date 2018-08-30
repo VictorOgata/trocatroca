@@ -8,7 +8,6 @@ import groupdelta.trocatroca.DataAccessObject.Conexao;
 
 public class Usuario {
 
-    private String name;
     private String nick;
     private String email;
     private String password;
@@ -20,14 +19,6 @@ public class Usuario {
     public void saveUser(){
         DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
         referenciaFirebase.child("User").push().setValue(this);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNick() {

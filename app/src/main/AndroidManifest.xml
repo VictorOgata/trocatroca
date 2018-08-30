@@ -24,6 +24,12 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
+            android:name=".Activity.CadastroP2Activity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activity.CadastroActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
             android:name=".Activity.PerfilActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.MainActivity"

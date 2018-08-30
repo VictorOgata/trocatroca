@@ -25,8 +25,7 @@ import static android.widget.Toast.*;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    /* Name edit text*/
-    private EditText mNameEditText;
+
     /* Nickname edit text*/
     private EditText mNickEditText;
     /* E-mail edit text */
@@ -38,9 +37,8 @@ public class CadastroActivity extends AppCompatActivity {
     /* Personal data Text View */
     private EditText mPhoneEditText;
     /* User class */
-    private Usuario user;
-    /* Firebase conection */
-    private FirebaseAuth autentication;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +47,6 @@ public class CadastroActivity extends AppCompatActivity {
 
 
         /*Obtaining the references to the views from the XML.*/
-        mNameEditText = findViewById(R.id.edtNomeCadastro);
         mNickEditText = findViewById(R.id.edtApelidoCadastro);
         mEmailEditText = findViewById(R.id.edtEmailCadastro);
         Intent intentMA = getIntent();
@@ -62,52 +59,23 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void onOkButtonClicked(View view) {
         Context context=this;
+
         /*Checking the password confirmation*/
         if(mPasswordEditText.getText().toString().equals(mConfPassEditText.getText().toString())){
 
-            user= new Usuario();
-            /* Pulling information from screen through references*/
-            user.setName(mNameEditText.getText().toString());
-            user.setNick(mNickEditText.getText().toString());
-            user.setEmail(mEmailEditText.getText().toString());
-            user.setPassword(mPasswordEditText.getText().toString());
-            user.setPhone(mPhoneEditText.getText().toString());
 
-            cadastrarNovoUsuario();
             /*Calling Main screen*/
-            Class destinationClass = MainActivity.class;
-            Intent intentToStartMainActivity = new Intent(context, destinationClass);
-            startActivity(intentToStartMainActivity);
+            Class destinationClass = CadastroP2Activity.class;
+            Intent intentToStartR2 = new Intent(context, destinationClass);
+            intentToStartR2.putExtra("nick",mNickEditText.getText().toString());
+            intentToStartR2.putExtra("email",mEmailEditText.getText().toString());
+            intentToStartR2.putExtra("pass",mPasswordEditText.getText().toString());
+            intentToStartR2.putExtra("phone",mPhoneEditText.getText().toString());
+            startActivity(intentToStartR2);
         }else{
             Toast.makeText(context,(String)"Senha não confirmada.", LENGTH_LONG).show();
         }
     }
 
-    private void cadastrarNovoUsuario(){
-        Activity activity=this;
-        final Context context=this;
-        autentication = Conexao.getFirebaseAuth();
-        autentication.createUserWithEmailAndPassword(
-                user.getEmail(),
-                user.getPassword()).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Toast.makeText(context, (String) "Cadastrado com sucesso.", LENGTH_LONG).show();
-                    user.saveUser();
-                }else{
-                    String errorAuth="";
-                    try{
-                        throw task.getException();
-                    }catch(FirebaseAuthUserCollisionException e){
-                        errorAuth="E-mail já cadastrado no sistema.";
-                    }catch(Exception e){
-                        errorAuth="Erro ao efetuar o cadastro";
-                        e.printStackTrace();
-                    }
-                    Toast.makeText(context, errorAuth, LENGTH_LONG).show();
-                }
-            }
-        });
-    }
+
 }
