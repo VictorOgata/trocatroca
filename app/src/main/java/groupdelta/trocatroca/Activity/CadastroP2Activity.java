@@ -30,7 +30,8 @@ public class CadastroP2Activity extends AppCompatActivity {
 
     /* Personal data Text View */
     private Spinner mState;
-    private static final String[] paths = {"SP", "RJ", "MG"};
+    private static final String[] paths = {"AC","AL","AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE"};
+    private static  final String[] AC = {"AC", "Acrelândia",	"Assis Brasil", "Brasiléia", "Bujari", "Capixaba", "Cruzeiro do Sul", "Epitaciolândia", "Feijó", "Jordão", "Mâncio Lima", "Manoel Urbano", "Marechal Thaumaturgo", "Plácido de Castro", "Porto Acre", "Porto Walter", "Rio Branco", "Rodrigues Alves", "Santa Rosa do Purus", "Sena Madureira", "Senador Guiomard", "Tarauacá", "Xapuri"};
     private Usuario user;
     /* Firebase conection */
     private FirebaseAuth autentication;
@@ -51,9 +52,7 @@ public class CadastroP2Activity extends AppCompatActivity {
         emailReceived = (String) intentR2.getStringExtra("email");
         passReceived = (String) intentR2.getStringExtra("pass");
         nickReceived = (String) intentR2.getStringExtra("nick");
-
         phoneReceived = (String) intentR2.getStringExtra("phone");
-
         mState = findViewById(R.id.edtData);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CadastroP2Activity.this,
                 android.R.layout.simple_spinner_item,paths);
@@ -81,6 +80,7 @@ public class CadastroP2Activity extends AppCompatActivity {
     public void onOkButtonClicked(View view) {
         user= new Usuario();
         /* Pulling information from screen through references*/
+        String state = mState.getSelectedItem().toString();
         user.setNick(nickReceived);
         user.setEmail(emailReceived);
         user.setPassword(passReceived);

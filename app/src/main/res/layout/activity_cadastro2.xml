@@ -37,10 +37,10 @@
         android:text="Cadastre-se"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorPrimatyLight"
-        app:layout_constraintBottom_toTopOf="@+id/edtApelidoadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtApelidoadastro"
+        app:layout_constraintBottom_toTopOf="@+id/edtData"
+        app:layout_constraintEnd_toEndOf="@+id/edtData"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/edtApelidoadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtData"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
