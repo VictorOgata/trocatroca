@@ -51,10 +51,24 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:hint="Estado"
+        app:layout_constraintBottom_toTopOf="@+id/edtCity"
+        app:layout_constraintEnd_toEndOf="@+id/edtCity"
+        app:layout_constraintStart_toStartOf="@+id/edtCity"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+
+    <Spinner
+        android:id="@+id/edtCity"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Cidade"
         app:layout_constraintBottom_toTopOf="@+id/btnOk"
         app:layout_constraintEnd_toEndOf="@+id/btnOk"
         app:layout_constraintStart_toStartOf="@+id/btnOk"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/edtData"
+        />
+    <!--  -->
 
     <Button
         android:id="@+id/btnOk"
@@ -72,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtData" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCity" />
 
 
 </android.support.constraint.ConstraintLayout>

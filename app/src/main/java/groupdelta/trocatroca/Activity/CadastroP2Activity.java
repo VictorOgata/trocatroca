@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,13 +26,16 @@ import groupdelta.trocatroca.R;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class CadastroP2Activity extends AppCompatActivity {
+public class CadastroP2Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
 
     /* Personal data Text View */
     private Spinner mState;
+    private Spinner mCity;
     private static final String[] paths = {"AC","AL","AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE"};
-    private static  final String[] AC = {"AC", "Acrelândia",	"Assis Brasil", "Brasiléia", "Bujari", "Capixaba", "Cruzeiro do Sul", "Epitaciolândia", "Feijó", "Jordão", "Mâncio Lima", "Manoel Urbano", "Marechal Thaumaturgo", "Plácido de Castro", "Porto Acre", "Porto Walter", "Rio Branco", "Rodrigues Alves", "Santa Rosa do Purus", "Sena Madureira", "Senador Guiomard", "Tarauacá", "Xapuri"};
+    private static  final String[] AC = { "Acrelândia",	"Assis Brasil", "Brasiléia", "Bujari", "Capixaba", "Cruzeiro do Sul", "Epitaciolândia", "Feijó", "Jordão", "Mâncio Lima", "Manoel Urbano", "Marechal Thaumaturgo", "Plácido de Castro", "Porto Acre", "Porto Walter", "Rio Branco", "Rodrigues Alves", "Santa Rosa do Purus", "Sena Madureira", "Senador Guiomard", "Tarauacá", "Xapuri"};
+    private static  final String[] AL= { "teste",	"Assis dsdsdBrasil", "Basasarasiléia", "Bujari", "Capixaba", "Cruzeiro do Sul", "Epitaciolândia", "Feijó", "Jordão", "Mâncio Lima", "Manoel Urbano", "Marechal Thaumaturgo", "Plácido de Castro", "Porto Acre", "Porto Walter", "Rio Branco", "Rodrigues Alves", "Santa Rosa do Purus", "Sena Madureira", "Senador Guiomard", "Tarauacá", "Xapuri"};
+
     private Usuario user;
     /* Firebase conection */
     private FirebaseAuth autentication;
@@ -40,7 +44,6 @@ public class CadastroP2Activity extends AppCompatActivity {
     String nickReceived;
 
     String phoneReceived;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,28 +56,47 @@ public class CadastroP2Activity extends AppCompatActivity {
         passReceived = (String) intentR2.getStringExtra("pass");
         nickReceived = (String) intentR2.getStringExtra("nick");
         phoneReceived = (String) intentR2.getStringExtra("phone");
-        mState = findViewById(R.id.edtData);
+        mState = (Spinner) findViewById(R.id.edtData);
+        mCity = (Spinner) findViewById(R.id.edtCity);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CadastroP2Activity.this,
                 android.R.layout.simple_spinner_item,paths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mState.setAdapter(adapter);
+        mState.setOnItemSelectedListener(this);
         //mPersonalDataTextView.setOnItemSelectedListener(this);
     }
+
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        mCity.setVisibility(View.VISIBLE);
+        ArrayAdapter<String> adapter2;
 
         switch (position) {
             case 0:
                 // Whatever you want to happen when the first item gets selected
+                adapter2 = new ArrayAdapter<String>(CadastroP2Activity.this,
+                        android.R.layout.simple_spinner_item,AC);
+
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mCity.setAdapter(adapter2);
                 break;
             case 1:
-                // Whatever you want to happen when the second item gets selected
+                adapter2 = new ArrayAdapter<String>(CadastroP2Activity.this,
+                        android.R.layout.simple_spinner_item,AL);
+
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mCity.setAdapter(adapter2);
                 break;
             case 2:
                 // Whatever you want to happen when the thrid item gets selected
                 break;
 
         }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     public void onOkButtonClicked(View view) {
