@@ -158,9 +158,9 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
                 if(task.isSuccessful()) {
                     Toast.makeText(context, (String) "Cadastrado com sucesso.", LENGTH_LONG).show();
                     user.saveUser(context);
-                    Class destinationClass = MainActivity.class;
-                    Intent intentToMain = new Intent(context, destinationClass);
-                    startActivity(intentToMain);
+                    Class destinationClass = PerfilActivity.class;
+                    Intent intentToPerfil = new Intent(context, destinationClass);
+                    startActivity(intentToPerfil);
                 }else{
                     String errorAuth="";
                     try{
