@@ -156,7 +156,7 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(context, (String) "Cadastrado com sucesso.", LENGTH_LONG).show();
-                    user.saveUser();
+                    user.saveUser(context);
                 }else{
                     String errorAuth="";
                     try{
