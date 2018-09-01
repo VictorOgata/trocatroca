@@ -136,7 +136,8 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
     public void onOkButtonClicked(View view) {
         user= new Usuario();
         /* Pulling information from screen through references*/
-        String state = mState.getSelectedItem().toString();
+        user.setState(mState.getSelectedItem().toString());
+        user.setCity(mCity.getSelectedItem().toString());
         user.setNick(nickReceived);
         user.setEmail(emailReceived);
         user.setPassword(passReceived);
