@@ -13,4 +13,8 @@ public class PerfilActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
     }
+
+    public void onModifyUserNameButtonClicked
+
+    }
 }
