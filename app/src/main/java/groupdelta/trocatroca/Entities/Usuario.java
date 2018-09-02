@@ -59,7 +59,12 @@ public class Usuario {
     public String getPhone() {
         return phone;
     }
-
+    public String getCity() {
+        return city;
+    }
+    public String getState() {
+        return state;
+    }
     public void setPhone(String phone) {
         this.phone = phone;
     }
