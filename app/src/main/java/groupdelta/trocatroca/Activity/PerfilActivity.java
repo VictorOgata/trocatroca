@@ -22,7 +22,6 @@ public class PerfilActivity extends AppCompatActivity{
     private EditText Tel;
     private EditText State;
     private EditText City;
-    private TextView Emailv;
     private FirebaseUser user;
 
     @Override
@@ -35,11 +34,9 @@ public class PerfilActivity extends AppCompatActivity{
         Tel = findViewById(R.id.Telephone);
         State = findViewById(R.id.State);
         City = findViewById(R.id.City);
-        Emailv = findViewById(R.id.EmailView);
-        Email.setText(usuario.getEmail());
     }
     public void onModifyUserNameButtonClicked(View view) {
-
+     user.
     }
 }
 
