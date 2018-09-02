@@ -1,13 +1,11 @@
 package groupdelta.trocatroca.Entities;
 
 import android.content.Context;
+import android.text.Editable;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-
-import java.security.CryptoPrimitive;
 
 import groupdelta.trocatroca.DataAccessObject.Conexao;
 
@@ -59,7 +57,12 @@ public class Usuario {
     public String getPhone() {
         return phone;
     }
-
+    public String getCity() {
+        return city;
+    }
+    public String getState() {
+        return state;
+    }
     public void setPhone(String phone) {
         this.phone = phone;
     }

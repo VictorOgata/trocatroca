@@ -39,6 +39,14 @@
           }
         },
         {
+          "client_id": "158143344897-mkrpmnu4gf3a0qfjdemhoj8cdji7mmed.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "groupdelta.trocatroca",
+            "certificate_hash": "e3c8e461cd5ce081920aa6744d7c328495b5e37d"
+          }
+        },
+        {
           "client_id": "158143344897-slq0vg5mess5lh1lpe1sa4fuolk44u82.apps.googleusercontent.com",
           "client_type": 3
         }
