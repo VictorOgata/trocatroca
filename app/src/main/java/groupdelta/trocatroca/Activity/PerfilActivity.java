@@ -36,7 +36,6 @@ public class PerfilActivity extends AppCompatActivity{
         City = findViewById(R.id.City);
     }
     public void onModifyUserNameButtonClicked(View view) {
-     user.
     }
 }
 
