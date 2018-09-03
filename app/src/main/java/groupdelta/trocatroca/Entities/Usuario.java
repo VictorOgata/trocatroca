@@ -13,25 +13,29 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class Usuario {
 
+    //User nickname
     private String nick;
+    //User email
     private String email;
-    private String phone;
+    //User contact info
+    private String CInfo;
+    //User state (Country area)
     private String state;
+    //User city
     private String city;
 
     public Usuario() {
     }
 
-    public void saveUser(Context context){
+    public void saveNewUser(Context context){
         DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
         FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
             String uid = firebaseUser.getUid();
-            referenciaFirebase.child("Usuarios").child(uid).child("nick").setValue(nick);
-            referenciaFirebase.child("Usuarios").child(uid).child("email").setValue(email);
-            referenciaFirebase.child("Usuarios").child(uid).child("phone").setValue(phone);
-            referenciaFirebase.child("Usuarios").child(uid).child("state").setValue(state);
-            referenciaFirebase.child("Usuarios").child(uid).child("city").setValue(city);
+            if(!(this.nick.isEmpty() || this.email.isEmpty() || this.CInfo.isEmpty() || this.state.isEmpty() || this.city.isEmpty()))
+                referenciaFirebase.child("Usuarios").child(uid).setValue(this);
+            else
+                Toast.makeText(context, (String) "Empty User Parameters.", LENGTH_LONG).show();
         }
         else{
             Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
@@ -41,21 +45,8 @@ public class Usuario {
     public String getNick() {
         return nick;
     }
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
     }
     public String getCity() {
         return city;
@@ -63,8 +54,16 @@ public class Usuario {
     public String getState() {
         return state;
     }
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getCInfo() { return CInfo; }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+    public void setCInfo(String CInfo) {
+        this.CInfo = CInfo;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
     public void setState(String state) {
         this.state = state;

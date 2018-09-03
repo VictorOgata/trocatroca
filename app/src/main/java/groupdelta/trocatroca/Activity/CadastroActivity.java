@@ -34,9 +34,6 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText mPasswordEditText;
     /* Confirm Password edit text */
     private EditText mConfPassEditText;
-    /* Personal data Text View */
-    private EditText mPhoneEditText;
-    /* User class */
 
 
 
@@ -54,37 +51,30 @@ public class CadastroActivity extends AppCompatActivity {
         mEmailEditText.setText(emailReceived);
         mPasswordEditText = findViewById(R.id.edtSenhaCadastro);
         mConfPassEditText = findViewById(R.id.edtConfSenha);
-        mPhoneEditText = findViewById(R.id.edtPhoneCadastro);
     }
 
     public void onOkButtonClicked(View view) {
         Context context=this;
         int verificacao = 1;
 
-        //verifica campo do apelido
-        if(mNickEditText.getText().toString().equals("")) { verificacao = 0; }
-        //verifica campo do email
-        if(mEmailEditText.getText().toString().equals("")){ verificacao = 0; }
-        //verificacao do telefone
-        if(mPhoneEditText.getText().toString().equals("")){ verificacao = 0; }
-        //verificacao do campo da senha
-        if(mPasswordEditText.getText().toString().equals("")){ verificacao = 0; }
 
-        if(verificacao == 1){
+        /*Checking non informed parameters*/
+        if(!mNickEditText.getText().toString().isEmpty() && !mEmailEditText.getText().toString().isEmpty()&&
+        !mPasswordEditText.getText().toString().isEmpty() && !mConfPassEditText.getText().toString().isEmpty()){
+            /*Checking the password confirmation*/
             if(mPasswordEditText.getText().toString().equals(mConfPassEditText.getText().toString())){
                 /*Calling Main screen*/
                 Class destinationClass = CadastroP2Activity.class;
                 Intent intentToStartR2 = new Intent(context, destinationClass);
-                intentToStartR2.putExtra("nick",mNickEditText.getText().toString());
-                intentToStartR2.putExtra("email",mEmailEditText.getText().toString());
-                intentToStartR2.putExtra("pass",mPasswordEditText.getText().toString());
-                intentToStartR2.putExtra("phone",mPhoneEditText.getText().toString());
+                intentToStartR2.putExtra("nick", mNickEditText.getText().toString());
+                intentToStartR2.putExtra("email", mEmailEditText.getText().toString());
+                intentToStartR2.putExtra("pass", mPasswordEditText.getText().toString());
                 startActivity(intentToStartR2);
-            } else {
-                Toast.makeText(context, (String) "Campos de senha inválidos.", LENGTH_LONG).show();
+            }else {
+                Toast.makeText(context,(String)"Senha não confirmada.", LENGTH_LONG).show();
             }
-        } else if(verificacao == 0){
-            Toast.makeText(context,(String)"Campos incompletos.", LENGTH_LONG).show();
+        }else{
+            Toast.makeText(context,(String)"Campos não preenchidos.", LENGTH_LONG).show();
         }
     }
 

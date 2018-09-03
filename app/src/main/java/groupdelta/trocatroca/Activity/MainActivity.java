@@ -49,19 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void login(String email, String senha){
-        auth.signInWithEmailAndPassword(email,senha)
-                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Intent i = new Intent(MainActivity.this,PerfilActivity.class);
-                            startActivity(i);
+        if(!email.isEmpty() && !senha.isEmpty()) {
+            auth.signInWithEmailAndPassword(email, senha)
+                    .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent i = new Intent(MainActivity.this, PerfilActivity.class);
+                                startActivity(i);
 
-                        }else{
-                            alert("E-mail ou Senha Errados ! ");
+                            } else
+                                alert("E-mail ou Senha Errados ! ");
                         }
-                    }
-                });
+                    });
+        }else
+            alert("Campos não preenchidos.");
     }
 
 

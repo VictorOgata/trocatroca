@@ -3,12 +3,9 @@ package groupdelta.trocatroca.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,10 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 import groupdelta.trocatroca.DataAccessObject.Conexao;
-import groupdelta.trocatroca.Entities.UserInformation;
 import groupdelta.trocatroca.Entities.Usuario;
 import groupdelta.trocatroca.R;
 
@@ -33,16 +27,11 @@ public class PerfilActivity extends AppCompatActivity{
     private EditText Tel;
     private EditText State;
     private EditText City;
-    FirebaseAuth aut;
-    FirebaseUser firebaseUser = aut.getInstance().getCurrentUser();
-    String email = firebaseUser.getEmail();
-    String uid = firebaseUser.getUid();
+    private static FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String email = firebaseUser.getEmail();
+    private String uid = firebaseUser.getUid();
     private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
-    private  String userID;
-    private ListView mListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,11 +45,8 @@ public class PerfilActivity extends AppCompatActivity{
         City = findViewById(R.id.City);
         Password.setText("**********");
         Email.setText(email);
-        mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,17 +66,17 @@ public class PerfilActivity extends AppCompatActivity{
 
     private void showData(DataSnapshot dataSnapshot) {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
-            UserInformation uInfo = new UserInformation();
-            uInfo.setName(ds.child(uid).getValue(Usuario.class).getNick()); //set the name
+            Usuario uInfo = new Usuario();
+            uInfo.setNick(ds.child(uid).getValue(Usuario.class).getNick()); //set the name
             uInfo.setCity(ds.child(uid).getValue(Usuario.class).getCity()); //set the city
             uInfo.setState(ds.child(uid).getValue(Usuario.class).getState()); //set the city
-            uInfo.setPhone_num(ds.child(uid).getValue(Usuario.class).getPhone()); //set the phone_num
+            uInfo.setCInfo(ds.child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
 
             //display all the information
-            Tel.setText(uInfo.getPhone_num());
+            Tel.setText(uInfo.getCInfo());
             State.setText(uInfo.getState());
             City.setText(uInfo.getCity());
-            Username.setText(uInfo.getName());
+            Username.setText(uInfo.getNick());
         }
     }
 
@@ -109,7 +95,7 @@ public class PerfilActivity extends AppCompatActivity{
     }
 
     public void onModifyPhoneButtonClicked(View view) {
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("phone").setValue(Tel.getText().toString());
+        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("CInfo").setValue(Tel.getText().toString());
     }
     public void onModifyStateButtonClicked(View view) {
         Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getText().toString());
