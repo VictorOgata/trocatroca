@@ -13,8 +13,6 @@
         android:layout_height="130dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/tvTitulo"
@@ -30,8 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="Cadastre-se"
@@ -49,8 +45,9 @@
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:hint="Estado"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/edtCity"
         app:layout_constraintEnd_toEndOf="@+id/edtCity"
         app:layout_constraintStart_toStartOf="@+id/edtCity"
@@ -63,21 +60,18 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:hint="Cidade"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnOk"
         app:layout_constraintEnd_toEndOf="@+id/btnOk"
         app:layout_constraintStart_toStartOf="@+id/btnOk"
-        app:layout_constraintTop_toBottomOf="@+id/edtData"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/edtData" />
     <!--  -->
 
     <Button
         android:id="@+id/btnOk"
         style="@style/button_style"
-
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:onClick="onOkButtonClicked"
