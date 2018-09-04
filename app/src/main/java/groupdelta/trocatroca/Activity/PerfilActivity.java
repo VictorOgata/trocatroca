@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,23 +18,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import groupdelta.trocatroca.AdressList;
 import groupdelta.trocatroca.DataAccessObject.Conexao;
 import groupdelta.trocatroca.Entities.Usuario;
 import groupdelta.trocatroca.R;
 
-public class PerfilActivity extends AppCompatActivity{
+public class PerfilActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText Username;
     private EditText Email;
     private EditText Password;
     private EditText Tel;
-    private EditText State;
-    private EditText City;
+    private Spinner State;
+    private Spinner City;
     private static FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private String email = firebaseUser.getEmail();
     private String uid = firebaseUser.getUid();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
+    private final static String [] paths = AdressList.StatesList;
+    private final static String [][] CityList = AdressList.CitiesList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,8 +47,14 @@ public class PerfilActivity extends AppCompatActivity{
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password);
         Tel = findViewById(R.id.Telephone);
-        State = findViewById(R.id.State);
-        City = findViewById(R.id.City);
+        State = findViewById(R.id.spinnerstate);
+        City = findViewById(R.id.spinnercity);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this,
+                android.R.layout.simple_spinner_item,paths);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        State.setAdapter(adapter);
+        State.setOnItemSelectedListener(this);
         Password.setText("**********");
         Email.setText(email);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -74,8 +86,18 @@ public class PerfilActivity extends AppCompatActivity{
 
             //display all the information
             Tel.setText(uInfo.getCInfo());
-            State.setText(uInfo.getState());
-            City.setText(uInfo.getCity());
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this,android.R.layout.simple_spinner_item,paths);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            State.setAdapter(adapter);
+            if (uInfo.getState()!= null) {
+                int spinnerPosition = adapter.getPosition(uInfo.getState());
+                State.setSelection(spinnerPosition);
+            }
+            City.setAdapter(adapter);
+            if (uInfo.getCity()!= null) {
+                int spinnerPosition = adapter.getPosition(uInfo.getCity());
+                City.setSelection(spinnerPosition);
+            }
             Username.setText(uInfo.getNick());
         }
     }
@@ -83,6 +105,20 @@ public class PerfilActivity extends AppCompatActivity{
 
     public void onModifyUserNameButtonClicked(View view) {
      Conexao.getFirebaseReference().child("Usuarios").child(uid).child("nick").setValue(Username.getText().toString());
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        City.setVisibility(View.VISIBLE);
+        ArrayAdapter<String> adapter2;
+        adapter2 = new ArrayAdapter<String>(PerfilActivity.this,
+                android.R.layout.simple_spinner_item,CityList[position]);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        City.setAdapter(adapter2);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        
     }
 
     public void onModifyEmailButtonClicked(View view) {
@@ -98,10 +134,10 @@ public class PerfilActivity extends AppCompatActivity{
         Conexao.getFirebaseReference().child("Usuarios").child(uid).child("CInfo").setValue(Tel.getText().toString());
     }
     public void onModifyStateButtonClicked(View view) {
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getText().toString());
+        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
     }
     public void onModifyCityButtonClicked(View view) {
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getText().toString());
+        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getSelectedItem().toString());
     }
 
 }
