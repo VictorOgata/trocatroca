@@ -89,9 +89,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoginButtonClicked(View view) {
-        String email = mEmailEditText.getText().toString().trim();
-        String senha = mPasswordEditText.getText().toString().trim();
-        login(email,senha);
+        if (mEmailEditText.getText().toString().isEmpty() || mPasswordEditText.getText().toString().isEmpty()){
+            Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+        } else {
+            String email = mEmailEditText.getText().toString().trim();
+            String senha = mPasswordEditText.getText().toString().trim();
+            login(email,senha);
+        }
+
 
     }
 }
