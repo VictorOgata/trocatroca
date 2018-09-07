@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Intent i = new Intent(MainActivity.this, PerfilActivity.class);
+                                Intent i = new Intent(MainActivity.this, HomescreenActivity.class);
                                 startActivity(i);
 
                             } else
