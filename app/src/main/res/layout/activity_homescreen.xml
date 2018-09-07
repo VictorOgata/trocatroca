@@ -6,32 +6,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Activity.HomescreenActivity"
     android:background="@color/colorPrimaryDark"
-    android:gravity="center"
-    android:smallScreens="true"
-    android:normalScreens="true"
-    android:largeScreens="true"
-    android:xlargeScreens="true"
-    android:anyDensity="true"
-    android:resizeable="true"
-    android:orientation="vertical">
+    >
+
+    <Button
+        android:id="@+id/btnPerfil"
+        style="@style/button_style"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:onClick="onPerfilButtonClicked"
+        android:text="Perfil"
+        app:layout_constraintEnd_toEndOf="@id/btnLogout"
+        app:layout_constraintStart_toStartOf="@id/btnLogout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btnLogout"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="@id/btnNewItem"
+        app:layout_constraintEnd_toEndOf="@id/btnNewItem"
+        app:layout_constraintStart_toStartOf="@id/btnNewItem"
+        app:layout_constraintTop_toBottomOf="@+id/btnPerfil" />
+
+    <Button
+        android:id="@+id/btnNewItem"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:text="Nova Oferta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btnLogout"
+        app:layout_constraintStart_toStartOf="@id/btnLogout"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogout" />
 
 
-<Button
-    android:id="@+id/btnPerfil"
-    style="@style/button_style"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="50dp"
-    android:layout_marginStart="50dp"
-    android:layout_marginTop="8dp"
-    android:onClick="onPerfilButtonClicked"
-    android:text="Perfil"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.737" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -11,6 +11,8 @@ import groupdelta.trocatroca.R;
 
 public class HomescreenActivity extends AppCompatActivity {
     private Button btnPerfil;
+    private Button btnLogout;
+    private Button btnNewItem;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,8 @@ public class HomescreenActivity extends AppCompatActivity {
 
         /*Obtaining the references to the views from the XML.*/
         btnPerfil = findViewById(R.id.btnPerfil);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnNewItem = findViewById(R.id.btnNewItem);
 
     }
     public void onPerfilButtonClicked(View view) {
