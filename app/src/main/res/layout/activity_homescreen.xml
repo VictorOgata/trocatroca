@@ -14,7 +14,7 @@
         android:layout_height="48dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="116dp"
         android:onClick="onPerfilButtonClicked"
         android:text="Perfil"
         app:layout_constraintEnd_toEndOf="@id/btnLogout"
@@ -43,7 +43,7 @@
         android:id="@+id/btnNewItem"
         style="@style/button_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="49dp"
         android:layout_marginBottom="392dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
@@ -52,11 +52,22 @@
         android:text="Nova Oferta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/btnLogout"
-        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/btnLogout"
-        app:layout_constraintTop_toBottomOf="@+id/btnPerfil" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPerfil"
+        app:layout_constraintVertical_bias="0.0" />
 
-
+    <AutoCompleteTextView
+        android:id="@+id/pesquisaItens"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="SEARCH"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
