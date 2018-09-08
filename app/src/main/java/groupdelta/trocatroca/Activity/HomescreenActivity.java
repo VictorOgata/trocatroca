@@ -28,4 +28,13 @@ public class HomescreenActivity extends AppCompatActivity {
         Intent i = new Intent(HomescreenActivity.this, PerfilActivity.class);
         startActivity(i);
     }
+    public void onLogoutButtonClicked(View view) {
+        Intent i = new Intent(HomescreenActivity.this, MainActivity.class);
+        startActivity(i);
+    }
+    public void onNovaofertaButtonClicked(View view) {
+        Intent i = new Intent(HomescreenActivity.this, PerfilActivity.class);
+        startActivity(i);
+    }
+
 }

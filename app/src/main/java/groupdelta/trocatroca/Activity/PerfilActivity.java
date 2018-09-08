@@ -28,7 +28,6 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     private EditText Username;
     private EditText Email;
     private EditText Password;
-    private EditText Tel;
     private Spinner State;
     private Spinner City;
     private static FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -46,7 +45,6 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
         Username = findViewById(R.id.Name);
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password);
-        Tel = findViewById(R.id.Telephone);
         State = findViewById(R.id.spinnerstate);
         City = findViewById(R.id.spinnercity);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this,
@@ -85,7 +83,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
             uInfo.setCInfo(ds.child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
 
             //display all the information
-            Tel.setText(uInfo.getCInfo());
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this,android.R.layout.simple_spinner_item,paths);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             State.setAdapter(adapter);
@@ -121,23 +119,14 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
         
     }
 
-    public void onModifyEmailButtonClicked(View view) {
+    public void onModifyProfileButtonClicked(View view) {
         firebaseUser.updateEmail(Email.getText().toString());
         Conexao.getFirebaseReference().child("Usuarios").child(uid).child("email").setValue(Email.getText().toString());
+        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
+        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getSelectedItem().toString());
     }
-
     public void onModifyPasswordButtonClicked(View view) {
         firebaseUser.updatePassword(Password.getText().toString());
-    }
-
-    public void onModifyPhoneButtonClicked(View view) {
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("CInfo").setValue(Tel.getText().toString());
-    }
-    public void onModifyStateButtonClicked(View view) {
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
-    }
-    public void onModifyCityButtonClicked(View view) {
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getSelectedItem().toString());
     }
 
 }
