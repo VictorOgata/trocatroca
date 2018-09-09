@@ -1,6 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Activity.NovoAnuncioActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="116dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitulo"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitulo"
+        app:layout_constraintStart_toStartOf="@+id/tvTitulo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="Criar nova oferta"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/colorPrimatyLight"
+        app:layout_constraintBottom_toTopOf="@+id/edtApelidoCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtApelidoCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtApelidoCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+    <EditText
+        android:id="@+id/edtApelidoCadastro"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
+        android:hint="Apelido"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/edtEmailCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmailCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtEmailCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+
+    <EditText
+        android:id="@+id/edtEmailCadastro"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenhaCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtSenhaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtSenhaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/edtApelidoCadastro" />
+
+    <EditText
+        android:id="@+id/edtSenhaCadastro"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/edtConfSenha"
+        app:layout_constraintEnd_toEndOf="@+id/edtConfSenha"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edtConfSenha"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailCadastro" />
+
+    <EditText
+        android:id="@+id/edtConfSenha"
+        style="@style/edittext_style"
+        android:layout_marginEnd="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Confirme a senha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btnOk"
+        app:layout_constraintEnd_toEndOf="@+id/btnOk"
+        app:layout_constraintStart_toStartOf="@+id/btnOk"
+        app:layout_constraintTop_toBottomOf="@+id/edtSenhaCadastro" />
+
+    <Button
+        android:id="@+id/btnOk"
+        style="@style/button_style"
+
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onOkButtonClicked"
+        android:text="Proximo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtConfSenha" />
 
 </android.support.constraint.ConstraintLayout>

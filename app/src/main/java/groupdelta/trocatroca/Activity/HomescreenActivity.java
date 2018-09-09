@@ -47,7 +47,7 @@ public class HomescreenActivity extends AppCompatActivity {
 
     }
     public void onNovaofertaButtonClicked(View view) {
-        Intent i = new Intent(HomescreenActivity.this, PerfilActivity.class);
+        Intent i = new Intent(HomescreenActivity.this, NovoAnuncioActivity.class);
         startActivity(i);
     }
 
