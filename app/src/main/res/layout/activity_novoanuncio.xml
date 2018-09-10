@@ -31,85 +31,84 @@
         android:text="Criar nova oferta"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorPrimatyLight"
-        app:layout_constraintBottom_toTopOf="@+id/edtApelidoCadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtApelidoCadastro"
-        app:layout_constraintStart_toStartOf="@+id/edtApelidoCadastro"
+        app:layout_constraintBottom_toTopOf="@+id/edtItemCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtItemCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtItemCadastro"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
     <EditText
-        android:id="@+id/edtApelidoCadastro"
+        android:id="@+id/edtItemCadastro"
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="5dp"
-        android:hint="Apelido"
+        android:hint="Item"
         android:inputType="text"
         android:maxLines="1"
-        app:layout_constraintBottom_toTopOf="@+id/edtEmailCadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtEmailCadastro"
-        app:layout_constraintStart_toStartOf="@+id/edtEmailCadastro"
+        app:layout_constraintBottom_toTopOf="@+id/edtDesejadosCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtDesejadosCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtDesejadosCadastro"
         app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
 
     <EditText
-        android:id="@+id/edtEmailCadastro"
+        android:id="@+id/edtDesejadosCadastro"
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/edtSenhaCadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtSenhaCadastro"
-        app:layout_constraintStart_toStartOf="@+id/edtSenhaCadastro"
-        app:layout_constraintTop_toBottomOf="@+id/edtApelidoCadastro" />
+        android:hint="Desejados (separados por ',') "
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/edtDescricaoCadastro"
+        app:layout_constraintEnd_toEndOf="@+id/edtDescricaoCadastro"
+        app:layout_constraintStart_toStartOf="@+id/edtDescricaoCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/edtItemCadastro" />
 
     <EditText
-        android:id="@+id/edtSenhaCadastro"
+        android:id="@+id/edtDescricaoCadastro"
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/edtConfSenha"
-        app:layout_constraintEnd_toEndOf="@+id/edtConfSenha"
+        android:hint="Descricao"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/edtCondicoes"
+        app:layout_constraintEnd_toEndOf="@+id/edtCondicoes"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/edtConfSenha"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailCadastro" />
+        app:layout_constraintStart_toStartOf="@+id/edtCondicoes"
+        app:layout_constraintTop_toBottomOf="@+id/edtDesejadosCadastro" />
 
     <EditText
-        android:id="@+id/edtConfSenha"
+        android:id="@+id/edtCondicoes"
         style="@style/edittext_style"
         android:layout_marginEnd="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:hint="Confirme a senha"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnOk"
-        app:layout_constraintEnd_toEndOf="@+id/btnOk"
-        app:layout_constraintStart_toStartOf="@+id/btnOk"
-        app:layout_constraintTop_toBottomOf="@+id/edtSenhaCadastro" />
+        android:hint="Condições especiais para troca"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/btnOKNew"
+        app:layout_constraintEnd_toEndOf="@+id/btnOKNew"
+        app:layout_constraintStart_toStartOf="@+id/btnOKNew"
+        app:layout_constraintTop_toBottomOf="@+id/edtDescricaoCadastro" />
 
     <Button
-        android:id="@+id/btnOk"
+        android:id="@+id/btnOKNew"
         style="@style/button_style"
-
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:onClick="onOkButtonClicked"
-        android:text="Proximo"
+        android:onClick="onOKNewButtonClicked"
+        android:text="Ofertar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtConfSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCondicoes" />
 
 </android.support.constraint.ConstraintLayout>
