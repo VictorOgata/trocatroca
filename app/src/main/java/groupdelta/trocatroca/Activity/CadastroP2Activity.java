@@ -79,6 +79,7 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
     }
 
     public void onOkButtonClicked(View view) {
+        final Context context=this;
         user= new Usuario();
         /* Pulling information from screen through references*/
         user.setState(mState.getSelectedItem().toString());
@@ -86,7 +87,7 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
         user.setNick(nickReceived);
         user.setEmail(emailReceived);
         user.setCInfo("@Vazio@");
-
+        Toast.makeText(context,(String)"Procesando...", LENGTH_LONG).show();
         cadastrarNovoUsuario();
     }
 

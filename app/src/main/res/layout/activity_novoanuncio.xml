@@ -7,19 +7,6 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".Activity.NovoAnuncioActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="116dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTitulo"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitulo"
-        app:layout_constraintStart_toStartOf="@+id/tvTitulo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="match_parent"
@@ -34,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@+id/edtItemCadastro"
         app:layout_constraintEnd_toEndOf="@+id/edtItemCadastro"
         app:layout_constraintStart_toStartOf="@+id/edtItemCadastro"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
 
     <EditText
@@ -60,6 +47,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:hint="Desejados (separados por ',') "
+        android:maxLines="3"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/edtDescricaoCadastro"
         app:layout_constraintEnd_toEndOf="@+id/edtDescricaoCadastro"
@@ -75,6 +63,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:hint="Descricao"
+        android:maxLines="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/edtCondicoes"
         app:layout_constraintEnd_toEndOf="@+id/edtCondicoes"
