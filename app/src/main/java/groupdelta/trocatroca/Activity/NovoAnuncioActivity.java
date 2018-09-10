@@ -52,9 +52,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
         Context context=this;
         /*Checking non informed parameters*/
         if(!mItemEditText.getText().toString().isEmpty() && !mDesejadosEditText.getText().toString().isEmpty()&&
-                !mDescricaoEditText.getText().toString().isEmpty() && !mTypeSpinner.getSelectedIt
-
-        em().toString().equals(itemType[0])){
+                !mDescricaoEditText.getText().toString().isEmpty() && !mTypeSpinner.getSelectedItem().toString().equals(itemType[0])){
 
             Toast.makeText(context,(String)"Inserindo Anuncio.", LENGTH_LONG).show();
         }else{
