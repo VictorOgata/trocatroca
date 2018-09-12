@@ -8,24 +8,28 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.Map;
+
 import groupdelta.trocatroca.DataAccessObject.Conexao;
 
 import static android.widget.Toast.LENGTH_LONG;
 
 public class Anuncio {
 
-    //User itemname
+    //Advertisement itemname
     private String item;
-    //User description
+    //Advertisement description
     private String description;
     //User contact info
-    private String WishList;
-    //User state (Country area)
+    private Map<String,String> WishList;
+    //User Advertisement state (Country area)
     private String state;
-    //User city
+    //User Advertisement city
     private String city;
 
+    //User Advertisement ID
     private String host;
+    //Advertisement type(game or book)
     private String type;
 
     public Anuncio() {
@@ -35,10 +39,7 @@ public class Anuncio {
         DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
         FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
-            if(!(this.item.isEmpty() || this.description.isEmpty() || this.WishList.isEmpty()))
-                referenciaFirebase.child("Anuncios").child(this.host).setValue(this);
-            else
-                Toast.makeText(context, (String) "Empty User Parameters.", LENGTH_LONG).show();
+            referenciaFirebase.child("Anuncios").push().setValue(this);
         }
         else{
             Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
@@ -57,18 +58,17 @@ public class Anuncio {
     public String getState() {
         return state;
     }
-    public String getWishList() { return WishList; }
-
     public void setItem(String item) {
         this.item = item;
     }
-    public String getType() { return type; }
+    public Map<String, String> getWishList() {
+        return WishList;
+    }
 
+
+    public String getType() { return type; }
     public void setType(String type) {
         this.type = type;
-    }
-    public void setWishList(String WishList) {
-        this.WishList = WishList;
     }
     public void setDescription(String description) {
         this.description = description;
@@ -82,6 +82,10 @@ public class Anuncio {
     public void setHost(String host) {
         this.host = host;
     }
+    public void setWishList(Map<String, String> wishList) {
+        WishList = wishList;
+    }
+
 
     public String getHost() { return host; }
 }

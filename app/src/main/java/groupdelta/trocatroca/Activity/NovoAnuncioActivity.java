@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
+
 import groupdelta.trocatroca.DataAccessObject.Conexao;
 import groupdelta.trocatroca.Entities.Anuncio;
 import groupdelta.trocatroca.Entities.Usuario;
@@ -74,7 +76,13 @@ public class NovoAnuncioActivity extends AppCompatActivity {
             ad.setHost(firebaseUser.getUid());
             /* Pulling information from screen through references*/
             ad.setItem(mItemEditText.getText().toString());
-            ad.setWishList(mDesejadosEditText.getText().toString().replace(" ", "").toUpperCase());
+
+            String [] wList = mDesejadosEditText.getText().toString().replace(" ", "_").toUpperCase().split(",");
+            HashMap<String,String> wishList = new HashMap<String, String>();
+            for(int i=0;i<wList.length;i++)
+                wishList.put("@"+i,wList[i]);
+            ad.setWishList(wishList);
+
             ad.setDescription(mDescricaoEditText.getText().toString());
             ad.setType(mTypeSpinner.getSelectedItem().toString());
             ad.saveNewAd(context);
