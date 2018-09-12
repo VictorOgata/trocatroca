@@ -13,7 +13,13 @@
         <item name="android:background">@drawable/edittext_background</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
 
+    <style name="spinner_style">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="button_style">

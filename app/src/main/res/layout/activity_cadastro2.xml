@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:background="@color/colorPrimaryDark"
     tools:context=".Activity.CadastroP2Activity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="116dp"
-        android:layout_height="130dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tvTitulo"
         app:layout_constraintEnd_toEndOf="@+id/tvTitulo"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,15 +39,10 @@
         app:layout_constraintStart_toStartOf="@+id/edtData"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-
     <Spinner
         android:id="@+id/edtData"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="5dp"
+        style="@style/spinner_style"
         android:hint="Estado"
-        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/edtCity"
         app:layout_constraintEnd_toEndOf="@+id/edtCity"
         app:layout_constraintStart_toStartOf="@+id/edtCity"
@@ -55,12 +50,8 @@
 
     <Spinner
         android:id="@+id/edtCity"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
         android:hint="Cidade"
-        android:textAlignment="center"
+        style="@style/spinner_style"
         app:layout_constraintBottom_toTopOf="@+id/btnOk"
         app:layout_constraintEnd_toEndOf="@+id/btnOk"
         app:layout_constraintStart_toStartOf="@+id/btnOk"
@@ -70,15 +61,15 @@
     <Button
         android:id="@+id/btnOk"
         style="@style/button_style"
-        android:layout_marginBottom="80dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="20dp"
         android:onClick="onOkButtonClicked"
         android:text="Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtCity" />
 
