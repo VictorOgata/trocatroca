@@ -34,7 +34,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     private String email = firebaseUser.getEmail();
     private String uid = firebaseUser.getUid();
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
+    private DatabaseReference myRef , myRef2 ;
     private final static String [] paths = AdressList.StatesList;
     private final static String [][] CityList = AdressList.CitiesList;
 
@@ -80,7 +80,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
             uInfo.setNick(ds.child(uid).getValue(Usuario.class).getNick()); //set the name
             uInfo.setCity(ds.child(uid).getValue(Usuario.class).getCity()); //set the city
             uInfo.setState(ds.child(uid).getValue(Usuario.class).getState()); //set the city
-            uInfo.setCInfo(ds.child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
+             uInfo.setCInfo(ds.child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
 
             //display all the information
 
@@ -97,7 +97,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
                 City.setSelection(spinnerPosition);
             }
             Username.setText(uInfo.getNick());
-            
+
         }
     }
 
