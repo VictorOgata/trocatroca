@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
@@ -26,7 +25,6 @@ public class Anuncio {
     private String state;
     //User Advertisement city
     private String city;
-
     //User Advertisement ID
     private String host;
     //Advertisement type(game or book)
@@ -39,6 +37,7 @@ public class Anuncio {
         DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
         FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
+
             referenciaFirebase.child("Anuncios").push().setValue(this);
         }
         else{
