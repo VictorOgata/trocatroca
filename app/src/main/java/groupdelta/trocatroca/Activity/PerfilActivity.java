@@ -97,13 +97,11 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
                 City.setSelection(spinnerPosition);
             }
             Username.setText(uInfo.getNick());
+            
         }
     }
 
 
-    public void onModifyUserNameButtonClicked(View view) {
-     Conexao.getFirebaseReference().child("Usuarios").child(uid).child("nick").setValue(Username.getText().toString());
-    }
 
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         City.setVisibility(View.VISIBLE);
@@ -121,6 +119,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void onModifyProfileButtonClicked(View view) {
         firebaseUser.updateEmail(Email.getText().toString());
+        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("nick").setValue(Username.getText().toString());
         Conexao.getFirebaseReference().child("Usuarios").child(uid).child("email").setValue(Email.getText().toString());
         Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
         Conexao.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getSelectedItem().toString());
