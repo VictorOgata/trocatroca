@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText editEmail, editSenha;
     private Button btnLogar;
     private FirebaseAuth auth;
+    private Button btnRecuperar;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,10 +45,30 @@ public class MainActivity extends AppCompatActivity {
         mEmailEditText = findViewById(R.id.edtEmail);
         mPasswordEditText = findViewById(R.id.edSenha);
         btnLogar = findViewById(R.id.btnLogin);
+        btnRecuperar = findViewById(R.id.btnRecuperar);
+
+        btnRecuperar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = mEmailEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(email)){
+                    Toast.makeText(getApplicationContext(),"Entre com email, bicho !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(MainActivity.this,"Olha o e-mail lá mano", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
 
     }
-
-
 
 
     private void login(String email, String senha){
