@@ -39,7 +39,8 @@ public class Anuncio {
         DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
         FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
-            referenciaFirebase.child("Anuncios").push().setValue(this);
+            String uid = firebaseUser.getUid();
+            referenciaFirebase.child("Anuncios").child(uid).setValue(this);
         }
         else{
             Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
