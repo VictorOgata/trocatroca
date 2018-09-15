@@ -37,7 +37,6 @@ public class Anuncio {
         DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
         FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
-
             referenciaFirebase.child("Anuncios").push().setValue(this);
         }
         else{

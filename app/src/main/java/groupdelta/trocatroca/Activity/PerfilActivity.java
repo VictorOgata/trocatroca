@@ -3,6 +3,7 @@ package groupdelta.trocatroca.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -74,31 +75,29 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-    private void showData(DataSnapshot dataSnapshot) {
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            Usuario uInfo = new Usuario();
-            uInfo.setNick(ds.child(uid).getValue(Usuario.class).getNick()); //set the name
-            uInfo.setCity(ds.child(uid).getValue(Usuario.class).getCity()); //set the city
-            uInfo.setState(ds.child(uid).getValue(Usuario.class).getState()); //set the city
-             uInfo.setCInfo(ds.child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
+    private void showData(DataSnapshot ds) {
+                Usuario uInfo = new Usuario();
+                uid = firebaseUser.getUid();
+                uInfo.setNick(ds.child("Usuarios").child(uid).getValue(Usuario.class).getNick()); //set the name
+                uInfo.setCity(ds.child("Usuarios").child(uid).getValue(Usuario.class).getCity()); //set the city
+                uInfo.setState(ds.child("Usuarios").child(uid).getValue(Usuario.class).getState()); //set the city
+                uInfo.setCInfo(ds.child("Usuarios").child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
 
-            //display all the information
+                //display all the information
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this,android.R.layout.simple_spinner_item,paths);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            State.setAdapter(adapter);
-            if (uInfo.getState()!= null) {
-                int spinnerPosition = adapter.getPosition(uInfo.getState());
-                State.setSelection(spinnerPosition);
-            }
-            City.setAdapter(adapter);
-            if (uInfo.getCity()!= null) {
-                int spinnerPosition = adapter.getPosition(uInfo.getCity());
-                City.setSelection(spinnerPosition);
-            }
-            Username.setText(uInfo.getNick());
-
-        }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this, android.R.layout.simple_spinner_item, paths);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                State.setAdapter(adapter);
+                if (uInfo.getState() != null) {
+                    int spinnerPosition = adapter.getPosition(uInfo.getState());
+                    State.setSelection(spinnerPosition);
+                }
+                City.setAdapter(adapter);
+                if (uInfo.getCity() != null) {
+                    int spinnerPosition = adapter.getPosition(uInfo.getCity());
+                    City.setSelection(spinnerPosition);
+                }
+                Username.setText(uInfo.getNick());
     }
 
 
