@@ -19,6 +19,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -43,6 +48,11 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     private Spinner mTypeSpinner;
     private FirebaseAuth autentication;
     Anuncio ad;
+    private FirebaseDatabase mFirebaseDatabase;
+    private String uid = firebaseUser.getUid();
+    private DatabaseReference myRef;
+    private String State, City;
+    private static FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
 
@@ -62,6 +72,30 @@ public class NovoAnuncioActivity extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTypeSpinner.setAdapter(adapter);
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void showData(DataSnapshot ds) {
+
+        uid = firebaseUser.getUid();
+        State = ds.child("Usuarios").child(uid).getValue(Usuario.class).getState(); //set the state
+        City = ds.child("Usuarios").child(uid).getValue(Usuario.class).getCity(); //set the city
     }
 
     public void onOKNewButtonClicked(View view) {
@@ -79,10 +113,13 @@ public class NovoAnuncioActivity extends AppCompatActivity {
 
             String [] wList = mDesejadosEditText.getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
 
-            ad.setWishList(wList);
+
 
             ad.setDescription(mDescricaoEditText.getText().toString());
+            ad.setState(State);
+            ad.setCity(City);
             ad.setType(mTypeSpinner.getSelectedItem().toString());
+            ad.setWishList(wList);
             ad.saveNewAd(context);
             Intent i = new Intent( NovoAnuncioActivity.this, HomescreenActivity.class);
             startActivity(i);

@@ -46,7 +46,9 @@ public class Anuncio {
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
             referenciaFirebase.child("Anuncios").child(this.AdID).setValue(this);
-            referenciaFirebase.child("Itens").child(this.item).child(this.AdID).setValue(0);
+            referenciaFirebase.child("Itens").child(this.item).child(this.AdID).child("Status").setValue("Oferecendo");
+            referenciaFirebase.child("Itens").child(this.item).child(this.AdID).child("Estado").setValue(this.state);
+            referenciaFirebase.child("Itens").child(this.item).child(this.AdID).child("Cidade").setValue(this.city);
 
         }
         else{
@@ -98,7 +100,10 @@ public class Anuncio {
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         for(int i=0;i<wList.length;i++){
             wishList.put("@"+wList[i], wList[i]);
-            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue(1);}
+            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).child("Status").setValue("Buscando");
+            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).child("Estado").setValue(this.state);
+            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).child("Cidade").setValue(this.city);}
+
         this.WishList = wishList;
     }
 
