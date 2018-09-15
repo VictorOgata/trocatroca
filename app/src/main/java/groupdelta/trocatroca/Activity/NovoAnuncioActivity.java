@@ -49,10 +49,10 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     private FirebaseAuth autentication;
     Anuncio ad;
     private FirebaseDatabase mFirebaseDatabase;
-    private String uid = firebaseUser.getUid();
     private DatabaseReference myRef;
     private String State, City;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String uid = firebaseUser.getUid();
 
 
 
