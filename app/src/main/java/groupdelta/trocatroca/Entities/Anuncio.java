@@ -29,16 +29,18 @@ public class Anuncio {
     private String host;
     //Advertisement type(game or book)
     private String type;
-
+    private String mGroupId;
+    private DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
+    private FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
     public Anuncio() {
+        mGroupId = referenciaFirebase.child("Anuncios").push().getKey();
     }
 
     public void saveNewAd(Context context){
-        DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
-        FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
-        if (firebaseUser != null) {
 
-            referenciaFirebase.child("Anuncios").push().setValue(this);
+        if (firebaseUser != null) {
+            referenciaFirebase.child("Anuncios").child(mGroupId).setValue(this);
+
         }
         else{
             Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
