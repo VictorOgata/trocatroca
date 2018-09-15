@@ -52,7 +52,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     private String uid = firebaseUser.getUid();
     private DatabaseReference myRef;
     private String State, City;
-    private static FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
 
@@ -92,7 +92,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     }
 
     private void showData(DataSnapshot ds) {
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         uid = firebaseUser.getUid();
         State = ds.child("Usuarios").child(uid).getValue(Usuario.class).getState(); //set the state
         City = ds.child("Usuarios").child(uid).getValue(Usuario.class).getCity(); //set the city

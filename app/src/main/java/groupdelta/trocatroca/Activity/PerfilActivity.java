@@ -31,11 +31,11 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     private EditText Password;
     private Spinner State;
     private Spinner City;
-    private static FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private String email = firebaseUser.getEmail();
     private String uid = firebaseUser.getUid();
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef , myRef2 ;
+    private DatabaseReference myRef;
     private final static String [] paths = AdressList.StatesList;
     private final static String [][] CityList = AdressList.CitiesList;
 
@@ -77,6 +77,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
     private void showData(DataSnapshot ds) {
                 Usuario uInfo = new Usuario();
+                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 uid = firebaseUser.getUid();
                 uInfo.setNick(ds.child("Usuarios").child(uid).getValue(Usuario.class).getNick()); //set the name
                 uInfo.setCity(ds.child("Usuarios").child(uid).getValue(Usuario.class).getCity()); //set the city
