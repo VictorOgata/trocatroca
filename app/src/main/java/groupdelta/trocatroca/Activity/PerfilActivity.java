@@ -38,6 +38,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     private DatabaseReference myRef;
     private final static String [] paths = AdressList.StatesList;
     private final static String [][] CityList = AdressList.CitiesList;
+    private int spinnerPosition;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,15 +89,20 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this, android.R.layout.simple_spinner_item, paths);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
                 State.setAdapter(adapter);
                 if (uInfo.getState() != null) {
-                    int spinnerPosition = adapter.getPosition(uInfo.getState());
+                    spinnerPosition = adapter.getPosition(uInfo.getState());
                     State.setSelection(spinnerPosition);
                 }
-                City.setAdapter(adapter);
+
+                ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(PerfilActivity.this, android.R.layout.simple_spinner_item, CityList[adapter.getPosition(uInfo.getState())]);
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                City.setAdapter(adapter2);
                 if (uInfo.getCity() != null) {
-                    int spinnerPosition = adapter.getPosition(uInfo.getCity());
-                    City.setSelection(spinnerPosition);
+                    int spinnerPosition2 = adapter2.getPosition(uInfo.getCity());
+                    City.setSelection(spinnerPosition2);
                 }
                 Username.setText(uInfo.getNick());
     }
@@ -105,16 +111,18 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         City.setVisibility(View.VISIBLE);
-        ArrayAdapter<String> adapter2;
-        adapter2 = new ArrayAdapter<String>(PerfilActivity.this,
-                android.R.layout.simple_spinner_item,CityList[position]);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        City.setAdapter(adapter2);
+        if(spinnerPosition != position) {
+            ArrayAdapter<String> adapter3;
+            adapter3 = new ArrayAdapter<String>(PerfilActivity.this,
+                    android.R.layout.simple_spinner_item, CityList[position]);
+            adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            City.setAdapter(adapter3);
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        
+
     }
 
     public void onModifyProfileButtonClicked(View view) {
