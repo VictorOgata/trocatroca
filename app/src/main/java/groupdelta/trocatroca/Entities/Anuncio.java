@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import groupdelta.trocatroca.DataAccessObject.Conexao;
@@ -29,15 +30,24 @@ public class Anuncio {
     private String host;
     //Advertisement type(game or book)
     private String type;
-
+    private String AdID;
     public Anuncio() {
+        DatabaseReference referenciaFirebase;
+        FirebaseUser firebaseUser;
+        referenciaFirebase = Conexao.getFirebaseReference();
+        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
+        AdID = referenciaFirebase.child("Anuncios").push().getKey();
     }
 
     public void saveNewAd(Context context){
-        DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
-        FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
+        DatabaseReference referenciaFirebase;
+        FirebaseUser firebaseUser;
+        referenciaFirebase = Conexao.getFirebaseReference();
+        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
-            referenciaFirebase.child("Anuncios").push().setValue(this);
+            referenciaFirebase.child("Anuncios").child(this.AdID).setValue(this);
+            referenciaFirebase.child("Itens").child(this.item).child(this.AdID).setValue(0);
+
         }
         else{
             Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
@@ -80,8 +90,16 @@ public class Anuncio {
     public void setHost(String host) {
         this.host = host;
     }
-    public void setWishList(Map<String, String> wishList) {
-        WishList = wishList;
+    public void setWishList(String []wList) {
+        HashMap<String,String> wishList = new HashMap<String, String>();
+        DatabaseReference referenciaFirebase;
+        FirebaseUser firebaseUser;
+        referenciaFirebase = Conexao.getFirebaseReference();
+        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
+        for(int i=0;i<wList.length;i++){
+            wishList.put("@"+wList[i], wList[i]);
+            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue(1);}
+        this.WishList = wishList;
     }
 
 

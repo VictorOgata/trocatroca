@@ -78,10 +78,8 @@ public class NovoAnuncioActivity extends AppCompatActivity {
             ad.setItem(mItemEditText.getText().toString());
 
             String [] wList = mDesejadosEditText.getText().toString().replace(" ", "_").toUpperCase().split(",");
-            HashMap<String,String> wishList = new HashMap<String, String>();
-            for(int i=0;i<wList.length;i++)
-                wishList.put("@"+i,wList[i]);
-            ad.setWishList(wishList);
+
+            ad.setWishList(wList);
 
             ad.setDescription(mDescricaoEditText.getText().toString());
             ad.setType(mTypeSpinner.getSelectedItem().toString());
