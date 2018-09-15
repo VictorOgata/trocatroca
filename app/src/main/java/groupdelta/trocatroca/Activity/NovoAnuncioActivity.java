@@ -77,7 +77,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
             /* Pulling information from screen through references*/
             ad.setItem(mItemEditText.getText().toString());
 
-            String [] wList = mDesejadosEditText.getText().toString().replace(" ", "_").toUpperCase().split(",");
+            String [] wList = mDesejadosEditText.getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
 
             ad.setWishList(wList);
 
