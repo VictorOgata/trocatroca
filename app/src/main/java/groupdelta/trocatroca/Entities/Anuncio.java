@@ -67,7 +67,7 @@ public class Anuncio {
         return state;
     }
     public void setItem(String item) {
-        this.item = item;
+        this.item = item.replace(" ", "_").toUpperCase();
     }
     public Map<String, String> getWishList() {
         return WishList;
