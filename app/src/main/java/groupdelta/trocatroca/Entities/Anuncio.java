@@ -98,7 +98,7 @@ public class Anuncio {
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         for(int i=0;i<wList.length;i++){
             wishList.put("@"+wList[i], wList[i]);
-            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue("Buscando%"+this.AdID);
+            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue("Buscando%"+this.AdID);}
 
         this.WishList = wishList;
     }
