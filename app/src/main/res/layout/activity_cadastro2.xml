@@ -32,7 +32,7 @@
         android:gravity="center"
         android:text="Cadastre-se"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorPrimatyLight"
+        android:textColor="@color/colorPrimaryLight"
         app:layout_constraintBottom_toTopOf="@+id/edtData"
         app:layout_constraintEnd_toEndOf="@+id/edtData"
         app:layout_constraintHorizontal_bias="0.5"
