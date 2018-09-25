@@ -100,9 +100,9 @@ public class BuscaActivity extends AppCompatActivity {
     private void BuscaWord(String word) {
         Query query;
         if (word.equals("")){
-            query = myRef.orderByChild("item");
+            query = myRef.child("item");
         }else{
-            query = myRef.orderByChild("item").startAt(word).endAt(word+"\uf8ff");
+            query = myRef.child("item").startAt(word).endAt(word+"\uf8ff");
         }
 
         listAnuncio.clear();
