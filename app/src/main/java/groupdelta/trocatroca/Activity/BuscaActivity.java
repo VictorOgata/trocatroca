@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -48,6 +49,7 @@ public class BuscaActivity extends AppCompatActivity {
     private EditText editPalavra;
     private ListView Busca;
     private DatabaseReference myRef;
+    private FirebaseDatabase firebaseDatabase;
 
     private List<Anuncio> listAnuncio = new ArrayList<Anuncio>();
     private ArrayAdapter<Anuncio> arrayAdapterAnuncio;
@@ -62,6 +64,15 @@ public class BuscaActivity extends AppCompatActivity {
         myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
 
         eventEdit();
+        inicializafirebase();
+
+
+    }
+
+    private void inicializafirebase(){
+        FirebaseApp.initializeApp(BuscaActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference();
 
     }
 
