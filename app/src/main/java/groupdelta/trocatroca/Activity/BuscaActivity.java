@@ -99,6 +99,7 @@ public class BuscaActivity extends AppCompatActivity {
     }
     private void BuscaWord(String word) {
         Query query;
+
         if (word.equals(" ")){
             query = myRef.child("Itens").orderByChild("Itens").equalTo("");
         }else{
