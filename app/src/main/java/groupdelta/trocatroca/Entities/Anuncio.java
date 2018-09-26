@@ -31,10 +31,6 @@ public class Anuncio {
     //Advertisement type(game or book)
     private String type;
     public Anuncio() {
-        DatabaseReference referenciaFirebase;
-        FirebaseUser firebaseUser;
-        referenciaFirebase = Conexao.getFirebaseReference();
-        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
 
     }
 
@@ -46,7 +42,7 @@ public class Anuncio {
         String AdID = referenciaFirebase.child("Anuncios").push().getKey();
         if (firebaseUser != null) {
             referenciaFirebase.child("Anuncios").child(AdID).setValue(this);
-            referenciaFirebase.child("Itens").child(this.item).setValue(1);
+            referenciaFirebase.child("Itens").child("@"+this.item).setValue(this.item);
 
         }
         else{
@@ -98,7 +94,7 @@ public class Anuncio {
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         for(int i=0;i<wList.length;i++){
             wishList.put("@"+wList[i], wList[i]);
-            referenciaFirebase.child("Itens").child(wList[i]).setValue(1);}
+            referenciaFirebase.child("Itens").child("@"+wList[i]).setValue(wList[i]);}
 
         this.WishList = wishList;
     }
