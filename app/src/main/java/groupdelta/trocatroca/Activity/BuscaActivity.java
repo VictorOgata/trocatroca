@@ -103,7 +103,8 @@ public class BuscaActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    listAnuncio.add((String) objSnapshot.child("item").getValue());
+                    String itemP = (String) objSnapshot.child("item").getValue();
+                    listAnuncio.add(itemP.replace("_"," "));
                 }
                 arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncio);
                 Busca.setAdapter(arrayAdapterAnuncio);
