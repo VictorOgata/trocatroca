@@ -61,21 +61,13 @@ public class BuscaActivity extends AppCompatActivity {
         editPalavra= (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
 
-        myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
+        myRef = FirebaseDatabase.getInstance().getReference("Itens");
 
         eventEdit();
-        inicializafirebase();
 
 
     }
-
-    private void inicializafirebase(){
-        FirebaseApp.initializeApp(BuscaActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference();
-
-    }
-
+    
     private void eventEdit(){
         editPalavra.addTextChangedListener(new TextWatcher() {
             @Override
@@ -100,9 +92,9 @@ public class BuscaActivity extends AppCompatActivity {
     private void BuscaWord(String word) {
         Query query;
         if (word.equals("")){
-            query = myRef.child("item");
+            query = myRef;
         }else{
-            query = myRef.child("item").startAt(word).endAt(word+"\uf8ff");
+            query = myRef.startAt(word).endAt(word+"\uf8ff");
         }
 
         listAnuncio.clear();
