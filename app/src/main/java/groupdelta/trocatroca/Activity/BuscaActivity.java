@@ -51,8 +51,8 @@ public class BuscaActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseDatabase firebaseDatabase;
 
-    private List<Anuncio> listAnuncio = new ArrayList<Anuncio>();
-    private ArrayAdapter<Anuncio> arrayAdapterAnuncio;
+    private List<String> listAnuncio = new ArrayList<String>();
+    private ArrayAdapter<String> arrayAdapterAnuncio;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +61,13 @@ public class BuscaActivity extends AppCompatActivity {
         editPalavra= (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
 
-        myRef = FirebaseDatabase.getInstance().getReference("Itens");
+        myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
 
         eventEdit();
 
 
     }
-    
+
     private void eventEdit(){
         editPalavra.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,10 +91,10 @@ public class BuscaActivity extends AppCompatActivity {
     }
     private void BuscaWord(String word) {
         Query query;
-        if (word.equals("")){
+        if (word.equals("") ){
             query = myRef;
         }else{
-            query = myRef.startAt(word).endAt(word+"\uf8ff");
+            query = myRef.orderByChild("item").startAt(word.replace(", ", ",").replace(" ", "_").toUpperCase()).endAt(word.replace(", ", ",").replace(" ", "_").toUpperCase()+"\uf8ff");
         }
 
         listAnuncio.clear();
@@ -103,10 +103,10 @@ public class BuscaActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Anuncio p = objSnapshot.getValue(Anuncio.class);
-                    listAnuncio.add(p);
+                String p2 = (String) objSnapshot.child("item").getValue();
+                    listAnuncio.add(p2);
                 }
-                arrayAdapterAnuncio = new ArrayAdapter<Anuncio>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncio);
+                arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncio);
                 Busca.setAdapter(arrayAdapterAnuncio);
             }
 
