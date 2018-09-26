@@ -99,8 +99,14 @@ public class BuscaActivity extends AppCompatActivity {
     }
     private void BuscaWord(String word) {
         Query query;
+<<<<<<< Updated upstream
         if (word.equals(" ")){
             query = myRef.child("Itens").orderByChild("Itens").equalTo("");
+=======
+        if (word.equals("")){
+            query = myRef.child("item");
+
+>>>>>>> Stashed changes
         }else{
             query = myRef.child("Itens").orderByChild("Itens").startAt(word).endAt(word+"\uf8ff");
         }
