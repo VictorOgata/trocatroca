@@ -66,6 +66,9 @@ public class Anuncio {
     public String getState() {
         return state;
     }
+    public String getAdID() {
+        return AdID;
+    }
     public void setItem(String item) {
         this.item = item.replace(" ", "_").toUpperCase();
     }
@@ -89,6 +92,9 @@ public class Anuncio {
     }
     public void setHost(String host) {
         this.host = host;
+    }
+    public void setAdID(String AdID) {
+        this.AdID = AdID;
     }
     public void setWishList(String []wList) {
         HashMap<String,String> wishList = new HashMap<String, String>();
