@@ -119,7 +119,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
             ad.setState(State);
             ad.setCity(City);
             ad.setType(mTypeSpinner.getSelectedItem().toString());
-            ad.setWishList(wList);
+            ad.setWishList(ad.makeWishL(wList));
             ad.saveNewAd(context);
             Intent i = new Intent( NovoAnuncioActivity.this, HomescreenActivity.class);
             startActivity(i);

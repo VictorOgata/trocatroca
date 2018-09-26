@@ -21,7 +21,7 @@ public class Anuncio {
     //Advertisement description
     private String description;
     //User contact info
-    private Map<String,String> WishList;
+    private Map<String,String> wishList;
     //User Advertisement state (Country area)
     private String state;
     //User Advertisement city
@@ -66,7 +66,7 @@ public class Anuncio {
         this.item = item.replace(" ", "_").toUpperCase();
     }
     public Map<String, String> getWishList() {
-        return WishList;
+        return wishList;
     }
 
 
@@ -86,17 +86,20 @@ public class Anuncio {
     public void setHost(String host) {
         this.host = host;
     }
-    public void setWishList(String []wList) {
-        HashMap<String,String> wishList = new HashMap<String, String>();
+    public void setWishList(HashMap<String,String> wMap) {
+        this.wishList = wMap;
+    }
+    public HashMap<String,String> makeWishL(String []wList) {
+        HashMap<String,String> wishL = new HashMap<String, String>();
         DatabaseReference referenciaFirebase;
         FirebaseUser firebaseUser;
         referenciaFirebase = Conexao.getFirebaseReference();
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         for(int i=0;i<wList.length;i++){
-            wishList.put("@"+wList[i], wList[i]);
+            wishL.put("@"+wList[i], wList[i]);
             referenciaFirebase.child("Itens").child("@"+wList[i]).setValue(wList[i]);}
 
-        this.WishList = wishList;
+        return wishL;
     }
 
 
