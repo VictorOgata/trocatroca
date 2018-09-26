@@ -30,13 +30,12 @@ public class Anuncio {
     private String host;
     //Advertisement type(game or book)
     private String type;
-    private String AdID;
     public Anuncio() {
         DatabaseReference referenciaFirebase;
         FirebaseUser firebaseUser;
         referenciaFirebase = Conexao.getFirebaseReference();
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
-        AdID = referenciaFirebase.child("Anuncios").push().getKey();
+
     }
 
     public void saveNewAd(Context context){
@@ -44,9 +43,10 @@ public class Anuncio {
         FirebaseUser firebaseUser;
         referenciaFirebase = Conexao.getFirebaseReference();
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
+        String AdID = referenciaFirebase.child("Anuncios").push().getKey();
         if (firebaseUser != null) {
-            referenciaFirebase.child("Anuncios").child(this.AdID).setValue(this);
-            referenciaFirebase.child("Itens").child(this.item).child(this.AdID).setValue("Oferecendo%"+this.AdID);
+            referenciaFirebase.child("Anuncios").child(AdID).setValue(this);
+            referenciaFirebase.child("Itens").child(this.item).setValue(1);
 
         }
         else{
@@ -65,9 +65,6 @@ public class Anuncio {
     }
     public String getState() {
         return state;
-    }
-    public String getAdID() {
-        return AdID;
     }
     public void setItem(String item) {
         this.item = item.replace(" ", "_").toUpperCase();
@@ -93,9 +90,6 @@ public class Anuncio {
     public void setHost(String host) {
         this.host = host;
     }
-    public void setAdID(String AdID) {
-        this.AdID = AdID;
-    }
     public void setWishList(String []wList) {
         HashMap<String,String> wishList = new HashMap<String, String>();
         DatabaseReference referenciaFirebase;
@@ -104,7 +98,7 @@ public class Anuncio {
         firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
         for(int i=0;i<wList.length;i++){
             wishList.put("@"+wList[i], wList[i]);
-            referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue("Buscando%"+this.AdID);}
+            referenciaFirebase.child("Itens").child(wList[i]).setValue(1);}
 
         this.WishList = wishList;
     }
