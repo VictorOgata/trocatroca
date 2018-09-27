@@ -50,8 +50,8 @@ public class BuscaActivity extends AppCompatActivity {
     private ListView Busca;
     private DatabaseReference myRef;
     private FirebaseDatabase firebaseDatabase;
-
-    private List<String> listAnuncio = new ArrayList<String>();
+    private List<Anuncio> listAnuncioClass = new ArrayList<Anuncio>();
+    private List<String> listAnuncioNames = new ArrayList<String>();
     private ArrayAdapter<String> arrayAdapterAnuncio;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,16 +97,18 @@ public class BuscaActivity extends AppCompatActivity {
             query = myRef.orderByChild("item").startAt(word.replace(", ", ",").replace(" ", "_").toUpperCase()).endAt(word.replace(", ", ",").replace(" ", "_").toUpperCase()+"\uf8ff");
         }
 
-        listAnuncio.clear();
+        listAnuncioNames.clear();
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    String itemP = (String) objSnapshot.getValue(Anuncio.class).getItem();
-                    listAnuncio.add(itemP.replace("_"," "));
+                    Anuncio p = objSnapshot.getValue(Anuncio.class);
+                    String itemP = p.getItem();
+                    listAnuncioClass.add(p);
+                    listAnuncioNames.add(itemP.replace("_"," "));
                 }
-                arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncio);
+                arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncioNames);
                 Busca.setAdapter(arrayAdapterAnuncio);
             }
 
