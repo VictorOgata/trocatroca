@@ -13,8 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 import groupdelta.trocatroca.R;
 
 public class HomeFragment extends Fragment {

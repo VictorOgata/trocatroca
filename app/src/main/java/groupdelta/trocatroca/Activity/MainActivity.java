@@ -15,9 +15,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-
-import groupdelta.trocatroca.DataAccessObject.Conexao;
+import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.R;
 
 
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editEmail, editSenha;
     private Button btnLogar;
-    private FirebaseAuth auth;
+    private UserDAO userDAO;
     private Button btnRecuperar;
 
 
@@ -40,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userDAO = new UserDAO();
 
         /*Obtaining the references to the views from the XML.*/
         mEmailEditText = findViewById(R.id.edtEmail);
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Entre com email, bicho !", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                userDAO.getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void login(String email, String senha){
         if(!email.isEmpty() && !senha.isEmpty()) {
-            auth.signInWithEmailAndPassword(email, senha)
+            userDAO.getFirebaseAuth().signInWithEmailAndPassword(email, senha)
                     .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -91,15 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void alert(String s){
-        Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }
 
     protected  void onStart (){
         super.onStart();
-        auth = Conexao.getFirebaseAuth();
     }
-
-
 
     public void onRegisterButtonClicked(View view) {
         Context context = this;

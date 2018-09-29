@@ -2,7 +2,6 @@ package groupdelta.trocatroca.DataAccessObject;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -15,24 +14,24 @@ public class Conexao {
     private static FirebaseUser firebaseUser;
     private static DatabaseReference firebaseReference;
 
-    private Conexao(){
+    public Conexao(){
     }
 
-    public static DatabaseReference getFirebaseReference(){
+    public DatabaseReference getFirebaseReference(){
         if(firebaseReference==null){
             firebaseReference= FirebaseDatabase.getInstance().getReference();
         }
         return  firebaseReference;
     }
 
-    public static FirebaseAuth getFirebaseAuth(){
+    public FirebaseAuth getFirebaseAuth(){
         if(firebaseAuth == null){
-            inicializarFirebaseAuth();
+            startFirebaseAuth();
         }
         return firebaseAuth;
     }
 
-    private static void inicializarFirebaseAuth (){
+    public void startFirebaseAuth (){
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -49,11 +48,11 @@ public class Conexao {
 
     }
 
-    public static FirebaseUser getFirebaseUser(){
+    public FirebaseUser getFirebaseUser(){
         return firebaseUser;
     }
 
-    public static void logOut(){
+    public void logOut(){
         firebaseAuth.signOut();
     }
 }

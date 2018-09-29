@@ -1,10 +1,8 @@
 package groupdelta.trocatroca.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,22 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-
-import groupdelta.trocatroca.DataAccessObject.Conexao;
+import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
+import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.Anuncio;
 import groupdelta.trocatroca.Entities.Usuario;
 import groupdelta.trocatroca.R;
@@ -47,7 +38,9 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     /* Confirm Password edit text */
     private Spinner mTypeSpinner;
     private FirebaseAuth autentication;
-    Anuncio ad;
+    private Anuncio ad;
+    private AdvertisementDAO adDAO;
+    private UserDAO userDAO;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private String State, City;
@@ -75,6 +68,9 @@ public class NovoAnuncioActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
+        userDAO = new UserDAO();
+        userDAO.startFirebaseAuth();
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,10 +88,10 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     }
 
     private void showData(DataSnapshot ds) {
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        uid = firebaseUser.getUid();
-        State = ds.child("Usuarios").child(uid).getValue(Usuario.class).getState(); //set the state
-        City = ds.child("Usuarios").child(uid).getValue(Usuario.class).getCity(); //set the city
+        Usuario uInfo= new Usuario();
+        uInfo.shapeHashMapIntoUser(userDAO.loadUserHashMap(ds));
+        State = uInfo.getState(); //set the state
+        City = uInfo.getCity(); //set the city
     }
 
     public void onOKNewButtonClicked(View view) {
@@ -103,24 +99,22 @@ public class NovoAnuncioActivity extends AppCompatActivity {
         /*Checking non informed parameters*/
         if(!mItemEditText.getText().toString().isEmpty() && !mDesejadosEditText.getText().toString().isEmpty()&&
                 !mDescricaoEditText.getText().toString().isEmpty() && !mTypeSpinner.getSelectedItem().toString().equals(itemType[0])){
-
             Toast.makeText(context,(String)"Inserindo Anuncio.", LENGTH_LONG).show();
             ad= new Anuncio();
-            FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
-            ad.setHost(firebaseUser.getUid());
+            adDAO = new AdvertisementDAO();
+            //FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();<-----
+            ad.setHost(userDAO.getFirebaseUser().getUid());
             /* Pulling information from screen through references*/
             ad.setItem(mItemEditText.getText().toString());
 
             String [] wList = mDesejadosEditText.getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
 
-
-
             ad.setDescription(mDescricaoEditText.getText().toString());
             ad.setState(State);
             ad.setCity(City);
             ad.setType(mTypeSpinner.getSelectedItem().toString());
-            ad.setWishList(ad.makeWishL(wList));
-            ad.saveNewAd(context);
+            ad.setWishList(wList);
+            adDAO.saveNewAd(NovoAnuncioActivity.this,ad);
             Intent i = new Intent( NovoAnuncioActivity.this, HomescreenActivity.class);
             startActivity(i);
         }else{

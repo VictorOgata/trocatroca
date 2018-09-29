@@ -1,15 +1,6 @@
 package groupdelta.trocatroca.Entities;
 
-import android.content.Context;
-import android.text.Editable;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-
-import groupdelta.trocatroca.DataAccessObject.Conexao;
-
-import static android.widget.Toast.LENGTH_LONG;
+import java.util.HashMap;
 
 public class Usuario {
 
@@ -26,22 +17,6 @@ public class Usuario {
 
     public Usuario() {
     }
-
-    public void saveNewUser(Context context){
-        DatabaseReference referenciaFirebase = Conexao.getFirebaseReference();
-        FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
-        if (firebaseUser != null) {
-            String uid = firebaseUser.getUid();
-            if(!(this.nick.isEmpty() || this.email.isEmpty() || this.CInfo.isEmpty() || this.state.isEmpty() || this.city.isEmpty()))
-                referenciaFirebase.child("Usuarios").child(uid).setValue(this);
-            else
-                Toast.makeText(context, (String) "Empty User Parameters.", LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
-        }
-    }
-
     public String getNick() {
         return nick;
     }
@@ -55,6 +30,7 @@ public class Usuario {
         return state;
     }
     public String getCInfo() { return CInfo; }
+
 
     public void setNick(String nick) {
         this.nick = nick;
@@ -70,5 +46,24 @@ public class Usuario {
     }
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public HashMap<String,String> returnUserHashMap(){
+        HashMap<String,String> UserHashMap = new HashMap<>();
+        UserHashMap.put("nick",(this.nick.isEmpty())? "":this.getNick());
+        UserHashMap.put("email",(this.email.isEmpty())? "":this.getEmail());
+        UserHashMap.put("CInfo",(this.CInfo.isEmpty())? "":this.getCInfo());
+        UserHashMap.put("state",(this.state.isEmpty())? "":this.getState());
+        UserHashMap.put("city",(this.city.isEmpty())? "":this.getCity());
+        return UserHashMap;
+    }
+
+    public void shapeHashMapIntoUser(HashMap UserHashMap){
+        this.setNick(UserHashMap.containsKey("nick")? UserHashMap.get("nick").toString():"NA");
+        this.setEmail(UserHashMap.containsKey("email")? UserHashMap.get("email").toString():"NA");
+        this.setCInfo(UserHashMap.containsKey("CInfo")? UserHashMap.get("CInfo").toString():"NA");
+        this.setState(UserHashMap.containsKey("state")? UserHashMap.get("state").toString():"NA");
+        this.setCity(UserHashMap.containsKey("city")? UserHashMap.get("city").toString():"NA");
+
     }
 }

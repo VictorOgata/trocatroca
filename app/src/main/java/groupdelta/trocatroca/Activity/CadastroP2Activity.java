@@ -3,25 +3,22 @@ package groupdelta.trocatroca.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import groupdelta.trocatroca.DataAccessObject.Conexao;
 import groupdelta.trocatroca.Entities.Usuario;
 import groupdelta.trocatroca.AdressList;
 import groupdelta.trocatroca.R;
@@ -37,7 +34,9 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
     private final static String [] paths = AdressList.StatesList;
     private final static String [][] CityList = AdressList.CitiesList;
     private Usuario user;
+
     /* Firebase conection */
+    private UserDAO userDAO;
     private FirebaseAuth autentication;
     String emailReceived;
     String passReceived;
@@ -49,6 +48,7 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro2);
+        userDAO = new UserDAO();
 
         /*Obtaining the references to the views from the XML.*/
         Intent intentR2 = getIntent();
@@ -98,15 +98,15 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
     private void cadastrarNovoUsuario(){
         Activity activity=this;
         final Context context=this;
-        autentication = Conexao.getFirebaseAuth();
-        autentication.createUserWithEmailAndPassword(
+        userDAO.getFirebaseAuth().createUserWithEmailAndPassword(
                 user.getEmail(),
                 passReceived).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
+                    //user.saveNewUser(context);
+                    userDAO.saveNewUser(context,user);
                     Toast.makeText(context, (String) "Cadastrado com sucesso.", LENGTH_LONG).show();
-                    user.saveNewUser(context);
                     Class destinationClass = MainActivity.class;
                     Intent intentToPerfil = new Intent(context, destinationClass);
                     startActivity(intentToPerfil);
