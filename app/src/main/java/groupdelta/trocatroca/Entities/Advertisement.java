@@ -63,7 +63,7 @@ public class Advertisement {
     public Map<String, String> getWishList() {
         return wishList;
     }
-    public void setWishList(String []wList) {
+    public  Map<String, String> makeWishList(String []wList) {
        HashMap<String,String> wishList = new HashMap<String, String>();
         /*DatabaseReference referenciaFirebase;
         FirebaseUser firebaseUser;
@@ -72,8 +72,12 @@ public class Advertisement {
         for(String wish : wList)//int i=0;i<wList.length;i++){
             wishList.put("@"+wish,wish);
             //referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue("Buscando%"+this.AdID);}
+        return wishList;
+    }
+    public void setWishList(Map<String, String>  wishList) {
         this.wishList = wishList;
     }
+
 
     public void setDescription(String description) {
         this.description = description;
