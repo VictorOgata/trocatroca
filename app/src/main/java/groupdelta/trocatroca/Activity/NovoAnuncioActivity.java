@@ -19,8 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
-import groupdelta.trocatroca.Entities.Anuncio;
-import groupdelta.trocatroca.Entities.Usuario;
+import groupdelta.trocatroca.Entities.Advertisement;
+import groupdelta.trocatroca.Entities.User;
 import groupdelta.trocatroca.R;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -38,7 +38,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     /* Confirm Password edit text */
     private Spinner mTypeSpinner;
     private FirebaseAuth autentication;
-    private Anuncio ad;
+    private Advertisement ad;
     private AdvertisementDAO adDAO;
     private UserDAO userDAO;
     private FirebaseDatabase mFirebaseDatabase;
@@ -88,7 +88,7 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     }
 
     private void showData(DataSnapshot ds) {
-        Usuario uInfo= new Usuario();
+        User uInfo= new User();
         uInfo.shapeHashMapIntoUser(userDAO.loadUserHashMap(ds));
         State = uInfo.getState(); //set the state
         City = uInfo.getCity(); //set the city
@@ -99,10 +99,10 @@ public class NovoAnuncioActivity extends AppCompatActivity {
         /*Checking non informed parameters*/
         if(!mItemEditText.getText().toString().isEmpty() && !mDesejadosEditText.getText().toString().isEmpty()&&
                 !mDescricaoEditText.getText().toString().isEmpty() && !mTypeSpinner.getSelectedItem().toString().equals(itemType[0])){
-            Toast.makeText(context,(String)"Inserindo Anuncio.", LENGTH_LONG).show();
-            ad= new Anuncio();
+            Toast.makeText(context,(String)"Inserindo Advertisement.", LENGTH_LONG).show();
+            ad= new Advertisement();
             adDAO = new AdvertisementDAO();
-            //FirebaseUser firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();<-----
+            //FirebaseUser firebaseUser = DbConection.getFirebaseAuth().getCurrentUser();<-----
             ad.setHost(userDAO.getFirebaseUser().getUid());
             /* Pulling information from screen through references*/
             ad.setItem(mItemEditText.getText().toString());

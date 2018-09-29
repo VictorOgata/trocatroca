@@ -8,28 +8,28 @@ import com.google.firebase.database.DataSnapshot;
 
 import java.util.HashMap;
 
-import groupdelta.trocatroca.Entities.Usuario;
+import groupdelta.trocatroca.Entities.User;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class UserDAO extends Conexao{
+public class UserDAO extends DbConection {
 
     public UserDAO() {
         super();
     }
 
-    public void saveNewUser(final Context context, Usuario user){
+    public void saveNewUser(final Context context, User user){
         FirebaseUser firebaseUser = getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
             String uid = firebaseUser.getUid();
             getFirebaseReference().child("Usuarios").child(uid).setValue(user);
         }
         else{
-            Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
+            Toast.makeText(context, (String) "User nao autenticado.", LENGTH_LONG).show();
         }
     }
 
-    public void updateUser(Usuario user){
+    public void updateUser(User user){
         getFirebaseReference().child("Usuarios").child(getFirebaseUser().getUid().toString()).setValue(user);
     }
 

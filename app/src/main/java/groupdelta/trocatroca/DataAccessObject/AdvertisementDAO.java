@@ -5,11 +5,11 @@ import android.widget.Toast;
 
 import java.util.Map;
 
-import groupdelta.trocatroca.Entities.Anuncio;
+import groupdelta.trocatroca.Entities.Advertisement;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class AdvertisementDAO extends Conexao {
+public class AdvertisementDAO extends DbConection {
 
     private String AdID;
 
@@ -18,7 +18,7 @@ public class AdvertisementDAO extends Conexao {
         AdID = getFirebaseReference().child("Anuncios").push().getKey();
     }
 
-    public void saveNewAd(Context context, Anuncio ad){
+    public void saveNewAd(Context context, Advertisement ad){
         if (getFirebaseAuth().getCurrentUser() != null) {
             getFirebaseReference().child("Anuncios").child(this.AdID).setValue(ad);
             getFirebaseReference().child("Itens").child(ad.getItem()).child(this.AdID).setValue("Oferecendo%"+this.AdID);
@@ -26,7 +26,7 @@ public class AdvertisementDAO extends Conexao {
                 getFirebaseReference().child("Itens").child(map.getValue()).child(this.AdID).setValue("Buscando%"+this.AdID);}
         }
         else{
-            Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
+            Toast.makeText(context, (String) "User nao autenticado.", LENGTH_LONG).show();
         }
     }
 }

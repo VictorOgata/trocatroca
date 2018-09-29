@@ -2,7 +2,7 @@ package groupdelta.trocatroca.Entities;
 
 import java.util.HashMap;
 
-public class Usuario {
+public class User {
 
     //User nickname
     private String nick;
@@ -14,8 +14,11 @@ public class Usuario {
     private String state;
     //User city
     private String city;
+    // User avaliation points
+    private String avPoints;
 
-    public Usuario() {
+
+    public User() {
     }
     public String getNick() {
         return nick;
@@ -30,6 +33,9 @@ public class Usuario {
         return state;
     }
     public String getCInfo() { return CInfo; }
+    public String getAvPoints() {
+        return avPoints;
+    }
 
 
     public void setNick(String nick) {
@@ -46,6 +52,9 @@ public class Usuario {
     }
     public void setCity(String city) {
         this.city = city;
+    }
+    public void setAvPoints(String avPoints) {
+        this.avPoints = avPoints;
     }
 
     public HashMap<String,String> returnUserHashMap(){

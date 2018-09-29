@@ -8,13 +8,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 //CONFIGURANDO CONEXÃO COM O FIREBASE
-public class Conexao {
+public class DbConection {
     private static FirebaseAuth firebaseAuth;
     private static FirebaseAuth.AuthStateListener authStateListener;
     private static FirebaseUser firebaseUser;
     private static DatabaseReference firebaseReference;
 
-    public Conexao(){
+    public DbConection(){
     }
 
     public DatabaseReference getFirebaseReference(){
