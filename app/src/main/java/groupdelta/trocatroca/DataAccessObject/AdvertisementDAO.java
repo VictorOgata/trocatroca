@@ -21,9 +21,9 @@ public class AdvertisementDAO extends DbConection {
     public void saveNewAd(Context context, Advertisement ad){
         if (getFirebaseAuth().getCurrentUser() != null) {
             getFirebaseReference().child("Anuncios").child(this.AdID).setValue(ad);
-            getFirebaseReference().child("Itens").child(ad.getItem()).child(this.AdID).setValue("Oferecendo%"+this.AdID);
+            getFirebaseReference().child("Itens").child("@"+ad.getItem()).setValue(ad.getItem());
             for(Map.Entry<String,String> map : ad.getWishList().entrySet()){
-                getFirebaseReference().child("Itens").child(map.getValue()).child(this.AdID).setValue("Buscando%"+this.AdID);}
+                getFirebaseReference().child("Itens").child("@"+map.getValue()).setValue(ad.getItem());}
         }
         else{
             Toast.makeText(context, (String) "User nao autenticado.", LENGTH_LONG).show();
