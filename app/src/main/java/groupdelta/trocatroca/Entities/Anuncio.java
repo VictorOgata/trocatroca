@@ -1,18 +1,7 @@
 package groupdelta.trocatroca.Entities;
 
-import android.content.Context;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.widget.Toast;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import groupdelta.trocatroca.DataAccessObject.Conexao;
-
-import static android.widget.Toast.LENGTH_LONG;
 
 public class Anuncio {
 
@@ -20,7 +9,6 @@ public class Anuncio {
     private String item;
     //Advertisement description
     private String description;
-    //User contact info
     private Map<String,String> wishList;
     //User Advertisement state (Country area)
     private String state;
@@ -31,10 +19,14 @@ public class Anuncio {
     //Advertisement type(game or book)
     private String type;
     public Anuncio() {
-
+        /*DatabaseReference referenciaFirebase;
+        FirebaseUser firebaseUser;
+        referenciaFirebase = Conexao.getFirebaseReference();
+        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
+        AdID = referenciaFirebase.child("Anuncios").push().getKey();*/
     }
 
-    public void saveNewAd(Context context){
+    /*public void saveNewAd(Context context){
         DatabaseReference referenciaFirebase;
         FirebaseUser firebaseUser;
         referenciaFirebase = Conexao.getFirebaseReference();
@@ -48,7 +40,7 @@ public class Anuncio {
         else{
             Toast.makeText(context, (String) "Usuario nao autenticado.", LENGTH_LONG).show();
         }
-    }
+    }*/
 
     public String getItem() {
         return item;
@@ -62,46 +54,40 @@ public class Anuncio {
     public String getState() {
         return state;
     }
+    public String getType() { return type; }
+    public String getHost() { return host; }
+
     public void setItem(String item) {
         this.item = item.replace(" ", "_").toUpperCase();
     }
     public Map<String, String> getWishList() {
         return wishList;
     }
-
-
-    public String getType() { return type; }
-    public void setType(String type) {
-        this.type = type;
+    public void setWishList(String []wList) {
+       HashMap<String,String> wishList = new HashMap<String, String>();
+        /*DatabaseReference referenciaFirebase;
+        FirebaseUser firebaseUser;
+        referenciaFirebase = Conexao.getFirebaseReference();
+        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();*/
+        for(String wish : wList)//int i=0;i<wList.length;i++){
+            wishList.put("@"+wish,wish);
+            //referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue("Buscando%"+this.AdID);}
+        this.wishList = wishList;
     }
+
     public void setDescription(String description) {
         this.description = description;
-    }
-    public void setState(String state) {
-        this.state = state;
     }
     public void setCity(String city) {
         this.city = city;
     }
+    public void setState(String state) {
+        this.state = state;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
     public void setHost(String host) {
         this.host = host;
     }
-    public void setWishList(HashMap<String,String> wMap) {
-        this.wishList = wMap;
-    }
-    public HashMap<String,String> makeWishL(String []wList) {
-        HashMap<String,String> wishL = new HashMap<String, String>();
-        DatabaseReference referenciaFirebase;
-        FirebaseUser firebaseUser;
-        referenciaFirebase = Conexao.getFirebaseReference();
-        firebaseUser = Conexao.getFirebaseAuth().getCurrentUser();
-        for(int i=0;i<wList.length;i++){
-            wishL.put("@"+wList[i], wList[i]);
-            referenciaFirebase.child("Itens").child("@"+wList[i]).setValue(wList[i]);}
-
-        return wishL;
-    }
-
-
-    public String getHost() { return host; }
 }

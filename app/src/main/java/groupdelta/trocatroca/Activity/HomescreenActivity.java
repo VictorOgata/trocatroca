@@ -9,20 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.support.design.widget.BottomNavigationView;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import groupdelta.trocatroca.DataAccessObject.Conexao;
-import groupdelta.trocatroca.Entities.Anuncio;
 import groupdelta.trocatroca.R;
-
-import static android.widget.Toast.LENGTH_LONG;
 
 public class HomescreenActivity extends AppCompatActivity {
 
@@ -72,4 +62,28 @@ public class HomescreenActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    /*@Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_homescreen);
+
+        //declaracao e referencias do BottomNavigationView
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        //indica qual o fragment inicial
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment()).commit();
+    }*/
+    public void onPerfilButtonClicked(View view) {
+        Intent i = new Intent(HomescreenActivity.this, PerfilActivity.class);
+        startActivity(i);
+    }
+    public void onLogoutButtonClicked(View view) {
+        Intent i = new Intent(HomescreenActivity.this, MainActivity.class);
+        //Conexao.logOut();
+        startActivity(i);
+    }
+
 }

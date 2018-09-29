@@ -9,10 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import groupdelta.trocatroca.DataAccessObject.Conexao;
 import groupdelta.trocatroca.R;
 
 public class PerfilFragment extends Fragment {
@@ -50,7 +48,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
                 Intent intent = new Intent(context,MainActivity.class);
-                Conexao.logOut();
+                //Conexao.logOut();
                 startActivity(intent);
             }
         });
