@@ -22,33 +22,32 @@
             android:name=".Activity.CadastroActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.CadastroP2Activity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.CadastroActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.PerfilActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.HomescreenActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.BuscaActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.NovoAnuncioActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
-
 
 </manifest>
