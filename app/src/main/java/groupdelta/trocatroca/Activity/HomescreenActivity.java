@@ -82,7 +82,7 @@ public class HomescreenActivity extends AppCompatActivity {
     }
     public void onLogoutButtonClicked(View view) {
         Intent i = new Intent(HomescreenActivity.this, MainActivity.class);
-        //Conexao.logOut();
+        //DbConection.logOut();
         startActivity(i);
     }
 

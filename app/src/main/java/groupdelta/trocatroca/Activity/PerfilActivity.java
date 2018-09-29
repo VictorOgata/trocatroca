@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import groupdelta.trocatroca.AdressList;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
-import groupdelta.trocatroca.Entities.Usuario;
+import groupdelta.trocatroca.Entities.User;
 import groupdelta.trocatroca.R;
 
 public class PerfilActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -75,14 +75,14 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void showData(DataSnapshot ds) {
-                Usuario uInfo = new Usuario();
+                User uInfo = new User();
                 //String uid = userDAO.getFirebaseUser().getUid();
-                //uInfo = (Usuario) ds.child("Usuarios").child(userDAO.getFirebaseUser().getUid().toString()).getValue();
+                //uInfo = (User) ds.child("Usuarios").child(userDAO.getFirebaseUser().getUid().toString()).getValue();
                 uInfo.shapeHashMapIntoUser(userDAO.loadUserHashMap(ds));
-                /*uInfo.setNick(ds.child("Usuarios").child(uid).getValue(Usuario.class).getNick()); //set the name
-                uInfo.setCity(ds.child("Usuarios").child(uid).getValue(Usuario.class).getCity()); //set the city
-                uInfo.setState(ds.child("Usuarios").child(uid).getValue(Usuario.class).getState()); //set the city
-                uInfo.setCInfo(ds.child("Usuarios").child(uid).getValue(Usuario.class).getCInfo()); //set the Contact Info
+                /*uInfo.setNick(ds.child("Usuarios").child(uid).getValue(User.class).getNick()); //set the name
+                uInfo.setCity(ds.child("Usuarios").child(uid).getValue(User.class).getCity()); //set the city
+                uInfo.setState(ds.child("Usuarios").child(uid).getValue(User.class).getState()); //set the city
+                uInfo.setCInfo(ds.child("Usuarios").child(uid).getValue(User.class).getCInfo()); //set the Contact Info
                 */
                 //display all the information
 
@@ -126,7 +126,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void onModifyProfileButtonClicked(View view) {
         userDAO.getFirebaseUser().updateEmail(Email.getText().toString());
-        Usuario uInfo = new Usuario();
+        User uInfo = new User();
         uInfo.setNick(Username.getText().toString());
         uInfo.setEmail(Email.getText().toString());
         uInfo.setCInfo("@Vazio@");
@@ -134,10 +134,10 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
         uInfo.setCity(City.getSelectedItem().toString());
         userDAO.updateUser(uInfo);
         /*
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("nick").setValue(Username.getText().toString());
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("email").setValue(Email.getText().toString());
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
-        Conexao.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getSelectedItem().toString());*/
+        DbConection.getFirebaseReference().child("Usuarios").child(uid).child("nick").setValue(Username.getText().toString());
+        DbConection.getFirebaseReference().child("Usuarios").child(uid).child("email").setValue(Email.getText().toString());
+        DbConection.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
+        DbConection.getFirebaseReference().child("Usuarios").child(uid).child("city").setValue(City.getSelectedItem().toString());*/
     }
 
     public void onModifyPasswordButtonClicked(View view) {

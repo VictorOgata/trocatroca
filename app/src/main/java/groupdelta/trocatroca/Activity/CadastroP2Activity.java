@@ -19,7 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import groupdelta.trocatroca.Entities.Usuario;
+
+import groupdelta.trocatroca.Entities.User;
 import groupdelta.trocatroca.AdressList;
 import groupdelta.trocatroca.R;
 
@@ -33,7 +34,7 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
     private Spinner mCity;
     private final static String [] paths = AdressList.StatesList;
     private final static String [][] CityList = AdressList.CitiesList;
-    private Usuario user;
+    private User user;
 
     /* Firebase conection */
     private UserDAO userDAO;
@@ -84,13 +85,14 @@ public class CadastroP2Activity extends AppCompatActivity implements AdapterView
 
     public void onOkButtonClicked(View view) {
         final Context context=this;
-        user= new Usuario();
+        user= new User();
         /* Pulling information from screen through references*/
         user.setState(mState.getSelectedItem().toString());
         user.setCity(mCity.getSelectedItem().toString());
         user.setNick(nickReceived);
         user.setEmail(emailReceived);
         user.setCInfo("@Vazio@");
+        user.setAvPoints("@Vazio@");
         Toast.makeText(context,(String)"Procesando...", LENGTH_LONG).show();
         cadastrarNovoUsuario();
     }
