@@ -94,7 +94,6 @@ public class BuscaActivity extends AppCompatActivity {
                 Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if(position==1){
                         Intent i = new Intent(BuscaActivity.this, PaginaAnuncio.class);
                         startActivity(i);}
                     }
