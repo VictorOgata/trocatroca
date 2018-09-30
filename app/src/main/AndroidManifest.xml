@@ -48,6 +48,11 @@
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activity.PaginaAnuncio"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activity.BuscaActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
