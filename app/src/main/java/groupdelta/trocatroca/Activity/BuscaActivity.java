@@ -1,10 +1,13 @@
 package groupdelta.trocatroca.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -39,7 +42,7 @@ public class BuscaActivity extends AppCompatActivity {
         Busca=(ListView) findViewById(R.id.ListSearch);
 
         myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
-
+        AdapterView<?> parent;
         eventEdit();
 
 
@@ -87,6 +90,14 @@ public class BuscaActivity extends AppCompatActivity {
                 }
                 arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncioNames);
                 Busca.setAdapter(arrayAdapterAnuncio);
+
+                Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(BuscaActivity.this, PaginaAnuncio.class);
+                        startActivity(i);
+                    }
+                });
             }
 
             @Override
