@@ -61,6 +61,8 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listAnuncioNames.clear();
+                listAnuncioID.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Advertisement p = objSnapshot.getValue(Advertisement.class);
                     String itemP = p.getItem();
