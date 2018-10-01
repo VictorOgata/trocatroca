@@ -36,38 +36,14 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meusanuncios);
-
-        editPalavra= (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
 
         myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
-        AdapterView<?> parent;
-        eventEdit();
+        ListaAnuncios();
 
 
     }
 
-    private void eventEdit(){
-        editPalavra.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String word = editPalavra.getText().toString().trim();
-                ListaAnuncios();
-
-            }
-        });
-
-    }
 
     private void ListaAnuncios() {
         Query query;
