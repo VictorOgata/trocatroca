@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +27,7 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
     private TextView City;
     private TextView State;
     private TextView Type;
+    private String IDAd;
     AdvertisementDAO advt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final String IDanuncio = bundle.getString("IDAnuncio");
+        IDAd = IDanuncio;
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,6 +60,13 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void onEdit(View view) {
+       /* String word = Item.getText().toString();
+        myRef.child(IDAd).child("item").setValue(word);*/
+        String word2 = Description.getText().toString();
+        myRef.child(IDAd).child("description").setValue(word2);
     }
 
 
