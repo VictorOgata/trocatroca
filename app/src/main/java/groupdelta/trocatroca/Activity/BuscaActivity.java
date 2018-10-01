@@ -34,7 +34,7 @@ public class BuscaActivity extends AppCompatActivity {
     private List<Advertisement> listAdvertisementClasses = new ArrayList<Advertisement>();
     private List<String> listAnuncioNames = new ArrayList<String>();
     private List<String> listAnuncioID = new ArrayList<String>();
-    private ArrayAdapter<String> arrayAdapterAnuncio;
+    private ArrayAdapter<String> arrayAdapterAnuncio, arrayAdapterAnuncio1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
@@ -78,30 +78,28 @@ public class BuscaActivity extends AppCompatActivity {
         }
 
         listAnuncioNames.clear();
+        listAnuncioID.clear();
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    listAnuncioID.add(objSnapshot.getKey().toString());
-                }
-
-
-                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Advertisement p = objSnapshot.getValue(Advertisement.class);
                     String itemP = p.getItem();
                     listAdvertisementClasses.add(p);
+                    listAnuncioID.add(objSnapshot.getKey().toString());
                     listAnuncioNames.add(itemP.replace("_"," "));
                 }
                 arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncioNames);
+                arrayAdapterAnuncio1 = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncioID);
                 Busca.setAdapter(arrayAdapterAnuncio);
 
                 Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("IDAnuncio",listAnuncioID.get(position).toString());
+                        bundle.putString("IDAnuncio",arrayAdapterAnuncio1.getItem(position).toString());
                         Intent i = new Intent(BuscaActivity.this, PaginaAnuncio.class);
                         i.putExtras(bundle);
                         startActivity(i);}
