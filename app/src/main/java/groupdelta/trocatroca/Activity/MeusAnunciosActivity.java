@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
 import groupdelta.trocatroca.R;
 
@@ -31,16 +32,18 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meusanuncios);
-        Busca =(ListView) findViewById(R.id.ListSearch);
+        Busca = findViewById(R.id.ListSearch);
 
-        myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
+        myRef = FirebaseDatabase.getInstance().getReference("Usuarios");
         AdapterView<?> parent;
 
     }
 
     private void ListaAnuncios() {
         Query query;
-        query = myRef.orderByChild("uid").startAt("uid");
+        UserDAO userDao =  new UserDAO();
+        String uid = userDao.getFirebaseAuth().getUid();
+        query = myRef.orderByChild("host").startAt(uid);
 
         listAnuncioNames.clear();
 
