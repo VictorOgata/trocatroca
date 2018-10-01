@@ -76,7 +76,7 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Bundle bundle = new Bundle();
                         bundle.putString("IDAnuncio",arrayAdapterAnuncio1.getItem(position).toString());
-                        Intent i = new Intent(MeusAnunciosActivity.this, PaginaAnuncio.class);
+                        Intent i = new Intent(MeusAnunciosActivity.this, PaginaAnuncioEdit.class);
                         i.putExtras(bundle);
                         startActivity(i);}
 

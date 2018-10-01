@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colourLightPurple"
-    tools:context=".Activity.PaginaAnuncio">
+    tools:context=".Activity.PaginaAnuncioEdit">
 
     <TextView
         android:id="@+id/item"

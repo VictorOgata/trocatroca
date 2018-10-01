@@ -54,6 +54,11 @@
             android:parentActivityName=".Activity.BuscaActivity"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".Activity.PaginaAnuncioEdit"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activity.BuscaActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".Activity.MeusAnunciosActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
