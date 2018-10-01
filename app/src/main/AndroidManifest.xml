@@ -51,12 +51,12 @@
         <activity
             android:name=".Activity.PaginaAnuncio"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activity.BuscaActivity"
+            android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.PaginaAnuncioEdit"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activity.BuscaActivity"
+            android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.MeusAnunciosActivity"

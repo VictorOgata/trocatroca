@@ -72,8 +72,8 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
     public void onDelete(View view) {
        /* String word = Item.getText().toString();
         myRef.child(IDAd).child("item").setValue(word);*/
-        Intent i = new Intent(PaginaAnuncioEdit.this, MeusAnunciosActivity.class);
-        myRef.child(IDAd).setValue(null);
+        Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
+        //myRef.child(IDAd).removeValue();
         startActivity(i);
     }
 
