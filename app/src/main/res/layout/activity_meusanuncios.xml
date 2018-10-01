@@ -8,19 +8,6 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".Activity.MeusAnunciosActivity">
 
-    <AutoCompleteTextView
-        android:id="@+id/TextSearch"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:hint="SEARCH"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ListView
         android:id="@+id/ListSearch"
         style="@style/edittext_style"
