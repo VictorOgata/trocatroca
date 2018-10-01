@@ -23,6 +23,7 @@ public class HomeFragment extends Fragment {
     private String[] itens = new String[] {"Game of Thrones", "Age of Empires", "Prototype", "God of War", "God of War2", "god of war", "game of Throne2"};
     ArrayAdapter<String> adapter;
 
+
     // The onCreate method is called when the Fragment instance is being created, or re-created.
     // Use onCreate for any standard setup that does not require the activity to be fully created
     @Override
@@ -30,6 +31,10 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //troquei this por getActivity()
         adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, itens);
+
+
+
+
     }
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
@@ -41,6 +46,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         context = view.getContext();
         return view;
+
+
+
     }
 
     // This event is triggered soon after onCreateView().
