@@ -47,11 +47,12 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(IDanuncio) != null){
                 Item.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getItem());
                 Description.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getDescription());
                 City.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getCity());
                 State.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getState());
-                Type.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getType());
+                Type.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getType());}
             }
 
             @Override
@@ -67,6 +68,13 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
         myRef.child(IDAd).child("item").setValue(word);*/
         String word2 = Description.getText().toString();
         myRef.child(IDAd).child("description").setValue(word2);
+    }
+    public void onDelete(View view) {
+       /* String word = Item.getText().toString();
+        myRef.child(IDAd).child("item").setValue(word);*/
+        Intent i = new Intent(PaginaAnuncioEdit.this, MeusAnunciosActivity.class);
+        myRef.child(IDAd).setValue(null);
+        startActivity(i);
     }
 
 
