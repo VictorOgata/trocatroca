@@ -19,7 +19,6 @@ public class HomeFragment extends Fragment {
 
     Context context;
     private Button btnNewItem;
-    private AutoCompleteTextView PesquisaItens;
     private String[] itens = new String[] {"Game of Thrones", "Age of Empires", "Prototype", "God of War", "God of War2", "god of war", "game of Throne2"};
     ArrayAdapter<String> adapter;
 
@@ -57,8 +56,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         //super.onViewCreated(view, savedInstanceState);
-        PesquisaItens = view.findViewById(R.id.pesquisaItens);
-        PesquisaItens.setAdapter(adapter);
 
         btnNewItem = view.findViewById(R.id.btnNewItem);
         btnNewItem.setOnClickListener(new View.OnClickListener() {
