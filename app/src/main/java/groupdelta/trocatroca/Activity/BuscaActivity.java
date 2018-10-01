@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
 import groupdelta.trocatroca.R;
 
@@ -32,15 +33,14 @@ public class BuscaActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private List<Advertisement> listAdvertisementClasses = new ArrayList<Advertisement>();
     private List<String> listAnuncioNames = new ArrayList<String>();
+    private List<String> listAnuncioID = new ArrayList<String>();
     private ArrayAdapter<String> arrayAdapterAnuncio;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
 
         editPalavra= (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
-
         myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
         AdapterView<?> parent;
         eventEdit();
@@ -81,7 +81,13 @@ public class BuscaActivity extends AppCompatActivity {
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    listAnuncioID.add(objSnapshot.getKey().toString());
+                }
+
+
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Advertisement p = objSnapshot.getValue(Advertisement.class);
                     String itemP = p.getItem();
@@ -94,7 +100,10 @@ public class BuscaActivity extends AppCompatActivity {
                 Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("IDAnuncio",listAnuncioID.get(position).toString());
                         Intent i = new Intent(BuscaActivity.this, PaginaAnuncio.class);
+                        i.putExtras(bundle);
                         startActivity(i);}
 
                 });

@@ -17,9 +17,6 @@ public class AdvertisementDAO extends DbConection {
         super();
         AdID = getFirebaseReference().child("Anuncios").push().getKey();
     }
-    public String getID() {
-        return AdID;
-    }
 
     public void saveNewAd(Context context, Advertisement ad){
         if (getFirebaseAuth().getCurrentUser() != null) {
