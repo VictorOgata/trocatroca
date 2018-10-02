@@ -19,11 +19,11 @@
     <!--
     <Button
         android:id="@+id/buscax"
-        android:layout_width="311dp"
+        android:layout_width="311sp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="64sp"
         android:text="busca"
         app:layout_constraintBottom_toBottomOf="@+id/btnNewItem"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,17 +35,17 @@
 
     <Button
         android:id="@+id/btnmeusanuncios"
-        android:layout_width="304dp"
+        android:layout_width="304sp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="202dp"
+        android:layout_marginTop="202sp"
         android:text="Meus Anuncios" />
     -->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="50sp"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
         app:itemIconTint="@color/colorPrimaryDark"

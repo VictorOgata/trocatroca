@@ -66,7 +66,6 @@ public class User {
         UserHashMap.put("city",(this.city.isEmpty())? "":this.getCity());
         return UserHashMap;
     }
-
     public void shapeHashMapIntoUser(HashMap UserHashMap){
         this.setNick(UserHashMap.containsKey("nick")? UserHashMap.get("nick").toString():"NA");
         this.setEmail(UserHashMap.containsKey("email")? UserHashMap.get("email").toString():"NA");

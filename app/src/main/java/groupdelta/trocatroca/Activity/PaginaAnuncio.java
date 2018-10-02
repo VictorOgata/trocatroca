@@ -23,8 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
+import groupdelta.trocatroca.DataAccessObject.TradeRequestDAO;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
+import groupdelta.trocatroca.Entities.TradeRequest;
 import groupdelta.trocatroca.Entities.User;
 import groupdelta.trocatroca.R;
 
@@ -41,6 +43,8 @@ public class PaginaAnuncio extends AppCompatActivity {
 
     private AdvertisementDAO advtDAO;
     private UserDAO userDAO;
+    private TradeRequestDAO tradeRDAO;
+    private Advertisement mainAD;
 
     private String idAD;
 
@@ -60,6 +64,8 @@ public class PaginaAnuncio extends AppCompatActivity {
 
         advtDAO = new AdvertisementDAO();
         userDAO = new UserDAO();
+        tradeRDAO = new TradeRequestDAO();
+        mainAD = new Advertisement();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -79,22 +85,32 @@ public class PaginaAnuncio extends AppCompatActivity {
         btnSendR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                TradeRequest tradeR = new TradeRequest();
+                tradeR.setHost(userDAO.getFirebaseUser().getUid());
+                tradeR.setTarget(mainAD.getHost());
+                tradeR.setAdID(idAD);
+
+                String text = RText.getText().toString();
+                tradeR.setMessage((text.length()>254)? text.substring(0,255) : text);
+
+                tradeRDAO.saveNewRequest(PaginaAnuncio.this,tradeR);
+
+                Intent i = new Intent( PaginaAnuncio.this, HomescreenActivity.class);
+                startActivity(i);
             }
         });
     }
 
     private void showData(DataSnapshot ds){
-        final Advertisement adInfo = new Advertisement();
         List<String> adWishes= new ArrayList<String>();
 
-        adInfo.shapeHashMapIntoAdvertisement((HashMap)ds.child(idAD).getValue());
-        Item.setText("Item: "+adInfo.getItem());
-        Description.setText("Descrição: "+adInfo.getDescription());
-        Address.setText("Endereço: "+adInfo.getCity()+","+adInfo.getState());
-        Type.setText("Tipo: "+adInfo.getType());
+        mainAD.shapeHashMapIntoAdvertisement((HashMap)ds.child(idAD).getValue());
+        Item.setText("Item: "+mainAD.getItem());
+        Description.setText("Descrição: "+mainAD.getDescription());
+        Address.setText("Endereço: "+mainAD.getCity()+","+mainAD.getState());
+        Type.setText("Tipo: "+mainAD.getType());
 
-        for(Map.Entry<String,String> map: adInfo.getWishList().entrySet()) {
+        for(Map.Entry<String,String> map: mainAD.getWishList().entrySet()) {
             adWishes.add(map.getValue());
         }
         ArrayAdapter<String> wishesAdapter= new ArrayAdapter<String>(PaginaAnuncio.this, android.R.layout.simple_list_item_1,adWishes);
@@ -105,7 +121,7 @@ public class PaginaAnuncio extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnap2) {
                 if(dataSnap2!=null) {
-                    uNick.setText("Anúncio de: " + dataSnap2.child(adInfo.getHost()).getValue(User.class).getNick());
+                    uNick.setText("Anúncio de: " + dataSnap2.child(mainAD.getHost()).getValue(User.class).getNick());
                 }
             }
             @Override
