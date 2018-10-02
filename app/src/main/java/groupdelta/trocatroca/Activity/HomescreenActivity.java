@@ -17,14 +17,12 @@ import groupdelta.trocatroca.R;
 public class HomescreenActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private Button btnBusca;
-    private Button btnAnuncios;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
-        btnBusca = findViewById(R.id.buscax);
-        btnAnuncios = findViewById(R.id.btnmeusanuncios);
+
 
         //declaracao e referencias do BottomNavigationView
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -34,33 +32,11 @@ public class HomescreenActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                new HomeFragment()).commit();
 
-        btnAnuncios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAnunciosButtonClicked();
-            }
-        });
+
 
 
 
     }
-    public void onAnunciosButtonClicked(){
-        Context context = this;
-        Intent i = new Intent(HomescreenActivity.this, MeusAnunciosActivity.class);
-        startActivity(i);
-    }
-
-
-    public void onBuscaButtonClicked(View view) {
-        Context context = this;
-        /*Checking non informed parameters*/
-
-        Intent i = new Intent(HomescreenActivity.this, BuscaActivity.class);
-        startActivity(i);
-    }
-
-
-
 
 
 

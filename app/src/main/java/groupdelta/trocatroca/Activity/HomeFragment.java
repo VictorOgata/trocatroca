@@ -21,6 +21,8 @@ public class HomeFragment extends Fragment {
     private Button btnNewItem;
     private String[] itens = new String[] {"Game of Thrones", "Age of Empires", "Prototype", "God of War", "God of War2", "god of war", "game of Throne2"};
     ArrayAdapter<String> adapter;
+    private Button btnBusca;
+    private Button btnAnuncios;
 
 
     // The onCreate method is called when the Fragment instance is being created, or re-created.
@@ -33,8 +35,18 @@ public class HomeFragment extends Fragment {
 
 
 
-
     }
+//    public void onAnunciosButtonClicked(){
+//        Intent i = new Intent(context, MeusAnunciosActivity.class);
+//        startActivity(i);
+//    }
+
+
+//    public void onBuscaButtonClicked(View view) {
+//        /*Checking non informed parameters*/
+//        Intent i = new Intent(context, BuscaActivity.class);
+//        startActivity(i);
+//    }
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation.
@@ -58,12 +70,35 @@ public class HomeFragment extends Fragment {
         //super.onViewCreated(view, savedInstanceState);
 
         btnNewItem = view.findViewById(R.id.btnNewItem);
+        btnBusca = view.findViewById(R.id.buscax);
+        btnAnuncios = view.findViewById(R.id.btnmeusanuncios);
+
         btnNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
                 Intent intent = new Intent(context,NovoAnuncioActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnAnuncios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                onAnunciosButtonClicked();
+                Intent i = new Intent(context, MeusAnunciosActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+        btnBusca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                onAnunciosButtonClicked();
+                Intent i = new Intent(context, BuscaActivity.class);
+                startActivity(i);
+
             }
         });
     }

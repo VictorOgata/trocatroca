@@ -93,7 +93,12 @@ public class BuscaActivity extends AppCompatActivity {
                 }
                 arrayAdapterAnuncio = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncioNames);
                 arrayAdapterAnuncio1 = new ArrayAdapter<String>(BuscaActivity.this, android.R.layout.simple_list_item_1,listAnuncioID);
+
+                arrayAdapterAnuncio.notifyDataSetChanged();
+                arrayAdapterAnuncio1.notifyDataSetChanged();
+
                 Busca.setAdapter(arrayAdapterAnuncio);
+
 
                 Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

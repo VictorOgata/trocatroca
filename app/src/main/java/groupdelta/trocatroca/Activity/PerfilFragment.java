@@ -34,6 +34,7 @@ public class PerfilFragment extends Fragment {
         //botoes e acoes
         btnPerfil = view.findViewById(R.id.btnPerfil);
         btnLogout = view.findViewById(R.id.btnLogout);
+
         btnPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

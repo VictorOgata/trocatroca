@@ -3,6 +3,7 @@ package groupdelta.trocatroca.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
@@ -46,13 +49,15 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(IDanuncio) != null){
-                Item.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getItem());
-                Description.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getDescription());
-                City.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getCity());
-                State.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getState());
-                Type.setText(dataSnapshot.child(IDanuncio).getValue(Advertisement.class).getType());}
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if(dataSnapshot.child(IDanuncio) != null){
+                if (IDanuncio != null) {
+                Item.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getItem());
+                Description.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getDescription());
+                City.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getCity());
+                State.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getState());
+                Type.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getType());
+                }
             }
 
             @Override
@@ -70,10 +75,12 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
         myRef.child(IDAd).child("description").setValue(word2);
     }
     public void onDelete(View view) {
-       /* String word = Item.getText().toString();
+        /*String word = Item.getText().toString();
         myRef.child(IDAd).child("item").setValue(word);*/
+//        Fragment f = new HomeFragment();
         Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
-        //myRef.child(IDAd).removeValue();
+        myRef.child(IDAd).removeValue();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
         startActivity(i);
     }
 
