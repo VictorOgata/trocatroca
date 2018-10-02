@@ -78,7 +78,7 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 adDAO.deleteAdvetisement(IDAd);
-                Intent i = new Intent(PaginaAnuncioEdit.this, MeusAnunciosActivity.class);
+                Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
                 startActivity(i);
             }
         });
