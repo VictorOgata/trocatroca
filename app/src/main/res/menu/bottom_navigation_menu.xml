@@ -10,15 +10,15 @@
     <item
         android:id="@+id/menu_anunciar"
         android:icon="@drawable/ic_local_offer_black_24dp"
-        android:title="Nova Oferta"
+        android:title="Meus Anúncios"
         />
-
+    <!--
     <item
         android:id="@+id/menu_arquivo"
         android:icon="@drawable/ic_archive_black_24dp"
         android:title="Arquivo"
         />
-
+    -->
     <item
         android:id="@+id/menu_perfil"
         android:icon="@drawable/ic_account_circle_black_24dp"

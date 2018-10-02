@@ -15,7 +15,6 @@ import android.widget.ListView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -29,19 +28,20 @@ import groupdelta.trocatroca.R;
 public class BuscaActivity extends AppCompatActivity {
     private EditText editPalavra;
     private ListView Busca;
+    private AdvertisementDAO adDAO;
     private DatabaseReference myRef;
-    private FirebaseDatabase firebaseDatabase;
     private List<Advertisement> listAdvertisementClasses = new ArrayList<Advertisement>();
     private List<String> listAnuncioNames = new ArrayList<String>();
     private List<String> listAnuncioID = new ArrayList<String>();
     private ArrayAdapter<String> arrayAdapterAnuncio, arrayAdapterAnuncio1;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
-
+        adDAO = new AdvertisementDAO();
         editPalavra= (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
-        myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
+        myRef = adDAO.getFirebaseInstance().getReference("Anuncios");
         AdapterView<?> parent;
         eventEdit();
 
@@ -98,7 +98,6 @@ public class BuscaActivity extends AppCompatActivity {
                 arrayAdapterAnuncio1.notifyDataSetChanged();
 
                 Busca.setAdapter(arrayAdapterAnuncio);
-
 
                 Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

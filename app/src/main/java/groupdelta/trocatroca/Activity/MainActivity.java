@@ -1,6 +1,5 @@
 package groupdelta.trocatroca.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,21 +17,23 @@ import com.google.firebase.auth.AuthResult;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.R;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 
 public class MainActivity extends AppCompatActivity {
 
     /* E-mail edit text */
     private EditText mEmailEditText;
-
     /* Password edit text */
     private EditText mPasswordEditText;
-
-
-    private EditText editEmail, editSenha;
-    private Button btnLogar;
     private UserDAO userDAO;
+    private Button btnLogar;
+    private Button btnRegistrar;
     private Button btnRecuperar;
 
+    protected  void onStart (){
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,31 +45,49 @@ public class MainActivity extends AppCompatActivity {
         mEmailEditText = findViewById(R.id.edtEmail);
         mPasswordEditText = findViewById(R.id.edSenha);
         btnLogar = findViewById(R.id.btnLogin);
+        btnRegistrar=findViewById(R.id.btnCadastro);
         btnRecuperar = findViewById(R.id.btnRecuperar);
+
+        btnLogar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = mEmailEditText.getText().toString().trim();
+                String senha = mPasswordEditText.getText().toString().trim();
+                login(email,senha);
+            }
+        });
+
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class destinationClass = CadastroActivity.class;
+                Intent intentToStartRegisterActivity = new Intent(MainActivity.this, destinationClass);
+                intentToStartRegisterActivity.putExtra("email", mEmailEditText.getText().toString());
+                startActivity(intentToStartRegisterActivity);
+            }
+        });
 
         btnRecuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailEditText.getText().toString().trim();
-                if (TextUtils.isEmpty(email)){
-                    Toast.makeText(getApplicationContext(),"Entre com email, bicho !", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                userDAO.getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(MainActivity.this,"Olha o e-mail lá mano", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(MainActivity.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
-                        }
+            String email = mEmailEditText.getText().toString().trim();
+            if (TextUtils.isEmpty(email)){
+                Toast.makeText(MainActivity.this,"Insira o e-mail vinculado a conta!", LENGTH_LONG).show();
+            }
+            userDAO.getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(MainActivity.this,"Um e-mail de recuperação foi enviado", LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(MainActivity.this,"Falha ao enviar e-mail de recuperação!", LENGTH_LONG).show();
                     }
-                });
+                }
+            });
             }
         });
 
     }
-
 
     private void login(String email, String senha){
         if(!email.isEmpty() && !senha.isEmpty()) {
@@ -78,44 +97,14 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Intent i = new Intent(MainActivity.this, HomescreenActivity.class);
+                                Toast.makeText(MainActivity.this,"Efetuando Login...", LENGTH_LONG).show();
                                 startActivity(i);
-
                             } else
-                                alert("E-mail ou Senha Errados ! ");
+                                Toast.makeText(MainActivity.this,"E-mail ou Senha Errados!", LENGTH_LONG).show();
                         }
                     });
         }else
-            alert("Campos não preenchidos.");
+            Toast.makeText(MainActivity.this,"Campos não preenchidos.", LENGTH_LONG).show();
     }
 
-
-    private void alert(String s){
-        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
-    }
-
-    protected  void onStart (){
-        super.onStart();
-    }
-
-    public void onRegisterButtonClicked(View view) {
-        Context context = this;
-
-        Class destinationClass = CadastroActivity.class;
-        Intent intentToStartRegisterActivity = new Intent(context, destinationClass);
-        String tS = mEmailEditText.getText().toString();
-        intentToStartRegisterActivity.putExtra("email", mEmailEditText.getText().toString());
-        startActivity(intentToStartRegisterActivity);
-    }
-
-    public void onLoginButtonClicked(View view) {
-        if (mEmailEditText.getText().toString().isEmpty() || mPasswordEditText.getText().toString().isEmpty()){
-            Toast.makeText(MainActivity.this, "Campos em Branco.Preencha todos os campos", Toast.LENGTH_SHORT).show();
-        } else {
-            String email = mEmailEditText.getText().toString().trim();
-            String senha = mPasswordEditText.getText().toString().trim();
-            login(email,senha);
-        }
-
-
-    }
 }

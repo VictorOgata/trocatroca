@@ -14,6 +14,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class UserDAO extends DbConection {
 
+    private final String USER_ENTITY="Usuarios";
     public UserDAO() {
         super();
     }
@@ -22,7 +23,7 @@ public class UserDAO extends DbConection {
         FirebaseUser firebaseUser = getFirebaseAuth().getCurrentUser();
         if (firebaseUser != null) {
             String uid = firebaseUser.getUid();
-            getFirebaseReference().child("Usuarios").child(uid).setValue(user);
+            getFirebaseReference().child(USER_ENTITY).child(uid).setValue(user);
         }
         else{
             Toast.makeText(context, (String) "User nao autenticado.", LENGTH_LONG).show();
@@ -30,11 +31,10 @@ public class UserDAO extends DbConection {
     }
 
     public void updateUser(User user){
-        getFirebaseReference().child("Usuarios").child(getFirebaseUser().getUid().toString()).setValue(user);
+        getFirebaseReference().child(USER_ENTITY).child(getFirebaseUser().getUid().toString()).setValue(user);
     }
 
     public HashMap<String,String> loadUserHashMap(DataSnapshot ds){
-        return (HashMap<String, String>) ds.child("Usuarios").child(this.getFirebaseUser().getUid().toString()).getValue();
+        return (HashMap<String, String>) ds.child(USER_ENTITY).child(this.getFirebaseUser().getUid().toString()).getValue();
     }
-
 }

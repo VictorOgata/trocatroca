@@ -1,6 +1,5 @@
 package groupdelta.trocatroca.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,36 +8,28 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.support.design.widget.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import groupdelta.trocatroca.R;
 
 public class HomescreenActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
-
 
         //declaracao e referencias do BottomNavigationView
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         //indica qual o fragment inicial
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-               new HomeFragment()).commit();
-
-
-
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container, new HomeFragment())
+                .commit();
 
     }
-
-
 
     //Atributo BottomNavigationView e Reacao aos clicks nos icones do bottomNavigationView
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -52,40 +43,17 @@ public class HomescreenActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()){
                         case R.id.menu_home: fragmentSelecionado = new HomeFragment(); break;
                         case R.id.menu_anunciar: fragmentSelecionado = new AnunciarFragment(); break;
-                        case R.id.menu_arquivo: fragmentSelecionado = new ArquivoFragment(); break;
+                        //case R.id.menu_arquivo: fragmentSelecionado = new ArquivoFragment(); break;
                         case R.id.menu_perfil: fragmentSelecionado = new PerfilFragment(); break;
                     }
                     //mostra o fragment seleciodo
                     //parametros: onde o fragment vai ser exibido e o fragment
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            fragmentSelecionado).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragmentSelecionado)
+                            .commit();
 
                     return true;
                 }
             };
-
-    /*@Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homescreen);
-
-        //declaracao e referencias do BottomNavigationView
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        //indica qual o fragment inicial
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
-    }*/
-    public void onPerfilButtonClicked(View view) {
-        Intent i = new Intent(HomescreenActivity.this, PerfilActivity.class);
-        startActivity(i);
-    }
-    public void onLogoutButtonClicked(View view) {
-        Intent i = new Intent(HomescreenActivity.this, MainActivity.class);
-        //DbConection.logOut();
-        startActivity(i);
-    }
-
-
 }

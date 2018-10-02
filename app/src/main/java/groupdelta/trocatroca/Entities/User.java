@@ -73,6 +73,5 @@ public class User {
         this.setCInfo(UserHashMap.containsKey("CInfo")? UserHashMap.get("CInfo").toString():"NA");
         this.setState(UserHashMap.containsKey("state")? UserHashMap.get("state").toString():"NA");
         this.setCity(UserHashMap.containsKey("city")? UserHashMap.get("city").toString():"NA");
-
     }
 }

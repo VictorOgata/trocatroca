@@ -3,86 +3,100 @@ package groupdelta.trocatroca.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
 import groupdelta.trocatroca.R;
 
 public class PaginaAnuncioEdit extends AppCompatActivity {
-    private DatabaseReference myRef;
     private TextView Item;
     private TextView Description;
-    private TextView City;
-    private TextView State;
+    private TextView Address;
     private TextView Type;
+    private TextView Wishes;
     private String IDAd;
-    AdvertisementDAO advt;
+    private AdvertisementDAO adDAO;
+    private Button btnEditar;
+    private Button btnDeletar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_anuncio_edit);
         Item = findViewById(R.id.item);
         Description = findViewById(R.id.description);
-        City = findViewById(R.id.city);
-        State = findViewById(R.id.state);
+        Address = findViewById(R.id.Address);
         Type = findViewById(R.id.type);
-        myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
+        Wishes = findViewById(R.id.wishListEdt);
+        btnEditar = findViewById(R.id.btnEditAd);
+        btnDeletar = findViewById(R.id.btnDellAd);
+
+        adDAO = new AdvertisementDAO();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final String IDanuncio = bundle.getString("IDAnuncio");
         IDAd = IDanuncio;
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        adDAO.getFirebaseInstance().getReference("Anuncios").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if(dataSnapshot.child(IDanuncio) != null){
-                if (IDanuncio != null) {
-                Item.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getItem());
-                Description.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getDescription());
-                City.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getCity());
-                State.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getState());
-                Type.setText(Objects.requireNonNull(dataSnapshot.child(IDanuncio).getValue(Advertisement.class)).getType());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(IDanuncio) != null){
+                    showData(dataSnapshot);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
+        });
 
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Advertisement adInfo = new Advertisement();
+                adInfo.setItem(Item.getText().toString());
+                adInfo.setDescription(Description.getText().toString());
+                String [] wishes = Wishes.getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
+                adInfo.setWishList(adInfo.makeWishList(wishes));
+                adDAO.updateAdInfo(adInfo,IDAd);
+                Intent i = new Intent(PaginaAnuncioEdit.this, MeusAnunciosActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnDeletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adDAO.deleteAdvetisement(IDAd);
+                Intent i = new Intent(PaginaAnuncioEdit.this, MeusAnunciosActivity.class);
+                startActivity(i);
+            }
         });
     }
 
-    public void onEdit(View view) {
-       /* String word = Item.getText().toString();
-        myRef.child(IDAd).child("item").setValue(word);*/
-        String word2 = Description.getText().toString();
-        myRef.child(IDAd).child("description").setValue(word2);
+    private void showData(DataSnapshot ds) {
+        if(ds.child(IDAd).hasChildren()) {
+            Advertisement adInfo = new Advertisement();
+            adInfo.shapeHashMapIntoAdvertisement((HashMap) ds.child(IDAd).getValue());
+            Item.setText(adInfo.getItem().replace("_", " "));
+            Description.setText(adInfo.getDescription());
+            Address.setText("Endereço: " + adInfo.getCity() + ", " + adInfo.getState());
+            Type.setText("Tipo: " + adInfo.getType());
+            String wishes = "";
+            for (Map.Entry<String, String> map : adInfo.getWishList().entrySet()) {
+                wishes = wishes + map.getValue().replace("_", " ") + ",";
+            }
+            Wishes.setText(wishes.substring(0, wishes.length() - 1));
+        }
     }
-    public void onDelete(View view) {
-        /*String word = Item.getText().toString();
-        myRef.child(IDAd).child("item").setValue(word);*/
-//        Fragment f = new HomeFragment();
-        Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
-        myRef.child(IDAd).removeValue();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-        startActivity(i);
-    }
-
-
 }

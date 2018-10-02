@@ -4,33 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
 import groupdelta.trocatroca.R;
 
 public class MeusAnunciosActivity  extends  AppCompatActivity {
-    private EditText editPalavra;
-    private ListView Busca;
-    private DatabaseReference myRef;
-    private FirebaseDatabase firebaseDatabase;
+
+    private ListView myAdList;
     private List<String> listAnuncioID = new ArrayList<String>();
     private List<Advertisement> listAdvertisementClasses = new ArrayList<Advertisement>();
     private List<String> listAnuncioNames = new ArrayList<String>();
@@ -39,30 +34,25 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meusanuncios);
-
-        Busca=(ListView) findViewById(R.id.ListSearch);
-
-        myRef = FirebaseDatabase.getInstance().getReference("Anuncios");
+        myAdList=(ListView) findViewById(R.id.ListSearch);
         ListaAnuncios();
-
-
     }
 
 
     private void ListaAnuncios() {
-        Query query;
         UserDAO userDao =  new UserDAO();
+        AdvertisementDAO adDAO= new AdvertisementDAO();
         String uid = userDao.getFirebaseAuth().getUid();
-        query = myRef.orderByChild("host").startAt(uid);
+        Query query = adDAO.getFirebaseInstance().getReference("Anuncios").orderByChild("host").equalTo(uid);
 
         listAnuncioNames.clear();
         listAnuncioID.clear();
 
+        Toast.makeText(MeusAnunciosActivity.this,"Carregando dados...",Toast.LENGTH_LONG).show();
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listAnuncioNames.clear();
-                listAnuncioID.clear();
+
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Advertisement p = objSnapshot.getValue(Advertisement.class);
                     String itemP = p.getItem();
@@ -72,8 +62,9 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
                 }
                 arrayAdapterAnuncio = new ArrayAdapter<String>(MeusAnunciosActivity.this, android.R.layout.simple_list_item_1, listAnuncioNames);
                 arrayAdapterAnuncio1 = new ArrayAdapter<String>(MeusAnunciosActivity.this, android.R.layout.simple_list_item_1,listAnuncioID);
-                Busca.setAdapter(arrayAdapterAnuncio);
-                Busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                myAdList.setAdapter(arrayAdapterAnuncio);
+
+                myAdList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Bundle bundle = new Bundle();
@@ -84,19 +75,14 @@ public class MeusAnunciosActivity  extends  AppCompatActivity {
 
                 });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
     }
 
-
     protected void onResume(){
         super.onResume();
     }
-
-
 }

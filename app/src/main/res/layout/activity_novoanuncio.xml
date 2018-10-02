@@ -80,19 +80,18 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:hint="Condições especiais para troca"
-        app:layout_constraintBottom_toTopOf="@+id/btnOKNew"
-        app:layout_constraintEnd_toEndOf="@+id/btnOKNew"
-        app:layout_constraintStart_toStartOf="@+id/btnOKNew"
+        app:layout_constraintBottom_toTopOf="@+id/btnNewAd"
+        app:layout_constraintEnd_toEndOf="@+id/btnNewAd"
+        app:layout_constraintStart_toStartOf="@+id/btnNewAd"
         app:layout_constraintTop_toBottomOf="@+id/edtDescricaoCadastro" />
 
     <Button
-        android:id="@+id/btnOKNew"
+        android:id="@+id/btnNewAd"
         style="@style/button_style"
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:onClick="onOKNewButtonClicked"
         android:text="Ofertar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

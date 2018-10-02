@@ -13,15 +13,23 @@ public class DbConection {
     private static FirebaseAuth.AuthStateListener authStateListener;
     private static FirebaseUser firebaseUser;
     private static DatabaseReference firebaseReference;
+    private static FirebaseDatabase firebaseInstance;
 
     public DbConection(){
     }
 
     public DatabaseReference getFirebaseReference(){
         if(firebaseReference==null){
-            firebaseReference= FirebaseDatabase.getInstance().getReference();
+            firebaseReference= getFirebaseInstance().getReference();
         }
         return  firebaseReference;
+    }
+
+    public FirebaseDatabase getFirebaseInstance(){
+        if(firebaseInstance==null){
+            firebaseInstance= FirebaseDatabase.getInstance();
+        }
+        return firebaseInstance;
     }
 
     public FirebaseAuth getFirebaseAuth(){

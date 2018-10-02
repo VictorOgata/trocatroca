@@ -9,96 +9,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import groupdelta.trocatroca.R;
 
 public class HomeFragment extends Fragment {
 
-    Context context;
-    private Button btnNewItem;
-    private String[] itens = new String[] {"Game of Thrones", "Age of Empires", "Prototype", "God of War", "God of War2", "god of war", "game of Throne2"};
-    ArrayAdapter<String> adapter;
     private Button btnBusca;
-    private Button btnAnuncios;
 
-
-    // The onCreate method is called when the Fragment instance is being created, or re-created.
-    // Use onCreate for any standard setup that does not require the activity to be fully created
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //troquei this por getActivity()
-        adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, itens);
-
-
-
-    }
-//    public void onAnunciosButtonClicked(){
-//        Intent i = new Intent(context, MeusAnunciosActivity.class);
-//        startActivity(i);
-//    }
-
-
-//    public void onBuscaButtonClicked(View view) {
-//        /*Checking non informed parameters*/
-//        Intent i = new Intent(context, BuscaActivity.class);
-//        startActivity(i);
-//    }
-
-    // The onCreateView method is called when Fragment should create its View object hierarchy,
-    // either dynamically or via XML layout inflation.
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        context = view.getContext();
-        return view;
-
-
-
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    // This event is triggered soon after onCreateView().
-    // onViewCreated() is only called if the view returned from onCreateView() is non-null.
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        //super.onViewCreated(view, savedInstanceState);
 
-        btnNewItem = view.findViewById(R.id.btnNewItem);
-        btnBusca = view.findViewById(R.id.buscax);
-        btnAnuncios = view.findViewById(R.id.btnmeusanuncios);
-
-        btnNewItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
-                Intent intent = new Intent(context,NovoAnuncioActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnAnuncios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                onAnunciosButtonClicked();
-                Intent i = new Intent(context, MeusAnunciosActivity.class);
-                startActivity(i);
-
-            }
-        });
-
+        btnBusca = view.findViewById(R.id.btnBusca);
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                onAnunciosButtonClicked();
-                Intent i = new Intent(context, BuscaActivity.class);
+                Intent i = new Intent(HomeFragment.super.getContext(), BuscaActivity.class);
                 startActivity(i);
-
             }
         });
     }

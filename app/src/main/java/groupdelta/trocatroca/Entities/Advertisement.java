@@ -18,29 +18,9 @@ public class Advertisement {
     private String host;
     //Advertisement type(game or book)
     private String type;
+
     public Advertisement() {
-        /*DatabaseReference referenciaFirebase;
-        FirebaseUser firebaseUser;
-        referenciaFirebase = DbConection.getFirebaseReference();
-        firebaseUser = DbConection.getFirebaseAuth().getCurrentUser();
-        AdID = referenciaFirebase.child("Anuncios").push().getKey();*/
     }
-
-    /*public void saveNewAd(Context context){
-        DatabaseReference referenciaFirebase;
-        FirebaseUser firebaseUser;
-        referenciaFirebase = DbConection.getFirebaseReference();
-        firebaseUser = DbConection.getFirebaseAuth().getCurrentUser();
-        String AdID = referenciaFirebase.child("Anuncios").push().getKey();
-        if (firebaseUser != null) {
-            referenciaFirebase.child("Anuncios").child(AdID).setValue(this);
-            referenciaFirebase.child("Itens").child("@"+this.item).setValue(this.item);
-
-        }
-        else{
-            Toast.makeText(context, (String) "User nao autenticado.", LENGTH_LONG).show();
-        }
-    }*/
 
     public String getItem() {
         return item;
@@ -56,29 +36,16 @@ public class Advertisement {
     }
     public String getType() { return type; }
     public String getHost() { return host; }
+    public Map<String, String> getWishList() {
+        return wishList;
+    }
 
     public void setItem(String item) {
         this.item = item.replace(" ", "_").toUpperCase();
     }
-    public Map<String, String> getWishList() {
-        return wishList;
-    }
-    public  Map<String, String> makeWishList(String []wList) {
-       HashMap<String,String> wishList = new HashMap<String, String>();
-        /*DatabaseReference referenciaFirebase;
-        FirebaseUser firebaseUser;
-        referenciaFirebase = DbConection.getFirebaseReference();
-        firebaseUser = DbConection.getFirebaseAuth().getCurrentUser();*/
-        for(String wish : wList)//int i=0;i<wList.length;i++){
-            wishList.put("@"+wish,wish);
-            //referenciaFirebase.child("Itens").child(wList[i]).child(this.AdID).setValue("Buscando%"+this.AdID);}
-        return wishList;
-    }
     public void setWishList(Map<String, String>  wishList) {
         this.wishList = wishList;
     }
-
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -93,5 +60,25 @@ public class Advertisement {
     }
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public Map<String,String> makeWishList(String [] wList){
+        HashMap<String,String> wishes= new HashMap<String,String>();
+        for(String wish : wList){
+            wishes.put("@"+wish,wish);
+        }
+        return wishes;
+    }
+
+    public void shapeHashMapIntoAdvertisement(HashMap AdvertHashMap){
+        if(AdvertHashMap!=null) {
+            this.setItem(AdvertHashMap.containsKey("item") ? AdvertHashMap.get("item").toString() : "NA");
+            this.setDescription(AdvertHashMap.containsKey("description") ? AdvertHashMap.get("description").toString() : "NA");
+            this.setWishList(AdvertHashMap.containsKey("wishList") ? (Map<String, String>) AdvertHashMap.get("wishList") : new HashMap<String, String>());
+            this.setCity(AdvertHashMap.containsKey("city") ? AdvertHashMap.get("city").toString() : "NA");
+            this.setState(AdvertHashMap.containsKey("state") ? AdvertHashMap.get("state").toString() : "NA");
+            this.setHost(AdvertHashMap.containsKey("host") ? AdvertHashMap.get("host").toString() : "NA");
+            this.setType(AdvertHashMap.containsKey("type") ? AdvertHashMap.get("type").toString() : "NA");
+        }
     }
 }

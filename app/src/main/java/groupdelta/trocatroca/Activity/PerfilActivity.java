@@ -85,7 +85,6 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
                 uInfo.setCInfo(ds.child("Usuarios").child(uid).getValue(User.class).getCInfo()); //set the Contact Info
                 */
 
-
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this, android.R.layout.simple_spinner_item, paths);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
