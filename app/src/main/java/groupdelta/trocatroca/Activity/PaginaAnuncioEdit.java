@@ -69,7 +69,7 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
                 String [] wishes = Wishes.getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
                 adInfo.setWishList(adInfo.makeWishList(wishes));
                 adDAO.updateAdInfo(adInfo,IDAd);
-                Intent i = new Intent(PaginaAnuncioEdit.this, MeusAnunciosActivity.class);
+                Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
                 startActivity(i);
             }
         });
