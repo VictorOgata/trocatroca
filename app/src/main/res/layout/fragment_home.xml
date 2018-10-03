@@ -16,9 +16,9 @@
         android:text="Home"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/btnBusca"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnBusca"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btnBusca"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -33,10 +33,29 @@
         android:layout_marginStart="8sp"
         android:layout_marginTop="8sp"
         android:text="Buscar"
+        app:layout_constraintBottom_toTopOf="@+id/btnMyTrades"
+        app:layout_constraintEnd_toEndOf="@+id/btnMyTrades"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/btnMyTrades"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/btnMyTrades"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="49sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:text="Minhas Trocas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBusca"
+        app:layout_constraintVertical_bias="0.828" />
 
 </android.support.constraint.ConstraintLayout>

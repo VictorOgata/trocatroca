@@ -1,5 +1,6 @@
 package groupdelta.trocatroca.DataAccessObject;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.widget.Toast;
 

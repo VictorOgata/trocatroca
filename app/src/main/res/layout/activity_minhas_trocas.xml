@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MinhasTrocas">
+
+    <TextView
+        android:id="@+id/myTradeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:gravity="center"
+        android:text="Minhas trocas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintBottom_toTopOf="@+id/myTradeList"
+        app:layout_constraintEnd_toEndOf="@+id/myTradeList"
+        app:layout_constraintStart_toStartOf="@+id/myTradeList"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/myTradeList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/myRequestTitle"
+        app:layout_constraintEnd_toEndOf="@+id/myTradeTitle"
+        app:layout_constraintStart_toStartOf="@+id/myTradeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/myTradeTitle" />
+
+    <TextView
+        android:id="@+id/myRequestTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:gravity="center"
+        android:text="Solicitações de troca"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintBottom_toTopOf="@+id/myRequestList"
+        app:layout_constraintEnd_toEndOf="@+id/myRequestList"
+        app:layout_constraintStart_toStartOf="@+id/myRequestList"
+        app:layout_constraintTop_toBottomOf="@+id/myTradeList"/>
+
+    <ListView
+        android:id="@+id/myRequestList"
+        style="@style/edittext_style"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myRequestTitle" />
+</android.support.constraint.ConstraintLayout>

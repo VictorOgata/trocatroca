@@ -45,7 +45,6 @@ public class BuscaActivity extends AppCompatActivity {
         AdapterView<?> parent;
         eventEdit();
 
-
     }
 
     private void eventEdit(){

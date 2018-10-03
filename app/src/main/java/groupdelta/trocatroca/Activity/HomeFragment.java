@@ -16,6 +16,7 @@ import groupdelta.trocatroca.R;
 public class HomeFragment extends Fragment {
 
     private Button btnBusca;
+    private Button btnMinhasTrocas;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,10 +26,20 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         btnBusca = view.findViewById(R.id.btnBusca);
+        btnMinhasTrocas = view.findViewById(R.id.btnMyTrades);
+
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeFragment.super.getContext(), BuscaActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnMinhasTrocas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeFragment.super.getContext(), MinhasTrocas.class);
                 startActivity(i);
             }
         });
