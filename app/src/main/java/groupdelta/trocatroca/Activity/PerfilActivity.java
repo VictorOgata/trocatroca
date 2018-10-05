@@ -21,6 +21,8 @@ import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.User;
 import groupdelta.trocatroca.R;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 public class PerfilActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText Username;
@@ -132,7 +134,9 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
         uInfo.setState(State.getSelectedItem().toString());
         uInfo.setCity(City.getSelectedItem().toString());
         userDAO.updateUser(uInfo);
+        Toast.makeText(PerfilActivity.this,"Perfil alterado com sucesso", LENGTH_LONG).show();
         /*
+
         DbConection.getFirebaseReference().child("Usuarios").child(uid).child("nick").setValue(Username.getText().toString());
         DbConection.getFirebaseReference().child("Usuarios").child(uid).child("email").setValue(Email.getText().toString());
         DbConection.getFirebaseReference().child("Usuarios").child(uid).child("state").setValue(State.getSelectedItem().toString());
@@ -141,6 +145,8 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void onModifyPasswordButtonClicked(View view) {
         userDAO.getFirebaseUser().updatePassword(Password.getText().toString());
+        Toast.makeText(PerfilActivity.this,"Senha alterada com sucesso",LENGTH_LONG ).show();
+
     }
 
     private void alert(String s){

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,8 @@ import java.util.Map;
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
 import groupdelta.trocatroca.R;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class PaginaAnuncioEdit extends AppCompatActivity {
     private TextView Item;
@@ -71,6 +74,7 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
                 adDAO.updateAdInfo(adInfo,IDAd);
                 Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
                 startActivity(i);
+                Toast.makeText(PaginaAnuncioEdit.this,"Anuncio alterado com sucesso", LENGTH_LONG).show();
             }
         });
 
@@ -80,6 +84,7 @@ public class PaginaAnuncioEdit extends AppCompatActivity {
                 adDAO.deleteAdvetisement(IDAd);
                 Intent i = new Intent(PaginaAnuncioEdit.this, HomescreenActivity.class);
                 startActivity(i);
+                Toast.makeText(PaginaAnuncioEdit.this,"Anuncio deletado com sucesso", LENGTH_LONG).show();
             }
         });
     }

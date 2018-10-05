@@ -94,6 +94,8 @@ public class NovoAnuncioActivity extends AppCompatActivity {
 
                     adDAO.saveNewAd(NovoAnuncioActivity.this,ad);
 
+
+
                     Intent i = new Intent( NovoAnuncioActivity.this, HomescreenActivity.class);
                     startActivity(i);
                 }else{
