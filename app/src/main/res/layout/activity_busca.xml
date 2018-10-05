@@ -10,15 +10,26 @@
 
     <AutoCompleteTextView
         android:id="@+id/TextSearch"
-        android:layout_width="0sp"
-        android:layout_height="45sp"
+        android:layout_width="204dp"
+        android:layout_height="53dp"
         android:layout_marginEnd="50sp"
         android:layout_marginStart="50sp"
         android:layout_marginTop="16sp"
         android:hint="SEARCH"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/edtCity"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/edtCity"
+        style="@style/spinner_style"
+        android:layout_width="120dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        android:hint="Região: Geral"
+        app:layout_constraintStart_toEndOf="@id/TextSearch"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -34,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextSearch"
         app:layout_constraintVertical_bias="0.862" />
 
 

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,21 +29,31 @@ import groupdelta.trocatroca.R;
 public class BuscaActivity extends AppCompatActivity {
     private EditText editPalavra;
     private ListView Busca;
+
+    private Spinner Region;
     private AdvertisementDAO adDAO;
     private DatabaseReference myRef;
     private List<Advertisement> listAdvertisementClasses = new ArrayList<Advertisement>();
     private List<String> listAnuncioNames = new ArrayList<String>();
     private List<String> listAnuncioID = new ArrayList<String>();
+
+    private final static String [] Regions = {"Geral", "Estado", "Cidade"};
     private ArrayAdapter<String> arrayAdapterAnuncio, arrayAdapterAnuncio1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
         adDAO = new AdvertisementDAO();
-        editPalavra= (EditText) findViewById(R.id.TextSearch);
+        editPalavra = (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
         myRef = adDAO.getFirebaseInstance().getReference("Anuncios");
         AdapterView<?> parent;
+        Region = (Spinner) findViewById(R.id.edtCity);
+        //
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(BuscaActivity.this,android.R.layout.simple_spinner_item, Regions);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Region.setAdapter(adapter);
         eventEdit();
 
     }
