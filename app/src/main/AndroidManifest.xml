@@ -63,7 +63,10 @@
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.MinhasTrocas"></activity>
+        <activity android:name=".Activity.MinhasTrocas" />
+        <activity
+            android:name=".Activity.Match"
+            android:label="@string/title_activity_match"></activity>
     </application>
 
 </manifest>
