@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".Activity.MinhasSolicitacoesActivity">
+
+    <TextView
+        android:id="@+id/reqItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Item:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reqMate"
+        app:layout_constraintEnd_toEndOf="@+id/reqMate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/reqMate"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Requisição de:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reqMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reqItem" />
+
+    <TextView
+        android:id="@+id/reqMessage"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Mensagem: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAcceptReq"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reqMate" />
+
+    <Button
+        android:id="@+id/btnAcceptReq"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Aceitar oferta"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnDenyReq"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reqMessage"/>
+
+    <Button
+        android:id="@+id/btnDenyReq"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Recusar oferta"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/reqWarning"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAcceptReq"/>
+
+    <TextView
+        android:id="@+id/reqWarning"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:text="Ao aceitar a oferta você estará disponibilizando suas informações de contato cadastradas no app para o requisitante."
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#ff8800"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDenyReq" />
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

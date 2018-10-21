@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".Activity.TradeActivity">
+
+    <TextView
+        android:id="@+id/trdTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Troca"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/trdNick"
+        app:layout_constraintEnd_toEndOf="@+id/trdNick"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/trdNick"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Nick: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/trdLocal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trdTitle" />
+
+    <TextView
+        android:id="@+id/trdLocal"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Local: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/trdCInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trdNick" />
+
+    <TextView
+        android:id="@+id/trdCInfo"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Informação de contato: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/trdItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trdLocal" />
+
+    <TextView
+        android:id="@+id/trdItem"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Item: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#020202"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/trdCInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trdCInfo" />
+
+    <Button
+        android:id="@+id/btnTrdFinish"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Avaliar e concluir"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnTrdCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trdItem"  />
+
+    <Button
+        android:id="@+id/btnTrdCancel"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Cancelar troca"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTrdFinish" />
+
+</android.support.constraint.ConstraintLayout>

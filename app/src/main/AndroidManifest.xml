@@ -74,6 +74,8 @@
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.MinhasSolicitacoesActivity" />
+        <activity android:name=".Activity.TradeActivity"></activity>
     </application>
 
 </manifest>
