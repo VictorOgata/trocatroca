@@ -40,7 +40,7 @@ public class MinhasTrocas extends AppCompatActivity {
     private AdvertisementDAO adDAO;
     private TradeDAO tradeDAO;
     private TradeRequestDAO tradeReqDAO;
-    private String idAD;
+    //private String idAD;
     private List<String> tradeInfoList= new ArrayList<String>();
     private List<String> requestInfoList = new ArrayList<String>();
 
@@ -55,9 +55,9 @@ public class MinhasTrocas extends AppCompatActivity {
         adDAO = new AdvertisementDAO();
         tradeDAO = new TradeDAO();
         tradeReqDAO = new TradeRequestDAO();
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        idAD = bundle.getString("IDAnuncio");
+        //Intent intent = getIntent();
+        //Bundle bundle = intent.getExtras();
+        //idAD = bundle.getString("IDAnuncio");
         Query query1,query2;
         query1 = tradeDAO.getFirebaseInstance()
                 .getReference("Troca")
