@@ -3,6 +3,7 @@ package groupdelta.trocatroca.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,11 +26,11 @@ public class NovoAnuncioActivity extends AppCompatActivity {
     public static final String[] itemType = {"Jogo ou Livro?","Livro","Jogo"};
 
     /* Itemname edit text*/
-    private EditText mItemEditText;
+    private TextInputLayout mItemEditText;
     /* E-mail edit text */
-    private EditText mDesejadosEditText;
+    private TextInputLayout mDesejadosEditText;
     /* Password edit text */
-    private EditText mDescricaoEditText;
+    private TextInputLayout mDescricaoEditText;
     /* Confirm Password edit text */
     private Spinner mTypeSpinner;
     private Advertisement ad;
@@ -53,7 +54,6 @@ public class NovoAnuncioActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         btnOfertar=findViewById(R.id.btnNewAd);
         mTypeSpinner.setAdapter(adapter);
-
         userDAO = new UserDAO();
         userDAO.startFirebaseAuth();
 
@@ -73,9 +73,9 @@ public class NovoAnuncioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /*Checking non informed parameters*/
-                if(!mItemEditText.getText().toString().isEmpty()&&
-                    !mDesejadosEditText.getText().toString().isEmpty()&&
-                    !mDescricaoEditText.getText().toString().isEmpty()&&
+                if(!mItemEditText.getEditText().getText().toString().isEmpty()&&
+                    !mDesejadosEditText.getEditText().getText().toString().isEmpty()&&
+                    !mDescricaoEditText.getEditText().getText().toString().isEmpty()&&
                     !mTypeSpinner.getSelectedItem().toString().equals(itemType[0])){
                     Toast.makeText(NovoAnuncioActivity.this,(String)"Criando Anuncio.", LENGTH_LONG).show();
                     ad= new Advertisement();
@@ -83,13 +83,13 @@ public class NovoAnuncioActivity extends AppCompatActivity {
 
                     ad.setHost(userDAO.getFirebaseUser().getUid());
                     /* Pulling information from screen through references*/
-                    ad.setItem(mItemEditText.getText().toString());
-                    ad.setDescription(mDescricaoEditText.getText().toString());
+                    ad.setItem(mItemEditText.getEditText().getText().toString());
+                    ad.setDescription(mDescricaoEditText.getEditText().getText().toString());
                     ad.setState(State);
                     ad.setCity(City);
                     ad.setType(mTypeSpinner.getSelectedItem().toString());
 
-                    String [] wList = mDesejadosEditText.getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
+                    String [] wList = mDesejadosEditText.getEditText().getText().toString().replace(", ", ",").replace(" ", "_").toUpperCase().split(",");
                     ad.setWishList(ad.makeWishList(wList));
 
                     adDAO.saveNewAd(NovoAnuncioActivity.this,ad);

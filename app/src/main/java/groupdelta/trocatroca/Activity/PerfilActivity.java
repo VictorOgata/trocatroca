@@ -2,6 +2,8 @@ package groupdelta.trocatroca.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,15 +27,18 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class PerfilActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText Username;
-    private EditText Email;
-    private EditText Password;
+    private TextInputLayout Username;
+    private TextInputLayout Email;
+    private TextInputLayout Password;
+    private TextInputEditText EmailEdit;
+    private TextInputEditText PasswordEdit;
+    private TextInputEditText UsernameEdit;
     private Spinner State;
     private Spinner City;
     //Conection
     private UserDAO userDAO;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    //private String email = firebaseUser.getEmail();
+    private String email = firebaseUser.getEmail();
     //private String uid = firebaseUser.getUid();
 
     private final static String [] paths = AdressList.StatesList;
@@ -46,7 +51,10 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_perfil);
         Username = findViewById(R.id.Name);
         Email = findViewById(R.id.Email);
+        EmailEdit=findViewById(R.id.Email_edit);
         Password = findViewById(R.id.Password);
+        PasswordEdit = findViewById(R.id.Password_edit);
+        UsernameEdit=findViewById(R.id.NameEdit);
         State = findViewById(R.id.spinnerstate);
         City = findViewById(R.id.spinnercity);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(PerfilActivity.this,
@@ -54,8 +62,8 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         State.setAdapter(adapter);
         State.setOnItemSelectedListener(this);
-        Password.setText("**********");
-        //Email.setText(email);
+        PasswordEdit.setText("**********");
+        EmailEdit.setText(email);
 
         userDAO = new UserDAO();
         userDAO.startFirebaseAuth();
@@ -103,8 +111,9 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
                     int spinnerPosition2 = adapter2.getPosition(uInfo.getCity());
                     City.setSelection(spinnerPosition2);
                 }
-                Username.setText(uInfo.getNick());
-                Email.setText(uInfo.getEmail());
+                UsernameEdit.setText(uInfo.getNick());
+                //PasswordEdit.setText("**********")
+                //EmailEdit.setText(uInfo.getEmail());
     }
 
 
@@ -126,10 +135,10 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void onModifyProfileButtonClicked(View view) {
-        userDAO.getFirebaseUser().updateEmail(Email.getText().toString());
+        userDAO.getFirebaseUser().updateEmail(Email.getEditText().getText().toString());
         User uInfo = new User();
-        uInfo.setNick(Username.getText().toString());
-        uInfo.setEmail(Email.getText().toString());
+        uInfo.setNick(Username.getEditText().getText().toString());
+        uInfo.setEmail(Email.getEditText().toString());
         uInfo.setCInfo("@Vazio@");
         uInfo.setState(State.getSelectedItem().toString());
         uInfo.setCity(City.getSelectedItem().toString());
@@ -144,7 +153,7 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void onModifyPasswordButtonClicked(View view) {
-        userDAO.getFirebaseUser().updatePassword(Password.getText().toString());
+        userDAO.getFirebaseUser().updatePassword(Password.getEditText().getText().toString());
         Toast.makeText(PerfilActivity.this,"Senha alterada com sucesso",LENGTH_LONG ).show();
 
     }

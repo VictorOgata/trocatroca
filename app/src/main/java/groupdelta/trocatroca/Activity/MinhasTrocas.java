@@ -31,7 +31,7 @@ import groupdelta.trocatroca.R;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class MinhasTrocas extends AppCompatActivity {
+public class    MinhasTrocas extends AppCompatActivity {
 
     private ListView myTList;
     private ListView myRList;
