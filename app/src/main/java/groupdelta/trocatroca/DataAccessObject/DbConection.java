@@ -53,7 +53,6 @@ public class DbConection {
         };
 
         firebaseAuth.addAuthStateListener(authStateListener);
-
     }
 
     public FirebaseUser getFirebaseUser(){

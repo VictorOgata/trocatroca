@@ -34,7 +34,7 @@ import static android.widget.Toast.LENGTH_LONG;
 public class MinhasTrocas extends AppCompatActivity {
 
     private ListView myTList;
-    private ListView mySList;
+    private ListView myRList;
 
     private UserDAO userDAO;
     private AdvertisementDAO adDAO;
@@ -49,7 +49,7 @@ public class MinhasTrocas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_minhas_trocas);
         myTList = (ListView) findViewById(R.id.myTradeList);
-        mySList = (ListView) findViewById(R.id.myRequestList);
+        myRList = (ListView) findViewById(R.id.myRequestList);
 
         userDAO = new UserDAO();
         adDAO = new AdvertisementDAO();
@@ -59,11 +59,10 @@ public class MinhasTrocas extends AppCompatActivity {
         //Bundle bundle = intent.getExtras();
         //idAD = bundle.getString("IDAnuncio");
         Query query1,query2;
-        query1 = tradeDAO.getFirebaseInstance()
-                .getReference("Troca")
-                .orderByChild("hTrade")
-                .equalTo(userDAO.getFirebaseAuth().getUid());
 
+        query1 = tradeDAO.makeFbInstanceReference()
+                .orderByChild("hTrader")
+                .equalTo(userDAO.getFirebaseAuth().getUid());
         query1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -77,11 +76,9 @@ public class MinhasTrocas extends AppCompatActivity {
             }
         });
 
-        query2 = tradeReqDAO.getFirebaseInstance()
-                .getReference("Solicitacao")
+        query2 = tradeReqDAO.makeFbInstanceReference()
                 .orderByChild("target")
                 .equalTo(userDAO.getFirebaseAuth().getUid());
-
         query2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,7 +88,6 @@ public class MinhasTrocas extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -105,7 +101,7 @@ public class MinhasTrocas extends AppCompatActivity {
         for(DataSnapshot snap: ds.getChildren()){
 
             Trade trade= snap.getValue(Trade.class);
-            tradeInfoList.add(trade.gettTrader()+"//"+trade.getAdID());
+            tradeInfoList.add(snap.getKey()+" "+trade.gettTrader()+" "+trade.getAdID());
             tradeTextList.add("Nick: "+trade.gettTrader()+", item: "+trade.getAdID());
         }
 
@@ -139,7 +135,7 @@ public class MinhasTrocas extends AppCompatActivity {
         for(DataSnapshot snap: ds.getChildren()){
 
             TradeRequest tradeRequest= snap.getValue(TradeRequest.class);
-            requestInfoList.add(snap.getKey()+"//"+tradeRequest.getHost()+"//"+tradeRequest.getAdID());
+            requestInfoList.add(snap.getKey()+" "+tradeRequest.getHost()+" "+tradeRequest.getAdID());
             requestTextList.add(tradeRequest.getHost()+" tem interesse em "+tradeRequest.getAdID());
 
         }
@@ -152,13 +148,16 @@ public class MinhasTrocas extends AppCompatActivity {
         requestTextListAdapter.notifyDataSetChanged();
         requestInfoListAdapter.notifyDataSetChanged();
 
-        mySList.setAdapter(requestTextListAdapter);
-        mySList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        myRList.setAdapter(requestTextListAdapter);
+        myRList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String [] ids=requestInfoListAdapter.getItem(position).toString().split(" ");
                 Bundle bundle = new Bundle();
-                bundle.putString("IDs",requestInfoListAdapter.getItem(position).toString());
-                Intent i = new Intent(MinhasTrocas.this, Match.class);
+                bundle.putString("IDsolicitacao",ids[0]);
+                bundle.putString("IDsolicitante",ids[1]);
+                bundle.putString("IDanuncio",ids[2]);
+                Intent i = new Intent(MinhasTrocas.this, MinhasSolicitacoesActivity.class);
                 i.putExtras(bundle);
                 startActivity(i);
             }

@@ -4,6 +4,8 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.Map;
 
 import groupdelta.trocatroca.Entities.Advertisement;
@@ -27,11 +29,15 @@ public class TradeRequestDAO extends DbConection {
         }
     }
 
-    public void updateAdInfo(TradeRequest tradeR, String adID){
+    public void updateRequestInfo(TradeRequest tradeR, String adID){
         getFirebaseReference().child(TRADE_REQUEST_ENTITY).child(adID).setValue(tradeR);
     }
 
-    public void deleteAdvetisement(String adID){
+    public void deleteRequest(String adID){
         getFirebaseReference().child(TRADE_REQUEST_ENTITY).child(adID).removeValue();
+    }
+
+    public DatabaseReference makeFbInstanceReference(){
+        return getFirebaseInstance().getReference(TRADE_REQUEST_ENTITY);
     }
 }

@@ -3,6 +3,8 @@ package groupdelta.trocatroca.DataAccessObject;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
 import groupdelta.trocatroca.Entities.Trade;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -15,7 +17,7 @@ public class TradeDAO extends DbConection {
         super();
     }
 
-    public void saveNewRequest(Context context, Trade trade){
+    public void saveNewTrade(Context context, Trade trade){
         if (getFirebaseAuth().getCurrentUser() != null) {
             getFirebaseReference().child(TRADE_ENTITY).push().setValue(trade);
         }
@@ -24,11 +26,15 @@ public class TradeDAO extends DbConection {
         }
     }
 
-    public void updateAdInfo(Trade trade, String adID){
+    public void updateTradeInfo(Trade trade, String adID){
         getFirebaseReference().child(TRADE_ENTITY).child(adID).setValue(trade);
     }
 
-    public void deleteAdvetisement(String adID){
+    public void deleteTrade(String adID){
         getFirebaseReference().child(TRADE_ENTITY).child(adID).removeValue();
+    }
+
+    public DatabaseReference makeFbInstanceReference(){
+        return getFirebaseInstance().getReference(TRADE_ENTITY);
     }
 }

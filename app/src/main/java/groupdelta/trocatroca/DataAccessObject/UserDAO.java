@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 
@@ -36,5 +37,9 @@ public class UserDAO extends DbConection {
 
     public HashMap<String,String> loadUserHashMap(DataSnapshot ds){
         return (HashMap<String, String>) ds.child(USER_ENTITY).child(this.getFirebaseUser().getUid().toString()).getValue();
+    }
+
+    public DatabaseReference makeFbInstanceReference(){
+        return getFirebaseInstance().getReference(USER_ENTITY);
     }
 }
