@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -85,15 +86,28 @@ public class PaginaAnuncio extends AppCompatActivity {
         btnSendR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TradeRequest tradeR = new TradeRequest();
-                tradeR.setHost(userDAO.getFirebaseUser().getUid());
-                tradeR.setTarget(mainAD.getHost());
-                tradeR.setAdID(idAD);
+                Query query= userDAO.makeFbInstanceReference()
+                        .orderByKey()
+                        .equalTo(userDAO.getCurrentUserID());
 
-                String text = RText.getText().toString();
-                tradeR.setMessage((text.length()>254)? text.substring(0,255) : text);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User uInfo= dataSnapshot.child(userDAO.getCurrentUserID()).getValue(User.class);
+                        TradeRequest tradeR = new TradeRequest();
+                        tradeR.setHost(userDAO.getCurrentUserID());
+                        tradeR.setTarget(mainAD.getHost());
+                        tradeR.setAdID(idAD);
+                        tradeR.setRequestText(uInfo.getNick()+" tem interesse no seu "+mainAD.getType()+" "+mainAD.getItem().replace("_"," "));
+                        String text = RText.getText().toString();
+                        tradeR.setMessage((text.length()>254)? text.substring(0,255) : text);
+                        tradeRDAO.saveNewRequest(PaginaAnuncio.this,tradeR);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                tradeRDAO.saveNewRequest(PaginaAnuncio.this,tradeR);
+                    }
+                });
 
                 Intent i = new Intent( PaginaAnuncio.this, HomescreenActivity.class);
                 startActivity(i);
@@ -105,7 +119,7 @@ public class PaginaAnuncio extends AppCompatActivity {
         List<String> adWishes= new ArrayList<String>();
 
         mainAD.shapeHashMapIntoAdvertisement((HashMap)ds.child(idAD).getValue());
-        Item.setText("Item: "+mainAD.getItem());
+        Item.setText("Item: "+mainAD.getItem().replace("_"," "));
         Description.setText("Descrição: "+mainAD.getDescription());
         Address.setText("Endereço: "+mainAD.getCity()+","+mainAD.getState());
         Type.setText("Tipo: "+mainAD.getType());

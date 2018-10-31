@@ -42,4 +42,12 @@ public class UserDAO extends DbConection {
     public DatabaseReference makeFbInstanceReference(){
         return getFirebaseInstance().getReference(USER_ENTITY);
     }
+
+    public String getCurrentUserID(){
+        return getFirebaseAuth().getCurrentUser().getUid();
+    }
+
+    public String getCurrentUserEmail(){
+        return getFirebaseAuth().getCurrentUser().getUid();
+    }
 }

@@ -7,6 +7,7 @@ public class TradeRequest {
     private String target;
     private String adID;
     private String message;
+    private String requestText;
 
     public TradeRequest() {
     }
@@ -23,7 +24,13 @@ public class TradeRequest {
     public String getMessage() {
         return message;
     }
+    public String getRequestText() {
+        return requestText;
+    }
 
+    public void setRequestText(String requestText) {
+        this.requestText = requestText;
+    }
     public void setHost(String host) {
         this.host = host;
     }

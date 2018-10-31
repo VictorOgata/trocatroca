@@ -35,6 +35,9 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
     private AdvertisementDAO adDAO;
     private UserDAO userDAO;
     private TradeDAO tradeDAO;
+    private User hostUser;
+    private User targetUser;
+    private Advertisement mainAD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
         tdrDAO = new TradeRequestDAO();
         tradeDAO = new TradeDAO();
 
-        Query queryReq,queryAd,queryU;
+        Query queryReq,queryAd,queryUT,queryUH;
 
         queryReq=tdrDAO.makeFbInstanceReference()
                 .orderByKey()
@@ -89,10 +92,10 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
                     }
                 });
 
-        queryU=userDAO.makeFbInstanceReference()
+        queryUT=userDAO.makeFbInstanceReference()
                 .orderByKey()
                 .equalTo(bundle.getString("IDsolicitante"));
-        queryU.addValueEventListener(new ValueEventListener() {
+        queryUT.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren())
@@ -105,21 +108,35 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
             }
         });
 
+        queryUH=userDAO.makeFbInstanceReference()
+                .orderByKey()
+                .equalTo(userDAO.getCurrentUserID());
+        queryUH.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                saveHostUserData(dataSnapshot);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Trade tradeH = new Trade();
                 Trade tradeT = new Trade();
 
-                tradeH.sethTrader(userDAO.getFirebaseAuth().getCurrentUser().getUid());
+                tradeH.sethTrader(userDAO.getCurrentUserID());
                 tradeH.settTrader(bundle.getString("IDsolicitante"));
                 tradeH.setAdID(bundle.getString("IDanuncio"));
-                tradeH.setStatus("Em andamento");
+                tradeH.setTradeText("Troca do "+mainAD.getType()+" "+mainAD.getItem().replace("_"," ")+" com o usuário "+targetUser.getNick());
 
                 tradeT.sethTrader(bundle.getString("IDsolicitante"));
                 tradeT.settTrader(userDAO.getFirebaseAuth().getCurrentUser().getUid());
                 tradeT.setAdID(bundle.getString("IDanuncio"));
-                tradeT.setStatus("Em andamento");
+                tradeT.setTradeText("Troca do "+mainAD.getType()+" "+mainAD.getItem().replace("_"," ")+" com "+hostUser.getNick());
 
                 tradeDAO.saveNewTrade(MinhasSolicitacoesActivity.this,tradeH);
                 tradeDAO.saveNewTrade(MinhasSolicitacoesActivity.this,tradeT);
@@ -132,9 +149,13 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
         });
     }
 
+    private void saveHostUserData(DataSnapshot dataSnapshot) {
+        hostUser = dataSnapshot.child(userDAO.getCurrentUserID()).getValue(User.class);
+    }
+
     private void showUData(DataSnapshot dataSnapshot, String iDsolicitante) {
-        User user = dataSnapshot.child(iDsolicitante).getValue(User.class);
-        reqMate.setText("Solicitação de: "+user.getNick());
+        targetUser = dataSnapshot.child(iDsolicitante).getValue(User.class);
+        reqMate.setText("Solicitação de: "+targetUser.getNick());
     }
 
     private void showReqData(DataSnapshot dataSnapshot, String iDsolicitacao) {
@@ -143,7 +164,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
     }
 
     private void showAdData(DataSnapshot dataSnapshot, String iDanuncio) {
-        Advertisement advertisement= dataSnapshot.child(iDanuncio).getValue(Advertisement.class);
-        reqItem.setText("Item: "+advertisement.getItem().replace("_"," "));
+        mainAD= dataSnapshot.child(iDanuncio).getValue(Advertisement.class);
+        reqItem.setText("Item: "+mainAD.getItem().replace("_"," "));
     }
 }

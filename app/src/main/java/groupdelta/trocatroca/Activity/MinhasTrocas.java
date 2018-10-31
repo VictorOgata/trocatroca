@@ -102,7 +102,7 @@ public class    MinhasTrocas extends AppCompatActivity {
 
             Trade trade= snap.getValue(Trade.class);
             tradeInfoList.add(snap.getKey()+" "+trade.gettTrader()+" "+trade.getAdID());
-            tradeTextList.add("Nick: "+trade.gettTrader()+", item: "+trade.getAdID());
+            tradeTextList.add(trade.getTradeText());
         }
 
         ArrayAdapter<String> tradeTextListAdapter =
@@ -136,7 +136,7 @@ public class    MinhasTrocas extends AppCompatActivity {
 
             TradeRequest tradeRequest= snap.getValue(TradeRequest.class);
             requestInfoList.add(snap.getKey()+" "+tradeRequest.getHost()+" "+tradeRequest.getAdID());
-            requestTextList.add(tradeRequest.getHost()+" tem interesse em "+tradeRequest.getAdID());
+            requestTextList.add(tradeRequest.getRequestText());
 
         }
 

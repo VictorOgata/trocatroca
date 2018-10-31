@@ -67,7 +67,6 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
 
         userDAO = new UserDAO();
         userDAO.startFirebaseAuth();
-
         userDAO.getFirebaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

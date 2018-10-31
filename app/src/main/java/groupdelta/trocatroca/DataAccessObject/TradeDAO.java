@@ -19,6 +19,7 @@ public class TradeDAO extends DbConection {
 
     public void saveNewTrade(Context context, Trade trade){
         if (getFirebaseAuth().getCurrentUser() != null) {
+            trade.setStatus("inProgress");
             getFirebaseReference().child(TRADE_ENTITY).push().setValue(trade);
         }
         else{

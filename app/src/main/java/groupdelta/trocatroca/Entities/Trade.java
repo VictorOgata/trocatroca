@@ -9,8 +9,9 @@ public class Trade {
     private String tTrader;
     //Advetisement ID that the trade is about
     private String adID;
-    //Trade status: waiting,one_sided,complete
+    //Trade status: inProgress,rated,completed
     private String status;
+    private String tradeText;
 
     public Trade() {
     }
@@ -27,6 +28,9 @@ public class Trade {
     public String getStatus() {
         return status;
     }
+    public String getTradeText() {
+        return tradeText;
+    }
 
     public void sethTrader(String hTrader) {
         this.hTrader = hTrader;
@@ -39,6 +43,9 @@ public class Trade {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public void setTradeText(String tradeText) {
+        this.tradeText = tradeText;
     }
 
     public HashMap<String,String> returnHashMap(){

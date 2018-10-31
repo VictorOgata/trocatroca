@@ -59,7 +59,7 @@ public class DbConection {
         return firebaseUser;
     }
 
-    public void logOut(){
+    public static void logOut(){
         firebaseAuth.signOut();
     }
 }
