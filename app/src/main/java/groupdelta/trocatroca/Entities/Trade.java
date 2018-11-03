@@ -12,6 +12,8 @@ public class Trade {
     //Trade status: inProgress,rated,completed
     private String status;
     private String tradeText;
+    //Trade chat reference
+    private String chatID;
 
     public Trade() {
     }
@@ -31,7 +33,13 @@ public class Trade {
     public String getTradeText() {
         return tradeText;
     }
+    public String getChatID() {
+        return chatID;
+    }
 
+    public void setChatID(String chatID) {
+        this.chatID = chatID;
+    }
     public void sethTrader(String hTrader) {
         this.hTrader = hTrader;
     }

@@ -118,9 +118,12 @@ public class    MinhasTrocas extends AppCompatActivity {
         myTList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String [] ids=tradeInfoListAdapter.getItem(position).toString().split(" ");
                 Bundle bundle = new Bundle();
-                bundle.putString("IDs",tradeInfoListAdapter.getItem(position).toString());
-                Intent i = new Intent(MinhasTrocas.this, HomescreenActivity.class);
+                bundle.putString("IDtrade",ids[0]);
+                bundle.putString("IDtarget",ids[1]);
+                bundle.putString("IDadvertisement",ids[2]);
+                Intent i = new Intent(MinhasTrocas.this, TradeActivity.class);
                 i.putExtras(bundle);
                 startActivity(i);
             }

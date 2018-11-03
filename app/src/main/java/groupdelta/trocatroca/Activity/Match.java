@@ -2,7 +2,6 @@ package groupdelta.trocatroca.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +24,7 @@ public class Match extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
-                Intent intent = new Intent(Match.this,Chat.class);
+                Intent intent = new Intent(Match.this,ChatAcivity.class);
                 startActivity(intent);
             }
         });

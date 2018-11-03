@@ -15,10 +15,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
+import groupdelta.trocatroca.DataAccessObject.ChatDAO;
 import groupdelta.trocatroca.DataAccessObject.TradeDAO;
 import groupdelta.trocatroca.DataAccessObject.TradeRequestDAO;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.Advertisement;
+import groupdelta.trocatroca.Entities.Chat;
 import groupdelta.trocatroca.Entities.Trade;
 import groupdelta.trocatroca.Entities.TradeRequest;
 import groupdelta.trocatroca.Entities.User;
@@ -35,6 +37,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
     private AdvertisementDAO adDAO;
     private UserDAO userDAO;
     private TradeDAO tradeDAO;
+    private ChatDAO chatDAO;
     private User hostUser;
     private User targetUser;
     private Advertisement mainAD;
@@ -57,6 +60,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
         userDAO = new UserDAO();
         tdrDAO = new TradeRequestDAO();
         tradeDAO = new TradeDAO();
+        chatDAO = new ChatDAO();
 
         Query queryReq,queryAd,queryUT,queryUH;
 
@@ -127,19 +131,29 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Trade tradeH = new Trade();
                 Trade tradeT = new Trade();
+                Chat chat = new Chat();
+                String chatID;
+                chatID = chatDAO.getFirebaseReference().child(chatDAO.getCHAT_ENTITY()).push().getKey();
 
                 tradeH.sethTrader(userDAO.getCurrentUserID());
                 tradeH.settTrader(bundle.getString("IDsolicitante"));
                 tradeH.setAdID(bundle.getString("IDanuncio"));
                 tradeH.setTradeText("Troca do "+mainAD.getType()+" "+mainAD.getItem().replace("_"," ")+" com o usuário "+targetUser.getNick());
+                tradeH.setChatID(chatID);
 
                 tradeT.sethTrader(bundle.getString("IDsolicitante"));
                 tradeT.settTrader(userDAO.getFirebaseAuth().getCurrentUser().getUid());
                 tradeT.setAdID(bundle.getString("IDanuncio"));
                 tradeT.setTradeText("Troca do "+mainAD.getType()+" "+mainAD.getItem().replace("_"," ")+" com "+hostUser.getNick());
+                tradeT.setChatID(chatID);
+
+                chat.setUserID1(userDAO.getCurrentUserID());
+                chat.setUserID2(bundle.getString("IDsolicitante"));
+                chat.setAdID(bundle.getString("IDanuncio"));
 
                 tradeDAO.saveNewTrade(MinhasSolicitacoesActivity.this,tradeH);
                 tradeDAO.saveNewTrade(MinhasSolicitacoesActivity.this,tradeT);
+                chatDAO.saveNewChat(MinhasSolicitacoesActivity.this,chat,chatID);
 
                 Intent i = new Intent( MinhasSolicitacoesActivity.this, HomescreenActivity.class);
                 startActivity(i);
