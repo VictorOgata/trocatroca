@@ -2,6 +2,8 @@ package groupdelta.trocatroca.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,9 +25,10 @@ import static android.widget.Toast.LENGTH_LONG;
 public class MainActivity extends AppCompatActivity {
 
     /* E-mail edit text */
-    private EditText mEmailEditText;
+    private TextInputLayout mEmailEditText;
+    private TextInputEditText mEmailEditTextEdit;
     /* Password edit text */
-    private EditText mPasswordEditText;
+    private TextInputLayout mPasswordEditText;
     private UserDAO userDAO;
     private Button btnLogar;
     private Button btnRegistrar;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*Obtaining the references to the views from the XML.*/
         mEmailEditText = findViewById(R.id.edtEmail);
+        mEmailEditTextEdit = findViewById(R.id.edtEmailedit);
         mPasswordEditText = findViewById(R.id.edSenha);
         btnLogar = findViewById(R.id.btnLogin);
         btnRegistrar=findViewById(R.id.btnCadastro);
@@ -51,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailEditText.getText().toString().trim();
-                String senha = mPasswordEditText.getText().toString().trim();
+                String email = mEmailEditText.getEditText().getText().toString().trim();
+                String senha = mPasswordEditText.getEditText().getText().toString().trim();
                 login(email,senha);
             }
         });
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Class destinationClass = CadastroActivity.class;
                 Intent intentToStartRegisterActivity = new Intent(MainActivity.this, destinationClass);
-                intentToStartRegisterActivity.putExtra("email", mEmailEditText.getText().toString());
+                intentToStartRegisterActivity.putExtra("email", mEmailEditText.getEditText().getText().toString());
                 startActivity(intentToStartRegisterActivity);
             }
         });
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         btnRecuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String email = mEmailEditText.getText().toString().trim();
+            String email = mEmailEditText.getEditText().getText().toString().trim();
             if (TextUtils.isEmpty(email)){
                 Toast.makeText(MainActivity.this,"Insira o e-mail vinculado a conta!", LENGTH_LONG).show();
             }

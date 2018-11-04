@@ -7,6 +7,7 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".Activity.NovoAnuncioActivity">
 
+
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="match_parent"
@@ -23,60 +24,93 @@
         app:layout_constraintStart_toStartOf="@+id/edtItemCadastro"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <EditText
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/edtItemCadastro"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="5sp"
-        android:hint="Item"
-        android:inputType="text"
-        android:maxLines="1"
-        app:layout_constraintBottom_toTopOf="@+id/edtDesejadosCadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtDesejadosCadastro"
-        app:layout_constraintStart_toStartOf="@+id/edtDesejadosCadastro"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="124dp"
+        app:boxBackgroundColor="@color/colorPrimaryLight"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
-    <EditText
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtItemCadastroEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Item"
+            android:inputType="text"
+             />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/edtDesejadosCadastro"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginLeft="50sp"
-        android:layout_marginRight="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
-        android:hint="Desejados (separados por ',') "
-        android:maxLines="3"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/edtDescricaoCadastro"
-        app:layout_constraintEnd_toEndOf="@+id/edtDescricaoCadastro"
-        app:layout_constraintStart_toStartOf="@+id/edtDescricaoCadastro"
-        app:layout_constraintTop_toBottomOf="@+id/edtItemCadastro" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="192dp"
+        app:boxBackgroundColor="@color/colorPrimaryLight"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
-    <EditText
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtDesejadosCadastroEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Desejados (separados por ',') "
+            android:inputType="text" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/edtDescricaoCadastro"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginLeft="50sp"
-        android:layout_marginRight="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
-        android:hint="Descricao"
-        android:maxLines="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/edtCondicoes"
-        app:layout_constraintEnd_toEndOf="@+id/edtCondicoes"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/edtCondicoes"
-        app:layout_constraintTop_toBottomOf="@+id/edtDesejadosCadastro" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="264dp"
+        app:boxBackgroundColor="@color/colorPrimaryLight"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtDescricaoCadastroEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descricao "
+            android:inputType="text" />
+
+    </android.support.design.widget.TextInputLayout>
+    -
 
     <Spinner
         android:id="@+id/edtCondicoes"
-        style="@style/edittext_style"
+        style="@style/spinner_style"
         android:layout_marginEnd="50sp"
-        android:layout_marginLeft="50sp"
-        android:layout_marginRight="50sp"
         android:layout_marginStart="50sp"
         android:layout_marginTop="8sp"
         android:hint="Condições especiais para troca"

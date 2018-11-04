@@ -53,14 +53,13 @@ public class DbConection {
         };
 
         firebaseAuth.addAuthStateListener(authStateListener);
-
     }
 
     public FirebaseUser getFirebaseUser(){
         return firebaseUser;
     }
 
-    public void logOut(){
+    public static void logOut(){
         firebaseAuth.signOut();
     }
 }

@@ -96,6 +96,23 @@
         app:layout_constraintTop_toBottomOf="@+id/trdCInfo" />
 
     <Button
+        android:id="@+id/btnTrdChat"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Conversar"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnTrdFinish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trdItem"  />
+
+    <Button
         android:id="@+id/btnTrdFinish"
         style="@style/button_style"
         android:layout_width="match_parent"
@@ -110,7 +127,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnTrdCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trdItem"  />
+        app:layout_constraintTop_toBottomOf="@+id/btnTrdChat"  />
 
     <Button
         android:id="@+id/btnTrdCancel"

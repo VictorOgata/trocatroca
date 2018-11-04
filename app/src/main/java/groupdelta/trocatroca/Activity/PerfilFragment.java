@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import groupdelta.trocatroca.DataAccessObject.DbConection;
 import groupdelta.trocatroca.R;
 
 public class PerfilFragment extends Fragment {
@@ -49,7 +50,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
                 //Pass the context and the Activity class you need to open from the Fragment Class, to the Intent
                 Intent intent = new Intent(context,MainActivity.class);
-                //DbConection.logOut();
+                DbConection.logOut();
                 startActivity(intent);
             }
         });

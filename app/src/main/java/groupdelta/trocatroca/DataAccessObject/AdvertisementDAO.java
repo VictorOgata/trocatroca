@@ -3,6 +3,8 @@ package groupdelta.trocatroca.DataAccessObject;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.Map;
 
 import groupdelta.trocatroca.Entities.Advertisement;
@@ -42,5 +44,9 @@ public class AdvertisementDAO extends DbConection {
 
     public void deleteAdvetisement(String adID){
         getFirebaseReference().child(ADVETISEMENT_ENTITY).child(adID).removeValue();
+    }
+
+    public DatabaseReference makeFbInstanceReference(){
+        return getFirebaseInstance().getReference(ADVETISEMENT_ENTITY);
     }
 }
