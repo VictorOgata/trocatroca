@@ -12,12 +12,13 @@ public class HolderMeusAnuncios extends RecyclerView.ViewHolder {
 
     //views
     ImageView imagemItem;
-    TextView meuItem, itemDesej;
+    TextView meuItem, itemDesej, descricao;
 
     public HolderMeusAnuncios(@NonNull View itemView) {
         super(itemView);
         this.imagemItem = itemView.findViewById(R.id.Ianuncio_imagem);
         this.meuItem = itemView.findViewById(R.id.Ianuncio_meuItem);
         this.itemDesej = itemView.findViewById(R.id.Ianuncio_itemDesejado);
+        this.descricao = itemView.findViewById(R.id.Ianuncio_descricao);
     }
 }

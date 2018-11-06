@@ -2,7 +2,7 @@ package groupdelta.trocatroca.Activity;
 
 public class ItensAnuncios {
 
-    private String meuItem, itemDesejado;
+    private String meuItem, itemDesejado, descricao;
     private int imagem;
 
     public String getMeuItem() {
@@ -11,6 +11,14 @@ public class ItensAnuncios {
 
     public void setMeuItem(String meuItem) {
         this.meuItem = meuItem;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getItemDesejado() {

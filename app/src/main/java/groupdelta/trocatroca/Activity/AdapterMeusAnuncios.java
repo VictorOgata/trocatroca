@@ -39,6 +39,7 @@ public class AdapterMeusAnuncios extends RecyclerView.Adapter<HolderMeusAnuncios
         holder.imagemItem.setImageResource(itens.get(position).getImagem());
         holder.meuItem.setText(itens.get(position).getMeuItem());
         holder.itemDesej.setText(itens.get(position).getItemDesejado());
+        holder.descricao.setText(itens.get(position).getDescricao());
 
         //animacao
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);

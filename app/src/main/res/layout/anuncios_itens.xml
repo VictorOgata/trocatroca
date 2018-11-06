@@ -33,6 +33,11 @@
                 style="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/colorPrimaryDark"/>
             <TextView
+                android:id="@+id/Ianuncio_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Item desejado"/>
+            <TextView
                 android:id="@+id/Ianuncio_itemDesejado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
