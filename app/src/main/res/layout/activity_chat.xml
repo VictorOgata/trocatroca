@@ -19,13 +19,6 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_rectangle"
-        android:padding="8dp"
-        android:text="Gosto de fazer Chá mate"
-        android:textColor="#ffffff" />
 
     <!-- A horizontal line between the chatbox and RecyclerView -->
     <View
