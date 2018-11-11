@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import groupdelta.trocatroca.R;
 
-public class AdapterMeusAnuncios extends RecyclerView.Adapter<HolderMeusAnuncios> {
+public class AdapterMeusAnuncios extends RecyclerView.Adapter<AdapterMeusAnuncios.HolderMeusAnuncios> {
 
     Context context;
     ArrayList<ItensAnuncios> itens;
@@ -50,4 +52,20 @@ public class AdapterMeusAnuncios extends RecyclerView.Adapter<HolderMeusAnuncios
     public int getItemCount() {
         return itens.size();
     }
+
+    public class HolderMeusAnuncios extends RecyclerView.ViewHolder {
+
+        //views
+        ImageView imagemItem;
+        TextView meuItem, itemDesej, descricao;
+
+        public HolderMeusAnuncios(@NonNull View itemView) {
+            super(itemView);
+            this.imagemItem = itemView.findViewById(R.id.Ianuncio_imagem);
+            this.meuItem = itemView.findViewById(R.id.Ianuncio_meuItem);
+            this.itemDesej = itemView.findViewById(R.id.Ianuncio_itemDesejado);
+            this.descricao = itemView.findViewById(R.id.Ianuncio_descricao);
+        }
+    }
+
 }
