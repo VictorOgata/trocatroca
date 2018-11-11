@@ -128,7 +128,7 @@ public class AnunciarFragment extends Fragment {
                 }
 
                 //chamando adapter
-                adapter = new AdapterMeusAnuncios(AnunciarFragment.super.getContext(), itens);
+                adapter = new AdapterMeusAnuncios(AnunciarFragment.super.getContext(), itens, anuncioID);
                 rcView.setAdapter(adapter);
 
             }
