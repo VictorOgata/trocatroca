@@ -59,7 +59,7 @@
             android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.MeusAnunciosActivity"
+            android:name=".Activity.FindMatchWishlist"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
