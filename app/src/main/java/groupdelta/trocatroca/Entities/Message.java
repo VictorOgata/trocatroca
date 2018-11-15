@@ -37,5 +37,6 @@ public class Message {
     public void setUserID1(String userID1) {
         this.userID1 = userID1;
     }
+    public void setUserID2(String userID2){this.userID2 = userID2;}
 
 }

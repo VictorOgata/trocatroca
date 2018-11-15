@@ -58,6 +58,7 @@ public class TradeActivity extends AppCompatActivity {
         //SELECTED TRADE DATA RECOVERY
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+
         targetTraderID = bundle.getString("IDtarget");
         tradeID = bundle.getString("IDtrade");
         advertisementID = bundle.getString("IDadvertisement");
@@ -115,7 +116,10 @@ public class TradeActivity extends AppCompatActivity {
         btnTradeChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("IDtrade",tradeID);
                 Intent i = new Intent(TradeActivity.this, ChatActivity.class);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
