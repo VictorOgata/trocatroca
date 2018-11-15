@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class ChatActivity extends AppCompatActivity {
         private EditText message;
         private Button btn;
         private Message mens = new Message();
-        private UserDAO user;
+        private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @Override
@@ -34,7 +37,9 @@ public class ChatActivity extends AppCompatActivity {
             message = findViewById(R.id.edittext_chatbox);
             btn = findViewById(R.id.button_chatbox_send);
             mMessageRecycler =  findViewById(R.id.reyclerview_message_list);
-            mens.setTextMessage(message.getText().toString());
+            //mens.setTextMessage(message.getText().toString());
+        mens.setTextMessage(message.getText().toString());
+            mens.setUserID1(firebaseUser.getUid());
         mMessageList.add(mens);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -42,7 +47,7 @@ public class ChatActivity extends AppCompatActivity {
                 mMessageList.add(mens);
                 }
             });
-            mMessageAdapter = new ChatAdapter(this,mMessageList);
+            mMessageAdapter = new ChatAdapter(this,mMessageList,firebaseUser);
             mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         }
     }

@@ -2,7 +2,6 @@ package groupdelta.trocatroca.Entities;
 
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -11,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
@@ -25,11 +22,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
     private Context mContext;
     private List<Message> mMessageList;
-    private UserDAO user;
+    private FirebaseUser user;
 
-    public ChatAdapter(Context context, List<Message> messageList) {
+    public ChatAdapter(Context context, List<Message> messageList, FirebaseUser user) {
         mContext = context;
         mMessageList = messageList;
+        this.user = user;
     }
 
     @Override
@@ -41,7 +39,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         Message message = (Message) mMessageList.get(position);
 
-        if (message.getUserID1().equals(user.getCurrentUserID())) {
+        if (message.getUserID1().equals(user.getUid())) {
             // If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
