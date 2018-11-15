@@ -12,7 +12,7 @@ import groupdelta.trocatroca.Entities.ChatAdapter;
 import groupdelta.trocatroca.Entities.Message;
 import groupdelta.trocatroca.R;
 
-public class ChatAcivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
         private RecyclerView mMessageRecycler;
         private ChatAdapter mMessageAdapter;
         private List<Message> mMessageList;
