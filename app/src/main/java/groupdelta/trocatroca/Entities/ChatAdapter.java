@@ -23,9 +23,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<Message> mMessageList;
 
-    public ChatAdapter(Context context, List<Message> messageList) {
+    public ChatAdapter(Context context, List<Message> messageList, FirebaseUser user) {
         mContext = context;
         mMessageList = messageList;
+        this.user = user;
     }
 
     @Override

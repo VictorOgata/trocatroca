@@ -82,7 +82,7 @@ public class ChatActivity extends AppCompatActivity {
                 mMessageList.add(mens);
                 }
             });
-            mMessageAdapter = new ChatAdapter(this,mMessageList);
+            mMessageAdapter = new ChatAdapter(this,mMessageList,firebaseUser);
             mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         }
