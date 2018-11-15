@@ -115,7 +115,7 @@ public class TradeActivity extends AppCompatActivity {
         btnTradeChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TradeActivity.this, ChatAcivity.class);
+                Intent i = new Intent(TradeActivity.this, ChatActivity.class);
                 startActivity(i);
             }
         });

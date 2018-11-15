@@ -1,5 +1,7 @@
 package groupdelta.trocatroca.Entities;
 
+import android.text.Editable;
+
 public class Message {
     private String textMessage;
     private long messageTime;
@@ -32,4 +34,8 @@ public class Message {
     public void setTextMessage(String textMessage) {
         this.textMessage = textMessage;
     }
+    public void setUserID1(String userID1) {
+        this.userID1 = userID1;
+    }
+
 }
