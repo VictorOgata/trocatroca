@@ -7,9 +7,11 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
     private Context mContext;
     private List<Message> mMessageList;
-
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     public ChatAdapter(Context context, List<Message> messageList) {
         mContext = context;
         mMessageList = messageList;
@@ -37,7 +39,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         Message message = (Message) mMessageList.get(position);
 
-        if (message.getUserID1().equals(message.getUserID2())) {
+        if (message.getUserID1().equals(firebaseUser.getUid())) {
             // If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
@@ -84,12 +86,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
         SentMessageHolder(View itemView) {
             super(itemView);
 
-            messageText = (TextView) itemView.findViewById(R.id.text_message_body);
-            timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            messageText = (TextView) itemView.findViewById(R.id.text_message_body1);
+            timeText = (TextView) itemView.findViewById(R.id.text_message_time1);
         }
 
         void bind(Message message) {
-            messageText.setText(message.getTextMessage());
+            messageText.setText(message.getUser1Message());
             // Format the stored timestamp into a readable String using method.
             timeText.setText(DateUtils.formatDateTime(mContext,message.getTime(),1));
         }
@@ -109,12 +111,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
         }
 
         void bind(Message message) {
-            messageText.setText(message.getTextMessage());
+            messageText.setText(message.getUser2Message());
 
             // Format the stored timestamp into a readable String using method.
             timeText.setText(DateUtils.formatDateTime(mContext,message.getTime(),1));
 
-            nameText.setText(message.getUserID1());
+            nameText.setText(message.getUserID2());
 
             // Insert the profile image from the URL into the ImageView.
           //  DateUtils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);

@@ -3,7 +3,7 @@ package groupdelta.trocatroca.Entities;
 import android.text.Editable;
 
 public class Message {
-    private String textMessage;
+    private String textMessage,textMessage1;
     private long messageTime;
     private String Usermessage;
     private String userID1,userID2;
@@ -19,7 +19,7 @@ public class Message {
     public String getUser1Message() {
         return Usermessage;
     }
-    public String getTextMessage() {
+    public String getUser2Message() {
         return textMessage;
     }
     public long getTime() {
@@ -31,8 +31,11 @@ public class Message {
     public void setTime(long messageTime) {
         this.messageTime = messageTime;
     }
-    public void setTextMessage(String textMessage) {
+    public void setUser1Message(String textMessage) {
         this.textMessage = textMessage;
+    }
+    public void setUser2Message(String textMessage1) {
+        this.textMessage1 = textMessage1;
     }
     public void setUserID1(String userID1) {
         this.userID1 = userID1;

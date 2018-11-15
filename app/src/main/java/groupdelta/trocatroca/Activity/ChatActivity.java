@@ -41,7 +41,6 @@ public class ChatActivity extends AppCompatActivity {
         private Message mens = new Message();
         private String tradeID;
         private ChatDAO chatDAO;
-        private Trade ChatID = new Trade();
 
     @Override
 
@@ -75,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
             });
             //mens.setTextMessage(message.getText().toString());
         //message.setText();
-        mens.setTextMessage(message.getText().toString());
+        mens.setUserID1(message.getText().toString());
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -84,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
             });
             mMessageAdapter = new ChatAdapter(this,mMessageList);
             mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
+            mMessageRecycler.setAdapter(mMessageAdapter);
 
         }
     }
