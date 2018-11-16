@@ -42,15 +42,18 @@ public class ChatActivity extends AppCompatActivity {
         private Message mens = new Message();
         private String tradeID;
         private ChatDAO chatDAO;
+        //private TextView teste;
 
     @Override
 
         protected void onCreate(Bundle savedInstanceState) {
+
             super.onCreate(savedInstanceState);
             Intent intent = getIntent();
             Bundle bundle = intent.getExtras();
             tradeID = bundle.getString("IDtrade");
             setContentView(R.layout.activity_chat);
+            //teste = findViewById(R.id.josue);
             message = findViewById(R.id.edittext_chatbox);
             btn = findViewById(R.id.button_chatbox_send);
             mMessageRecycler =  findViewById(R.id.reyclerview_message_list);
@@ -78,6 +81,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     mens.setUser1Message(message.getText().toString());
                     mMessageList.add(mens);
+
                 }
             });
             mMessageAdapter = new ChatAdapter(this,mMessageList);

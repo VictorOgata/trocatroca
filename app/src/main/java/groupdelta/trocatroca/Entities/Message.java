@@ -17,10 +17,10 @@ public class Message {
         return userID2;
     }
     public String getUser1Message() {
-        return Usermessage;
+        return textMessage;
     }
     public String getUser2Message() {
-        return textMessage;
+        return textMessage1;
     }
     public long getTime() {
         return messageTime;
