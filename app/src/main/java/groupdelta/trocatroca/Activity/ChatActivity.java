@@ -1,5 +1,6 @@
 package groupdelta.trocatroca.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,6 +40,7 @@ public class ChatActivity extends AppCompatActivity {
         private List<Message> mMessageList = new ArrayList<>();
         private EditText message;
         private Button btn;
+        private Context context = this;
         private Message mens = new Message();
         private String tradeID;
         private ChatDAO chatDAO;
@@ -81,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     mens.setUser1Message(message.getText().toString());
                     mMessageList.add(mens);
+                    mMessageAdapter.notifyDataSetChanged();
 
                 }
             });

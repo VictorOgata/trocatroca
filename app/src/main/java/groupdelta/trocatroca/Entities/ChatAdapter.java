@@ -111,6 +111,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         }
 
         void bind(Message message) {
+            String tst = message.getUser2Message();
             messageText.setText(message.getUser2Message());
 
             // Format the stored timestamp into a readable String using method.
