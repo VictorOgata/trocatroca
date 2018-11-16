@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -72,13 +73,11 @@ public class ChatActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
-            //mens.setTextMessage(message.getText().toString());
-        //message.setText();
-        mens.setUserID1(message.getText().toString());
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                mMessageList.add(mens);
+                    mens.setUser1Message(message.getText().toString());
+                    mMessageList.add(mens);
                 }
             });
             mMessageAdapter = new ChatAdapter(this,mMessageList);
