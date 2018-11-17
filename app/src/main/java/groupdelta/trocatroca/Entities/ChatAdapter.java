@@ -39,7 +39,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         Message message = (Message) mMessageList.get(position);
 
-        if (message.getUserID1().equals(firebaseUser.getUid())) {
+        if (message.getUserID().equals(firebaseUser.getUid())) {
             // If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
@@ -91,7 +91,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         }
 
         void bind(Message message) {
-            messageText.setText(message.getUser1Message());
+            messageText.setText(message.getUserMessage());
             // Format the stored timestamp into a readable String using method.
             timeText.setText(DateUtils.formatDateTime(mContext,message.getTime(),1));
         }
@@ -111,13 +111,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
         }
 
         void bind(Message message) {
-            String tst = message.getUser2Message();
-            messageText.setText(message.getUser2Message());
+            messageText.setText(message.getUserMessage());
 
             // Format the stored timestamp into a readable String using method.
             timeText.setText(DateUtils.formatDateTime(mContext,message.getTime(),1));
 
-            nameText.setText(message.getUserID2());
+            nameText.setText(message.getUserID());
 
             // Insert the profile image from the URL into the ImageView.
           //  DateUtils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);

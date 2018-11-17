@@ -3,43 +3,35 @@ package groupdelta.trocatroca.Entities;
 import android.text.Editable;
 
 public class Message {
-    private String textMessage,textMessage1;
+    private String textMessage1,chatid;
     private long messageTime;
-    private String Usermessage;
-    private String userID1,userID2;
+    private String userID1;
 
     public Message() {
     }
-    public String getUserID1() {
+    public String getUserID() {
         return userID1;
     }
-    public String getUserID2() {
-        return userID2;
-    }
-    public String getUser1Message() {
-        return textMessage;
-    }
-    public String getUser2Message() {
+    public String getUserMessage() {
         return textMessage1;
     }
+    public String getChatid(){return chatid;}
+
+    public void setChatid(String chatid) {
+        this.chatid = chatid;
+    }
+
     public long getTime() {
         return messageTime;
-    }
-    public void setT(long messageTime) {
-        this.messageTime = messageTime;
     }
     public void setTime(long messageTime) {
         this.messageTime = messageTime;
     }
-    public void setUser1Message(String textMessage) {
-        this.textMessage = textMessage;
-    }
-    public void setUser2Message(String textMessage1) {
+    public void setUserMessage(String textMessage1) {
         this.textMessage1 = textMessage1;
     }
-    public void setUserID1(String userID1) {
+    public void setUserID(String userID1) {
         this.userID1 = userID1;
     }
-    public void setUserID2(String userID2){this.userID2 = userID2;}
 
 }

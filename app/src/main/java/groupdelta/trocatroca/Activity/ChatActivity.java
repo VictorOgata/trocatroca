@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import groupdelta.trocatroca.DataAccessObject.ChatDAO;
+import groupdelta.trocatroca.DataAccessObject.MessageDAO;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
 import groupdelta.trocatroca.Entities.Chat;
 import groupdelta.trocatroca.Entities.ChatAdapter;
@@ -44,6 +45,8 @@ public class ChatActivity extends AppCompatActivity {
         private Message mens = new Message();
         private String tradeID;
         private ChatDAO chatDAO;
+        private UserDAO userDAO;
+        private MessageDAO messageDAO;
         //private TextView teste;
 
     @Override
@@ -66,13 +69,22 @@ public class ChatActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot!=null) {
                         Chat cInfo = new Chat();
+                        userDAO = new UserDAO();
+                        userDAO.startFirebaseAuth();
+                        String uid = userDAO.getFirebaseUser().getUid();
                         String cid = dataSnapshot.child("Troca").child(tradeID).getValue(Trade.class).getChatID();
-                        cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
-                        cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
-                        mens.setUserID1(cInfo.getUserID1());
-                        mens.setUserID2(cInfo.getUserID2());
-
-                    }
+                        mens.setChatid(cid);
+                        if(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1().equals(uid)) {
+                            cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
+                            cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
+                            mens.setUserID(cInfo.getUserID1());
+                        }
+                        else{
+                            cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
+                            cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
+                            mens.setUserID(cInfo.getUserID1());
+                        }
+                        }
                     }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -81,8 +93,11 @@ public class ChatActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mens.setUser1Message(message.getText().toString());
-                    mMessageList.add(mens);
+                    Message mens1 =new Message();
+                    mens1.setUserID(mens.getUserID());
+                    mens1.setUserMessage(message.getText().toString());
+                  //  messageDAO.saveNewMessage(ChatActivity.this,mens,mens.getChatid());
+                    mMessageList.add(mens1);
                     mMessageAdapter.notifyDataSetChanged();
 
                 }
