@@ -21,8 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import groupdelta.trocatroca.DataAccessObject.ChatDAO;
@@ -48,11 +50,15 @@ public class ChatActivity extends AppCompatActivity {
         private UserDAO userDAO;
         private MessageDAO messageDAO = new MessageDAO();
         //private TextView teste;
+        SimpleDateFormat dateFormat_hora = new SimpleDateFormat("HH:mm:ss");
+        Date data = new Date();
 
     @Override
 
         protected void onCreate(Bundle savedInstanceState) {
-
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        final long data_atual = cal.getTimeInMillis();
             super.onCreate(savedInstanceState);
             Intent intent = getIntent();
             Bundle bundle = intent.getExtras();
@@ -82,12 +88,15 @@ public class ChatActivity extends AppCompatActivity {
                             cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
                             cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
                             mens.setUserID(cInfo.getUserID1());
+                            mens.setUsername((dataSnapshot.child("Usuarios").child(cInfo.getUserID1()).getValue(User.class).getNick()));
                         }
                         else{
                             cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
                             cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
                             mens.setUserID(cInfo.getUserID1());
+                            mens.setUsername((dataSnapshot.child("Usuarios").child(cInfo.getUserID1()).getValue(User.class).getNick()));
                         }
+
                         }
                     }
                 @Override
@@ -100,6 +109,8 @@ public class ChatActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Message mens1 =new Message();
                     mens1.setUserID(mens.getUserID());
+                    mens1.setUsername(mens.getUsername());
+                    mens1.setTime(data_atual);
                     mens1.setUserMessage(message.getText().toString());
                     messageDAO.saveNewMessage(ChatActivity.this,mens1,mens.getChatid());
                     mMessageList.add(mens1);

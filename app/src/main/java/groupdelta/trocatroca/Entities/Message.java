@@ -5,7 +5,7 @@ import android.text.Editable;
 public class Message {
     private String textMessage1,chatid;
     private long messageTime;
-    private String userID1;
+    private String userID1,username;
 
     public Message() {
     }
@@ -20,6 +20,9 @@ public class Message {
     public void setChatid(String chatid) {
         this.chatid = chatid;
     }
+    public String getUsername(){
+        return username;
+    }
 
     public long getTime() {
         return messageTime;
@@ -32,6 +35,9 @@ public class Message {
     }
     public void setUserID(String userID1) {
         this.userID1 = userID1;
+    }
+    public void setUsername(String username){
+        this.username = username;
     }
 
 }

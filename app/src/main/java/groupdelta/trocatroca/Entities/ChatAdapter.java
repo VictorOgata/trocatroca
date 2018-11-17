@@ -116,7 +116,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
             // Format the stored timestamp into a readable String using method.
             timeText.setText(DateUtils.formatDateTime(mContext,message.getTime(),1));
 
-            nameText.setText(message.getUserID());
+            nameText.setText(message.getUsername());
 
             // Insert the profile image from the URL into the ImageView.
           //  DateUtils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);
