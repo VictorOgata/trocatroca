@@ -82,12 +82,15 @@ public class ChatActivity extends AppCompatActivity {
                             cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
                             cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
                             mens.setUserID(cInfo.getUserID1());
+                            mens.setUsername((dataSnapshot.child("Usuarios").child(cInfo.getUserID1()).getValue(User.class).getNick()));
                         }
                         else{
                             cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
                             cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
                             mens.setUserID(cInfo.getUserID1());
+                            mens.setUsername((dataSnapshot.child("Usuarios").child(cInfo.getUserID1()).getValue(User.class).getNick()));
                         }
+
                         }
                     }
                 @Override
@@ -100,6 +103,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Message mens1 =new Message();
                     mens1.setUserID(mens.getUserID());
+                    mens1.setUsername(mens.getUsername());
                     mens1.setUserMessage(message.getText().toString());
                     messageDAO.saveNewMessage(ChatActivity.this,mens1,mens.getChatid());
                     mMessageList.add(mens1);
