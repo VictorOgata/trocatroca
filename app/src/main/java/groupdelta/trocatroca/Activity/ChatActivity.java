@@ -74,6 +74,7 @@ public class ChatActivity extends AppCompatActivity {
                         String uid = userDAO.getFirebaseUser().getUid();
                         String cid = dataSnapshot.child("Troca").child(tradeID).getValue(Trade.class).getChatID();
                         mens.setChatid(cid);
+                        mMessageList.clear();
                        for (DataSnapshot postSnapshot: dataSnapshot.child("Chat").child(cid).child("Mensagens").getChildren()) {
                             mMessageList.add(postSnapshot.getValue(Message.class));
                         }
