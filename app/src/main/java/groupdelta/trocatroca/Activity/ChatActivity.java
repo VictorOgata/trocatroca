@@ -44,6 +44,7 @@ public class ChatActivity extends AppCompatActivity {
         private Message mens = new Message();
         private String tradeID;
         private ChatDAO chatDAO;
+        private UserDAO userDAO;
         //private TextView teste;
 
     @Override
@@ -66,13 +67,23 @@ public class ChatActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot!=null) {
                         Chat cInfo = new Chat();
+                        userDAO = new UserDAO();
+                        userDAO.startFirebaseAuth();
+                        String uid = userDAO.getFirebaseUser().getUid();
                         String cid = dataSnapshot.child("Troca").child(tradeID).getValue(Trade.class).getChatID();
-                        cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
-                        cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
-                        mens.setUserID1(cInfo.getUserID1());
-                        mens.setUserID2(cInfo.getUserID2());
-
-                    }
+                        if(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1().equals(uid)) {
+                            cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
+                            cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
+                            mens.setUserID1(cInfo.getUserID1());
+                            mens.setUserID2(cInfo.getUserID2());
+                        }
+                        else{
+                            cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
+                            cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
+                            mens.setUserID1(cInfo.getUserID1());
+                            mens.setUserID2(cInfo.getUserID2());
+                        }
+                        }
                     }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
