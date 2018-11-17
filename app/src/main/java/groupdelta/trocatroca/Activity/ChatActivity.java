@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         private String tradeID;
         private ChatDAO chatDAO;
         private UserDAO userDAO;
-        private MessageDAO messageDAO;
+        private MessageDAO messageDAO = new MessageDAO();
         //private TextView teste;
 
     @Override
@@ -74,6 +74,9 @@ public class ChatActivity extends AppCompatActivity {
                         String uid = userDAO.getFirebaseUser().getUid();
                         String cid = dataSnapshot.child("Troca").child(tradeID).getValue(Trade.class).getChatID();
                         mens.setChatid(cid);
+                       for (DataSnapshot postSnapshot: dataSnapshot.child("Chat").child(cid).child("Mensagens").getChildren()) {
+                            mMessageList.add(postSnapshot.getValue(Message.class));
+                        }
                         if(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1().equals(uid)) {
                             cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
                             cInfo.setUserID2(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID2());
@@ -89,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
+
             });
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,7 +100,7 @@ public class ChatActivity extends AppCompatActivity {
                     Message mens1 =new Message();
                     mens1.setUserID(mens.getUserID());
                     mens1.setUserMessage(message.getText().toString());
-                  //  messageDAO.saveNewMessage(ChatActivity.this,mens,mens.getChatid());
+                    messageDAO.saveNewMessage(ChatActivity.this,mens1,mens.getChatid());
                     mMessageList.add(mens1);
                     mMessageAdapter.notifyDataSetChanged();
 
