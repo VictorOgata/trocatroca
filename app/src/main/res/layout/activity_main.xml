@@ -19,15 +19,12 @@
         android:id="@+id/imageView2"
         android:layout_width="116sp"
         android:layout_height="130sp"
-        android:layout_marginBottom="8sp"
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
-        android:layout_marginTop="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053"
         app:srcCompat="@drawable/logo" />
 
     <android.support.design.widget.TextInputLayout
@@ -46,7 +43,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.811">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edtEmailedit"
@@ -61,7 +58,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="59dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         app:boxBackgroundColor="@color/colorPrimaryLight"
@@ -79,54 +76,46 @@
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
-
-
     <Button
         android:id="@+id/btnRecuperar"
         style="@style/button_style"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50sp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
         android:text="Recuperar Senha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnLogin"
         style="@style/button_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnCadastro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnCadastro"
         style="@style/button_style"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
         android:text="Cadastre-se"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnRecuperar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

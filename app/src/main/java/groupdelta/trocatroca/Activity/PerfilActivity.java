@@ -115,8 +115,6 @@ public class PerfilActivity extends AppCompatActivity implements AdapterView.OnI
                 //EmailEdit.setText(uInfo.getEmail());
     }
 
-
-
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         City.setVisibility(View.VISIBLE);
         if(spinnerPosition != position) {

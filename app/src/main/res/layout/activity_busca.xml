@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Pesquisa"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryLight"
     tools:context=".Activity.BuscaActivity">
 
-    <AutoCompleteTextView
-        android:id="@+id/TextSearch"
-        android:layout_width="204dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="16sp"
-        android:hint="SEARCH"
-        app:layout_constraintEnd_toStartOf="@id/edtCity"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/buscalayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/edtCity"
-        style="@style/spinner_style"
-        android:layout_width="120dp"
-        android:layout_height="47dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="20dp"
-        android:hint="Região: Geral"
-        app:layout_constraintStart_toEndOf="@id/TextSearch"
-        app:layout_constraintTop_toTopOf="parent" />
+        <AutoCompleteTextView
+            android:id="@+id/TextSearch"
+            android:layout_width="300dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentLeft="true"
+            android:hint="Search"
+            />
 
-    <ListView
-        android:id="@+id/ListSearch"
-        style="@style/edittext_style"
-        android:layout_width="357sp"
-        android:layout_height="477sp"
-        android:layout_marginBottom="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TextSearch"
-        app:layout_constraintVertical_bias="0.862" />
+        <Spinner
+            android:id="@+id/edtCity"
+            style="@style/spinner_style"
+            android:layout_alignParentRight="true"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:hint="Região: Geral"
+            />
+    </RelativeLayout>
 
-
-</android.support.constraint.ConstraintLayout>
+        <ListView
+            android:id="@+id/ListSearch"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/buscalayout"
+            />
+</RelativeLayout>

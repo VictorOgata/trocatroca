@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryLight"
     tools:context=".Activity.NovoAnuncioActivity">
-
 
     <TextView
         android:id="@+id/tvTitulo"
@@ -18,11 +17,11 @@
         android:gravity="center"
         android:text="Criar nova oferta"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorPrimaryLight"
         app:layout_constraintBottom_toTopOf="@+id/edtItemCadastro"
         app:layout_constraintEnd_toEndOf="@+id/edtItemCadastro"
         app:layout_constraintStart_toStartOf="@+id/edtItemCadastro"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edtItemCadastro"
@@ -31,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
         app:boxBackgroundColor="@color/colorPrimaryLight"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/Email"
@@ -47,8 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Item"
-            android:inputType="text"
-             />
+            android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -59,8 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="164dp"
         app:boxBackgroundColor="@color/colorPrimaryLight"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/Email"
@@ -86,8 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="264dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="236dp"
         app:boxBackgroundColor="@color/colorPrimaryLight"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/Email"
@@ -110,26 +108,31 @@
     <Spinner
         android:id="@+id/edtCondicoes"
         style="@style/spinner_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Condições especiais para troca"
         app:layout_constraintBottom_toTopOf="@+id/btnNewAd"
         app:layout_constraintEnd_toEndOf="@+id/btnNewAd"
+        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="@+id/btnNewAd"
-        app:layout_constraintTop_toBottomOf="@+id/edtDescricaoCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/edtDescricaoCadastro"
+        app:layout_constraintVertical_bias="0.018"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <Button
         android:id="@+id/btnNewAd"
         style="@style/button_style"
-        android:layout_marginBottom="80sp"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="20sp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:text="Ofertar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCondicoes" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
