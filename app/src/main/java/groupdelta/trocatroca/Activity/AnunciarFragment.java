@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,9 +29,7 @@ import groupdelta.trocatroca.R;
 
 public class AnunciarFragment extends Fragment {
 
-    private Button btnNewAd;
-    private Button btnMyAd;
-
+    private FloatingActionButton fabNovoAnuncio;
     //lista de itens
     RecyclerView rcView;
     AdapterMeusAnuncios adapter;
@@ -46,22 +45,15 @@ public class AnunciarFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        btnNewAd = view.findViewById(R.id.btnNovoAnuncio);
-        btnMyAd = view.findViewById(R.id.btnMeusAnuncios);
-        btnNewAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AnunciarFragment.super.getContext(),NovoAnuncioActivity.class);
-                startActivity(i);
-            }
-        });
-        btnMyAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AnunciarFragment.super.getContext(),FindMatchWishlist.class);
-                startActivity(i);
-            }
-        });
+        fabNovoAnuncio = (FloatingActionButton) view.findViewById(R.id.fabNovoAnuncio);
+        fabNovoAnuncio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(AnunciarFragment.super.getContext(), NovoAnuncioActivity.class);
+                    startActivity(i);
+                }
+            });
+
 
         //recyclerview
         rcView = view.findViewById(R.id.recycler_mAnuncios);

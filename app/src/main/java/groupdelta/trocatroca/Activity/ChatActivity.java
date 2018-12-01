@@ -3,7 +3,9 @@ package groupdelta.trocatroca.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +41,8 @@ import groupdelta.trocatroca.Entities.User;
 import groupdelta.trocatroca.R;
 
 public class ChatActivity extends AppCompatActivity {
+
+        private SwipeRefreshLayout swipe;
         private RecyclerView mMessageRecycler;
         private ChatAdapter mMessageAdapter;
         private List<Message> mMessageList = new ArrayList<>();
@@ -67,7 +72,9 @@ public class ChatActivity extends AppCompatActivity {
             //teste = findViewById(R.id.josue);
             message = findViewById(R.id.edittext_chatbox);
             btn = findViewById(R.id.button_chatbox_send);
+            swipe = (SwipeRefreshLayout) findViewById(R.id.reyclerview_swipe);
             mMessageRecycler =  findViewById(R.id.reyclerview_message_list);
+
             chatDAO = new ChatDAO();
             chatDAO.startFirebaseAuth();
             chatDAO.getFirebaseReference().addValueEventListener(new ValueEventListener() {
@@ -83,6 +90,10 @@ public class ChatActivity extends AppCompatActivity {
                         mMessageList.clear();
                        for (DataSnapshot postSnapshot: dataSnapshot.child("Chat").child(cid).child("Mensagens").getChildren()) {
                             mMessageList.add(postSnapshot.getValue(Message.class));
+                           //avisa ao adapter que enviaram uma nova mensagem
+                            mMessageAdapter.notifyDataSetChanged();
+                           //rola um nivel para mostrar a nova mensagem
+                            mMessageRecycler.scrollToPosition(mMessageAdapter.getItemCount()-1);
                         }
                         if(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1().equals(uid)) {
                             cInfo.setUserID1(dataSnapshot.child("Chat").child(cid).getValue(Chat.class).getUserID1());
@@ -96,8 +107,23 @@ public class ChatActivity extends AppCompatActivity {
                             mens.setUserID(cInfo.getUserID1());
                             mens.setUsername((dataSnapshot.child("Usuarios").child(cInfo.getUserID1()).getValue(User.class).getNick()));
                         }
+                    }
 
+                    //atualiza o conteudo da dela ao arrastar para baixo
+                    swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            //colocar aqui o que vai fazer a cada swipe
+                            mMessageAdapter.notifyDataSetChanged();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    swipe.setRefreshing(false);
+                                }
+                            },1000);
                         }
+                    });
                     }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -115,12 +141,15 @@ public class ChatActivity extends AppCompatActivity {
                     messageDAO.saveNewMessage(ChatActivity.this,mens1,mens.getChatid());
                     mMessageList.add(mens1);
                     mMessageAdapter.notifyDataSetChanged();
+                    message.setText("");
 
                 }
             });
-            mMessageAdapter = new ChatAdapter(this,mMessageList);
-            mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
-            mMessageRecycler.setAdapter(mMessageAdapter);
 
+            mMessageAdapter = new ChatAdapter(this,mMessageList);
+            LinearLayoutManager linear = new LinearLayoutManager(this);
+            linear.setStackFromEnd(true); //mostra o recycler do final (ou seja, ultima mensagem)
+            mMessageRecycler.setLayoutManager(linear);
+            mMessageRecycler.setAdapter(mMessageAdapter);
         }
     }
