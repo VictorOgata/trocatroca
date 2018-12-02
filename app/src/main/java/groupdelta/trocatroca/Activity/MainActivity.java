@@ -14,6 +14,9 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 //import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogar;
     private Button btnRegistrar;
     private Button btnRecuperar;
+    private AdView mAdView;
 
     protected  void onStart (){
         super.onStart();
@@ -43,12 +47,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         userDAO = new UserDAO();
 
         /*Obtaining the references to the views from the XML.*/
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         mEmailEditText = findViewById(R.id.edtEmail);
         mEmailEditTextEdit = findViewById(R.id.edtEmailedit);
         mPasswordEditText = findViewById(R.id.edSenha);
