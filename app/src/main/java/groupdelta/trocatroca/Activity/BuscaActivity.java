@@ -37,7 +37,7 @@ public class BuscaActivity extends AppCompatActivity {
     private List<String> listAnuncioNames = new ArrayList<String>();
     private List<String> listAnuncioID = new ArrayList<String>();
 
-    private final static String [] Regions = {"Geral", "Estado", "Cidade"};
+    //private final static String [] Regions = {"Geral", "Estado", "Cidade"};
     private ArrayAdapter<String> arrayAdapterAnuncio, arrayAdapterAnuncio1;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class BuscaActivity extends AppCompatActivity {
         Busca=(ListView) findViewById(R.id.ListSearch);
         myRef = adDAO.makeFbInstanceReference();
         AdapterView<?> parent;
-        Region = (Spinner) findViewById(R.id.edtCity);
+        //Region = (Spinner) findViewById(R.id.edtCity);
         //
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(BuscaActivity.this,android.R.layout.simple_spinner_item, Regions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(BuscaActivity.this,android.R.layout.simple_spinner_item, Regions);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Region.setAdapter(adapter);
+        //Region.setAdapter(adapter);
         eventEdit();
 
     }
