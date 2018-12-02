@@ -30,8 +30,8 @@ import groupdelta.trocatroca.R;
 public class FindMatchWishlist extends  AppCompatActivity {
 
     private ListView myAdList;
-    private List<String> listAnuncioID = new ArrayList<String>();
-    private List<String> listAnuncioNames = new ArrayList<String>();
+    private List<String> listAnuncioID;
+    private List<String> listAnuncioNames;
     private ArrayAdapter<String> arrayAdapterAnuncio, arrayAdapterAnuncio1;
     private AdvertisementDAO adDAO;
     private Button btnBuscar;
@@ -42,37 +42,23 @@ public class FindMatchWishlist extends  AppCompatActivity {
         myAdList=(ListView) findViewById(R.id.ListMatch);
         btnBuscar = findViewById(R.id.btnFindMatch);
         adDAO= new AdvertisementDAO();
-
-        listAnuncioNames.clear();
-        listAnuncioID.clear();
-
+        listAnuncioID = new ArrayList<String>();
+        listAnuncioNames = new ArrayList<String>();
+        arrayAdapterAnuncio = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1, listAnuncioNames);
+        arrayAdapterAnuncio1 = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1,listAnuncioID);
+        myAdList.setAdapter(arrayAdapterAnuncio);
         ListaAnuncios();
-
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ListaAnuncios();
-
-                arrayAdapterAnuncio = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1, listAnuncioNames);
-                arrayAdapterAnuncio1 = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1,listAnuncioID);
-
                 arrayAdapterAnuncio.notifyDataSetChanged();
                 arrayAdapterAnuncio1.notifyDataSetChanged();
-
-                myAdList.setAdapter(arrayAdapterAnuncio);
-
                 listAnuncioNames.clear();
                 listAnuncioID.clear();
+                ListaAnuncios();
+
             }
         });
-
-        arrayAdapterAnuncio = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1, listAnuncioNames);
-        arrayAdapterAnuncio1 = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1,listAnuncioID);
-
-        arrayAdapterAnuncio.notifyDataSetChanged();
-        arrayAdapterAnuncio1.notifyDataSetChanged();
-
-        myAdList.setAdapter(arrayAdapterAnuncio);
 
         myAdList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -127,6 +113,8 @@ public class FindMatchWishlist extends  AppCompatActivity {
             if(m.getWishList().containsKey("@"+item)){
                 listAnuncioID.add(objSnapshot.getKey().toString());
                 listAnuncioNames.add(m.getItem());
+                arrayAdapterAnuncio.notifyDataSetChanged();
+                arrayAdapterAnuncio1.notifyDataSetChanged();
             }
         }
     }
