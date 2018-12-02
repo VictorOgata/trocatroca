@@ -65,7 +65,7 @@ public class FindMatchWishlist extends  AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putString("IDAnuncio",arrayAdapterAnuncio1.getItem(position).toString());
-                Intent i = new Intent(FindMatchWishlist.this, PaginaAnuncioEdit.class);
+                Intent i = new Intent(FindMatchWishlist.this, PaginaAnuncio.class);
                 i.putExtras(bundle);
                 startActivity(i);}
         });
