@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 //import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
