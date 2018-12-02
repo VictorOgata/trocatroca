@@ -46,7 +46,7 @@ public class BuscaActivity extends AppCompatActivity {
         adDAO = new AdvertisementDAO();
         editPalavra = (EditText) findViewById(R.id.TextSearch);
         Busca=(ListView) findViewById(R.id.ListSearch);
-        myRef = adDAO.getFirebaseInstance().getReference("Anuncios");
+        myRef = adDAO.makeFbInstanceReference();
         AdapterView<?> parent;
         Region = (Spinner) findViewById(R.id.edtCity);
         //

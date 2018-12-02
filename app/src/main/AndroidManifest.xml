@@ -74,11 +74,6 @@
             android:parentActivityName=".Activity.HomescreenActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.Match"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Activity.HomescreenActivity"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".Activity.ChatActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".Activity.HomescreenActivity"

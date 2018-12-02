@@ -8,21 +8,48 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".Activity.FindMatchWishlist">
 
+    <TextView
+        android:id="@+id/matchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="Meus matches"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/colorPrimaryLight"
+        app:layout_constraintBottom_toTopOf="@+id/ListMatch"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ListView
-        android:id="@+id/ListSearch"
+        android:id="@+id/ListMatch"
         style="@style/edittext_style"
-        android:layout_width="357sp"
-        android:layout_height="477sp"
+        android:layout_width="match_parent"
+        android:layout_height="450sp"
         android:layout_marginBottom="8sp"
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
         android:layout_marginTop="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnFindMatch"
+        app:layout_constraintTop_toBottomOf="@+id/matchTitle" />
+
+    <Button
+        android:id="@+id/btnFindMatch"
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Buscar"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862" />
+        app:layout_constraintTop_toBottomOf="@+id/otxtAdP" />
 
 
 </android.support.constraint.ConstraintLayout>

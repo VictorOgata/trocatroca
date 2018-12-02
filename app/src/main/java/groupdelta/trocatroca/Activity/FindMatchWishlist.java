@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,7 +17,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import groupdelta.trocatroca.DataAccessObject.AdvertisementDAO;
 import groupdelta.trocatroca.DataAccessObject.UserDAO;
@@ -27,59 +31,104 @@ public class FindMatchWishlist extends  AppCompatActivity {
 
     private ListView myAdList;
     private List<String> listAnuncioID = new ArrayList<String>();
-    private List<Advertisement> listAdvertisementClasses = new ArrayList<Advertisement>();
     private List<String> listAnuncioNames = new ArrayList<String>();
     private ArrayAdapter<String> arrayAdapterAnuncio, arrayAdapterAnuncio1;
+    private AdvertisementDAO adDAO;
+    private Button btnBuscar;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_findmatchwishlist);
-        myAdList=(ListView) findViewById(R.id.ListSearch);
-        ListaAnuncios();
-    }
-
-
-    private void ListaAnuncios() {
-        UserDAO userDao =  new UserDAO();
-        AdvertisementDAO adDAO= new AdvertisementDAO();
-        String uid = userDao.getFirebaseAuth().getUid();
-        Query query = adDAO.getFirebaseInstance().getReference("Anuncios").orderByChild("host").equalTo(uid);
+        myAdList=(ListView) findViewById(R.id.ListMatch);
+        btnBuscar = findViewById(R.id.btnFindMatch);
+        adDAO= new AdvertisementDAO();
 
         listAnuncioNames.clear();
         listAnuncioID.clear();
+
+        ListaAnuncios();
+
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ListaAnuncios();
+
+                arrayAdapterAnuncio = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1, listAnuncioNames);
+                arrayAdapterAnuncio1 = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1,listAnuncioID);
+
+                arrayAdapterAnuncio.notifyDataSetChanged();
+                arrayAdapterAnuncio1.notifyDataSetChanged();
+
+                myAdList.setAdapter(arrayAdapterAnuncio);
+
+                listAnuncioNames.clear();
+                listAnuncioID.clear();
+            }
+        });
+
+        arrayAdapterAnuncio = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1, listAnuncioNames);
+        arrayAdapterAnuncio1 = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1,listAnuncioID);
+
+        arrayAdapterAnuncio.notifyDataSetChanged();
+        arrayAdapterAnuncio1.notifyDataSetChanged();
+
+        myAdList.setAdapter(arrayAdapterAnuncio);
+
+        myAdList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putString("IDAnuncio",arrayAdapterAnuncio1.getItem(position).toString());
+                Intent i = new Intent(FindMatchWishlist.this, PaginaAnuncioEdit.class);
+                i.putExtras(bundle);
+                startActivity(i);}
+        });
+    }
+
+    private void ListaAnuncios() {
+        UserDAO userDao =  new UserDAO();
+        String uid = userDao.getFirebaseAuth().getUid();
+        final Query query = adDAO.makeFbInstanceReference().orderByChild("host").equalTo(uid);
 
         Toast.makeText(FindMatchWishlist.this,"Carregando dados...",Toast.LENGTH_LONG).show();
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                Query query1;
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Advertisement p = objSnapshot.getValue(Advertisement.class);
-                    String itemP = p.getItem();
-                    listAdvertisementClasses.add(p);
-                    listAnuncioID.add(objSnapshot.getKey().toString());
-                    listAnuncioNames.add(itemP.replace("_", " "));
+                    final Advertisement p = objSnapshot.getValue(Advertisement.class);
+                    Iterator pIT = p.getWishList().entrySet().iterator();
+                    while (pIT.hasNext()){
+                        Map.Entry wish = (Map.Entry)pIT.next();
+                        query1=adDAO.makeFbInstanceReference().orderByChild("item").equalTo(wish.getValue().toString());
+                        query1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                findMatch(dataSnapshot,p.getItem());
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
-                arrayAdapterAnuncio = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1, listAnuncioNames);
-                arrayAdapterAnuncio1 = new ArrayAdapter<String>(FindMatchWishlist.this, android.R.layout.simple_list_item_1,listAnuncioID);
-                myAdList.setAdapter(arrayAdapterAnuncio);
-
-                myAdList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("IDAnuncio",arrayAdapterAnuncio1.getItem(position).toString());
-                        Intent i = new Intent(FindMatchWishlist.this, PaginaAnuncioEdit.class);
-                        i.putExtras(bundle);
-                        startActivity(i);}
-
-                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
 
+    private void findMatch(DataSnapshot dataSnapshot, String item){
+        for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+            Advertisement m = objSnapshot.getValue(Advertisement.class);
+            if(m.getWishList().containsKey("@"+item)){
+                listAnuncioID.add(objSnapshot.getKey().toString());
+                listAnuncioNames.add(m.getItem());
+            }
+        }
     }
 
     protected void onResume(){

@@ -17,6 +17,7 @@ public class HomeFragment extends Fragment {
 
     private Button btnBusca;
     private Button btnMinhasTrocas;
+    private Button btnMatch;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
 
         btnBusca = view.findViewById(R.id.btnBusca);
         btnMinhasTrocas = view.findViewById(R.id.btnMyTrades);
+        btnMatch = view.findViewById(R.id.btnMatches);
 
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +42,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeFragment.super.getContext(), MinhasTrocas.class);
+                startActivity(i);
+            }
+        });
+
+        btnMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeFragment.super.getContext(), FindMatchWishlist.class);
                 startActivity(i);
             }
         });
