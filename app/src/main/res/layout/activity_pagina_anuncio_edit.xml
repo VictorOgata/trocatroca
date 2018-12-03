@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colourLightPurple"
+    android:background="@color/colorPrimaryLight"
     tools:context=".Activity.PaginaAnuncioEdit">
 
     <TextView
@@ -17,44 +17,86 @@
         android:gravity="center"
         android:text="Editar Anúncio"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorPrimaryLight"
         app:layout_constraintBottom_toTopOf="@+id/item"
         app:layout_constraintEnd_toEndOf="@+id/item"
         app:layout_constraintStart_toStartOf="@+id/item"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/item"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="5sp"
-        android:text="item"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:boxBackgroundColor="@color/colorPrimaryLight"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/wishListEdt"
         app:layout_constraintStart_toStartOf="@+id/wishListEdt"
         app:layout_constraintBottom_toTopOf="@+id/wishListEdt"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo">
 
-    <EditText
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/itemEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Item"
+            android:inputType="text"
+            android:maxLength="20" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/wishListEdt"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
-        android:text="lista de desejos"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:boxBackgroundColor="@color/colorPrimaryLight"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/description"
         app:layout_constraintStart_toStartOf="@+id/description"
         app:layout_constraintBottom_toBottomOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@+id/item" />
+        app:layout_constraintTop_toBottomOf="@+id/item">
 
-    <EditText
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/wishlistEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lista de desejos"
+            android:inputType="text"
+            android:maxLength="20" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/description"
-        style="@style/edittext_style"
-        android:layout_marginEnd="50sp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="8sp"
-        android:text="descrição"
-        app:layout_constraintTop_toBottomOf="@+id/wishListEdt" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:boxBackgroundColor="@color/colorPrimaryLight"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/wishListEdt"
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/descriptionEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lista de desejos"
+            android:inputType="text"
+            android:maxLength="20" />
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/Address"
@@ -67,7 +109,6 @@
         android:gravity="left"
         android:text="Endereço: "
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorPrimaryLight"
         app:layout_constraintBottom_toTopOf="@+id/type"
         app:layout_constraintEnd_toEndOf="@+id/description"
         app:layout_constraintStart_toStartOf="@+id/description"
@@ -86,7 +127,6 @@
         android:gravity="left"
         android:text="Tipo: "
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorPrimaryLight"
         app:layout_constraintEnd_toEndOf="@+id/Address"
         app:layout_constraintStart_toStartOf="@+id/Address"
         app:layout_constraintTop_toBottomOf="@+id/Address" />
@@ -94,22 +134,25 @@
     <Button
         android:id="@+id/btnEditAd"
         style="@style/button_style"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8dp"
         android:text="Editar"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnDellAd"/>
+        app:layout_constraintBottom_toTopOf="@+id/btnDellAd"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnDellAd"
         style="@style/button_style"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
         android:layout_margin="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8dp"
         android:text="Deletar"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Pesquisa"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryLight"
     tools:context=".Activity.FindMatchWishlist">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/container_matchs">
     <TextView
         android:id="@+id/matchTitle"
         android:layout_width="match_parent"
@@ -15,41 +23,48 @@
         android:layout_margin="8sp"
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Meus matches"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/colorPrimaryLight"
-        app:layout_constraintBottom_toTopOf="@+id/ListMatch"
-        app:layout_constraintTop_toTopOf="parent"/>
+        />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/container_listamatchs"
+        android:layout_below="@+id/container_matchs"
+        android:layout_above="@+id/container_buttonmatch">
     <ListView
         android:id="@+id/ListMatch"
-        style="@style/edittext_style"
         android:layout_width="match_parent"
         android:layout_height="450sp"
         android:layout_marginBottom="8sp"
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
-        android:layout_marginTop="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnFindMatch"
-        app:layout_constraintTop_toBottomOf="@+id/matchTitle" />
+        android:layout_marginTop="8sp" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/container_buttonmatch"
+        android:layout_alignParentBottom="true">
     <Button
         android:id="@+id/btnFindMatch"
         style="@style/button_style"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8sp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:text="Buscar"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otxtAdP" />
+        android:textSize="15sp"/>
+    </LinearLayout>
 
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -94,15 +97,21 @@ public class NovoAnuncioActivity extends AppCompatActivity {
 
                     adDAO.saveNewAd(NovoAnuncioActivity.this,ad);
 
-
-
+                    //onBackPressed();
                     Intent i = new Intent( NovoAnuncioActivity.this, HomescreenActivity.class);
                     startActivity(i);
+
                 }else{
                     Toast.makeText(NovoAnuncioActivity.this,(String)"Campos não preenchidos.", LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        finish();
     }
 
     private void showData(DataSnapshot ds) {

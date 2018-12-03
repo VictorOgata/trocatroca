@@ -50,7 +50,6 @@
 
     <ListView
         android:id="@+id/myRequestList"
-        style="@style/edittext_style"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="8sp"

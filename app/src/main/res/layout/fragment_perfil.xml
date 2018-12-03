@@ -24,11 +24,7 @@
             android:layout_marginTop="8dp"
             android:text="Configurações de Perfil"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </LinearLayout>
 
     <LinearLayout
@@ -174,8 +170,8 @@
         android:id="@+id/layouy_botoesF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_above="@+id/fakeBottomMenu2"
         android:orientation="vertical">
 
         <Button
@@ -217,5 +213,12 @@
             android:text="Logout"
             android:textSize="15sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fakeBottomMenu2"/>
 
 </RelativeLayout>
