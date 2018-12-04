@@ -72,7 +72,7 @@ public class ChatActivity extends AppCompatActivity {
             //teste = findViewById(R.id.josue);
             message = findViewById(R.id.edittext_chatbox);
             btn = findViewById(R.id.button_chatbox_send);
-            swipe = (SwipeRefreshLayout) findViewById(R.id.reyclerview_swipe);
+            swipe = (SwipeRefreshLayout) findViewById(R.id.reyclerview_swipeChat);
             mMessageRecycler =  findViewById(R.id.reyclerview_message_list);
 
             chatDAO = new ChatDAO();

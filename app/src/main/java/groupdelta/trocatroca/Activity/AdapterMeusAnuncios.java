@@ -48,8 +48,8 @@ public class AdapterMeusAnuncios extends RecyclerView.Adapter<AdapterMeusAnuncio
         holder.descricao.setText(itens.get(position).getDescricao());
 
         //animacao
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        holder.itemView.startAnimation(animation);
+        //Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        //holder.itemView.startAnimation(animation);
         holder.itemView.setTag(IDs.get(position));
         holder.itemView.setOnClickListener(mOnClickListener);
     }

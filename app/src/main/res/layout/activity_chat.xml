@@ -17,7 +17,7 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reyclerview_swipe"
+        android:id="@+id/reyclerview_swipeChat"
         >
 
     <!-- Nao aparece aqui como preenchendo a tela toda, mas no celular funciona -->

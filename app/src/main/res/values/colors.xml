@@ -5,4 +5,6 @@
     <color name="colorPrimaryLight">#F6F6FC</color>
     <color name="colorAccent">#5299D3</color>
     <color name="colourLightPurple">#9975b9</color>
+    <color name="vermelho">#C61B1B</color>
+    <color name="verde">#07BC25</color>
 </resources>
