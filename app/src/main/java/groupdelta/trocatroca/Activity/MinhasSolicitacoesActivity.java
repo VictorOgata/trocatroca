@@ -32,7 +32,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
     private TextView reqItem;
     private TextView reqMessage;
     private Button btnAccept;
-
+    private Button btnReject;
     private TradeRequestDAO tdrDAO;
     private AdvertisementDAO adDAO;
     private UserDAO userDAO;
@@ -51,7 +51,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
         reqItem = findViewById(R.id.reqItem);
         reqMessage = findViewById(R.id.reqMessage);
         btnAccept = findViewById(R.id.btnAcceptReq);
-
+        btnReject = findViewById(R.id.btnDenyReq);
         Intent intent = getIntent();
         final Bundle bundle = intent.getExtras();
 
@@ -126,6 +126,17 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
             }
         });
 
+        btnReject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent( MinhasSolicitacoesActivity.this, HomescreenActivity.class);
+                startActivity(i);
+
+                tdrDAO.deleteRequest(bundle.getString("IDsolicitacao"));
+            }
+        });
+
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +172,7 @@ public class MinhasSolicitacoesActivity extends AppCompatActivity {
                 tdrDAO.deleteRequest(bundle.getString("IDsolicitacao"));
             }
         });
+
     }
 
     private void saveHostUserData(DataSnapshot dataSnapshot) {
