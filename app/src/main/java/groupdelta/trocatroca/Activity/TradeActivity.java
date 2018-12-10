@@ -124,6 +124,16 @@ public class TradeActivity extends AppCompatActivity {
             }
         });
 
+        btnTradeRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent( TradeActivity.this, HomescreenActivity.class);
+                startActivity(i);
+
+                tradeDAO.deleteTrade(tradeID);
+            }
+        });
         btnTradeCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
