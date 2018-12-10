@@ -86,20 +86,22 @@ public class MainActivity extends AppCompatActivity {
         btnRecuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String email = mEmailEditText.getEditText().getText().toString().trim();
-            if (TextUtils.isEmpty(email)){
-                Toast.makeText(MainActivity.this,"Insira o e-mail vinculado a conta!", LENGTH_LONG).show();
-            }
-            userDAO.getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(MainActivity.this,"Um e-mail de recuperação foi enviado", LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(MainActivity.this,"Falha ao enviar e-mail de recuperação!", LENGTH_LONG).show();
-                    }
+                String email = mEmailEditText.getEditText().getText().toString().trim();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(MainActivity.this, "Insira o e-mail vinculado a conta!", LENGTH_LONG).show();
                 }
-            });
+                else{
+                userDAO.getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Um e-mail de recuperação foi enviado", LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Falha ao enviar e-mail de recuperação!", LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
             }
         });
 
